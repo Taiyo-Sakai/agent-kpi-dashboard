@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エージェント事業部 KPI ダッシュボード</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Hiragino Sans', sans-serif; background: #f0f2f5; color: #333; }
+  .header { background: #1a3a5c; color: white; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .header h1 { font-size: 18px; }
+  .last-update { font-size: 12px; opacity: 0.7; }
+  .tabs { display: flex; background: white; border-bottom: 2px solid #e0e0e0; padding: 0 24px; }
+  .tab { padding: 14px 24px; cursor: pointer; font-weight: bold; color: #999; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+  .tab.active { color: #1a3a5c; border-bottom-color: #1a3a5c; }
+  .container { padding: 24px; max-width: 1200px; margin: 0 auto; }
+  .summary-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .card .label { font-size: 13px; color: #888; margin-bottom: 8px; }
+  .card .value { font-size: 28px; font-weight: bold; color: #1a3a5c; }
+  table { width: 100%; background: white; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); border-collapse: collapse; overflow: hidden; }
+  th { background: #1a3a5c; color: white; padding: 12px 16px; text-align: left; font-size: 13px; }
+  td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f8f9fa; }
+  .grade-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin: 0 2px; }
+  .grade-A { background: #e8f5e9; color: #2e7d32; }
+  .grade-B { background: #e3f2fd; color: #1565c0; }
+  .grade-C { background: #fff9c4; color: #f57f17; }
+  .grade-Dp { background: #fce4ec; color: #c62828; }
+  .grade-D { background: #eeeeee; color: #616161; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>エージェント事業部 KPI ダッシュボード</h1>
+  <span class="last-update" id="lastUpdate">読み込み中...</span>
+</div>
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('ca')">CA（営業）</div>
+  <div class="tab" onclick="switchTab('ra')">RA（推薦者）</div>
+</div>
+<div class="container">
+  <div id="caView">
+    <div class="summary-cards">
+      <div class="card"><div class="label">総成約数</div><div class="value" id="totalProjects">-</div></div>
+      <div class="card"><div class="label">総面接数</div><div class="value" id="totalInterviews">-</div></div>
+      <div class="card"><div class="label">総ポイント</div><div class="value" id="totalPoints">-</div></div>
+    </div>
+    <table>
+      <thead><tr><th>CA名</th><th>部門</th><th>成約数</th></tr></thead>
+      <tbody id="caTable"></tbody>
+    </table>
+  </div>
+  <div id="raView" class="hidden">
+    <table>
+      <thead><tr><th>推薦者名</th><th>チーム</th><th>A</th><th>B</th><th>C</th><th>D+</th><th>D</th><th>スコア</th><th>ポイント</th></tr></thead>
+      <tbody id="raTable"></tbody>
+    </table>
+  </div>
+</div>
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', (tab==='ca'&&i===0)||(tab==='ra'&&i===1)));
+  document.getElementById('caView').classList.toggle('hidden', tab !== 'ca');
+  document.getElementById('raView').classList.toggle('hidden', tab !== 'ra');
+}
+fetch('output/data.json').then(r => r.json()).then(data => {
+  document.getElementById('lastUpdate').textContent = '最終更新: ' + new Date(data.lastUpdate).toLocaleString('ja-JP');
+  document.getElementById('totalProjects').textContent = data.summary.total_projects;
+  document.getElementById('totalInterviews').textContent = data.summary.total_interviews;
+  document.getElementById('totalPoints').textContent = data.summary.total_points;
+  const caTable = document.getElementById('caTable');
+  data.ca_list.forEach(ca => {
+    caTable.innerHTML += `<tr><td>${ca.name}</td><td>${ca.division}</td><td>${ca.summary.projects_created}</td></tr>`;
+  });
+  const raTable = document.getElementById('raTable');
+  data.ra_list.forEach(ra => {
+    raTable.innerHTML += `<tr><td>${ra.name}</td><td>${ra.team}</td>
+      <td><span class="grade-badge grade-A">${ra.grades.A}</span></td>
+      <td><span class="grade-badge grade-B">${ra.grades.B}</span></td>
+      <td><span class="grade-badge grade-C">${ra.grades.C}</span></td>
+      <td><span class="grade-badge grade-Dp">${ra.grades['D+']}</span></td>
+      <td><span class="grade-badge grade-D">${ra.grades.D}</span></td>
+      <td>${ra.grade_score}</td><td>${ra.points}</td></tr>`;
+  });
+}).catch(e => { document.getElementById('lastUpdate').textContent = 'データ読み込みエラー'; });
+</script>
+</body>
+</html>
