@@ -40,37 +40,46 @@ function determineGrade(subtable) {
   return 'D';
 }
 
+// カーソルAPIで高速取得（500件/リクエスト）
 async function fetchAndAggregate(appId, token, query, fields, processRecord) {
-  let offset = 0;
-  let total = 0;
-  const limit = 100;
-  // 必要なフィールドだけ取得（高速化）
-  const fieldParams = fields.map((f, i) => `&fields[${i}]=${encodeURIComponent(f)}`).join('');
-  while (true) {
-    const url = `${KINTONE_BASE_URL}/k/v1/records.json?app=${appId}&limit=${limit}&offset=${offset}&query=${encodeURIComponent(query)}${fieldParams}`;
-    const response = await fetch(url, { method: 'GET', headers: { 'X-Cybozu-API-Token': token } });
-    if (!response.ok) {
-      const err = await response.text();
-      throw new Error(`App ${appId} エラー: ${response.status} - ${err}`);
-    }
-    const data = await response.json();
-    const records = data.records || [];
-    for (const record of records) processRecord(record);
-    total += records.length;
-    if (records.length < limit) break;
-    offset += limit;
-    if (offset % 1000 === 0) console.log(`  App ${appId}: ${offset}件処理中...`);
+  // カーソル作成
+  const createRes = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json`, {
+    method: 'POST',
+    headers: { 'X-Cybozu-API-Token': token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ app: appId, query, fields, size: 500 })
+  });
+  if (!createRes.ok) {
+    const err = await createRes.text();
+    throw new Error(`カーソル作成失敗 App${appId}: ${createRes.status} - ${err}`);
   }
-  console.log(`App ${appId}: ${total}件完了`);
+  const { id: cursorId } = await createRes.json();
+
+  let total = 0;
+  let next = true;
+  while (next) {
+    const res = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json?id=${cursorId}`, {
+      method: 'GET',
+      headers: { 'X-Cybozu-API-Token': token }
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(`カーソル取得失敗 App${appId}: ${res.status} - ${err}`);
+    }
+    const data = await res.json();
+    for (const record of data.records) processRecord(record);
+    total += data.records.length;
+    next = data.next;
+    if (total % 5000 === 0) console.log(`  App${appId}: ${total}件処理中...`);
+  }
+  console.log(`App${appId}: ${total}件完了`);
   return total;
 }
 
 async function main() {
   try {
     const fromDate = getFromDate();
-    console.log(`取得期間: ${fromDate} 以降 (${FULL_FETCH ? '全件モード' : '今年度モード'})`);
+    console.log(`取得期間: ${fromDate} 以降 (${FULL_FETCH ? '全件' : '今年度'})`);
 
-    // CA集計（App325）- 必要フィールドのみ
     const caMap = {};
     const total325 = await fetchAndAggregate(
       325, KINTONE_API_TOKEN_325,
@@ -85,7 +94,6 @@ async function main() {
       }
     );
 
-    // RA集計（App80）- 必要フィールドのみ
     const raMap = {};
     const total80 = await fetchAndAggregate(
       80, KINTONE_API_TOKEN_80,
