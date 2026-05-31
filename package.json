@@ -1,12 +1,21 @@
 {
   "name": "agent-kpi-dashboard",
   "version": "1.0.0",
-  "description": "エージェント事業部 KPI ダッシュボード",
+  "description": "エージェント事業部 KPI ダッシュボード（kintone連携版）",
   "main": "index.js",
   "scripts": {
-    "update": "node index.js"
+    "fetch-data": "node fetch-kintone-data.js",
+    "dev": "http-server -p 8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "kintone",
+    "dashboard",
+    "kpi"
+  ],
+  "author": "Agent Division",
+  "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.6.11"
+    "node-fetch": "^2.6.7"
   }
 }
