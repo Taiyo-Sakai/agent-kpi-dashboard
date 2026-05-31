@@ -1,0 +1,46 @@
+name: Update Dashboard Data
+
+on:
+  schedule:
+    # 毎時間 0分に実行 (UTC)
+    - cron: '0 * * * *'
+  workflow_dispatch:  # 手動実行可能
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Fetch kintone data
+        env:
+          KINTONE_BASE_URL: ${{ secrets.KINTONE_BASE_URL }}
+          KINTONE_API_TOKEN_325: ${{ secrets.KINTONE_API_TOKEN_325 }}
+        run: node fetch-kintone-data.js
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data.json
+
+          # 変更がある場合のみコミット
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "📊 Auto-update dashboard data at $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+            git push
+          else
+            echo "No changes to commit"
+          fi
