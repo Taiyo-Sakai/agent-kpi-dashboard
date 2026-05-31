@@ -1,0 +1,12 @@
+{
+  "name": "agent-kpi-dashboard",
+  "version": "1.0.0",
+  "description": "エージェント事業部 KPI ダッシュボード",
+  "main": "index.js",
+  "scripts": {
+    "update": "node index.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.11"
+  }
+}
