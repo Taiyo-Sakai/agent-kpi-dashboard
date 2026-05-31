@@ -9,9 +9,10 @@ const FULL_FETCH = process.env.FULL_FETCH === 'true';
 
 function getFromDate() {
   if (FULL_FETCH) return '2025-01-01';
-  const d = new Date();
-  d.setMonth(d.getMonth() - 6);
-  return d.toISOString().split('T')[0];
+  // 今年度の4月1日（日本の会計年度）
+  const now = new Date();
+  const year = now.getMonth() >= 3 ? now.getFullYear() : now.getFullYear() - 1;
+  return `${year}-04-01`;
 }
 
 function getSelectName(record, fieldName) {
@@ -40,7 +41,6 @@ function determineGrade(subtable) {
   return 'D';
 }
 
-// ★ポイント：取得しながらすぐ集計→メモリに全件溜めない
 async function fetchAndAggregate(appId, token, query, processRecord) {
   let offset = 0;
   let total = 0;
@@ -58,7 +58,7 @@ async function fetchAndAggregate(appId, token, query, processRecord) {
     total += records.length;
     if (records.length < limit) break;
     offset += limit;
-    if (offset % 5000 === 0) console.log(`  App ${appId}: ${offset}件処理中...`);
+    if (offset % 1000 === 0) console.log(`  App ${appId}: ${offset}件処理中...`);
   }
   console.log(`App ${appId}: ${total}件完了`);
   return total;
@@ -67,9 +67,8 @@ async function fetchAndAggregate(appId, token, query, processRecord) {
 async function main() {
   try {
     const fromDate = getFromDate();
-    console.log(`取得期間: ${fromDate} 以降 (${FULL_FETCH ? '全件モード' : '直近6ヶ月モード'})`);
+    console.log(`取得期間: ${fromDate} 以降 (${FULL_FETCH ? '全件モード' : '今年度モード'})`);
 
-    // CA集計（App325）
     const caMap = {};
     const total325 = await fetchAndAggregate(
       325, KINTONE_API_TOKEN_325,
@@ -83,7 +82,6 @@ async function main() {
       }
     );
 
-    // RA集計（App80）
     const raMap = {};
     const total80 = await fetchAndAggregate(
       80, KINTONE_API_TOKEN_80,
@@ -115,7 +113,11 @@ async function main() {
       fullFetch: FULL_FETCH,
       ca_list: Object.values(caMap).sort((a, b) => b.summary.projects_created - a.summary.projects_created),
       ra_list: raList,
-      summary: { total_interviews: total80, total_projects: total325, total_points: raList.reduce((s, r) => s + r.points, 0) }
+      summary: {
+        total_interviews: total80,
+        total_projects: total325,
+        total_points: raList.reduce((s, r) => s + r.points, 0)
+      }
     };
 
     const outputDir = path.join(__dirname, 'output');
