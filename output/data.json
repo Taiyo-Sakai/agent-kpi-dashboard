@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-05-31T18:56:41.095Z",
+  "lastUpdate": "2026-05-31T22:37:42.587Z",
   "dataFrom": "2026-04-01",
   "fullFetch": false,
   "ca_list": [
@@ -1150,15 +1150,15 @@
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 5863,
+        "D": 5883,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 5863,
+      "total_deals": 5883,
       "grade_score": "0.10",
-      "points": 58630
+      "points": 58830
     },
     {
       "name": "脇屋 香音",
@@ -2310,8 +2310,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 17396,
+    "total_interviews": 17416,
     "total_projects": 385,
-    "total_points": 173960
+    "total_points": 174160
   }
 }
