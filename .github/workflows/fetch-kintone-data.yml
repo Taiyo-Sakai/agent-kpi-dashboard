@@ -1,0 +1,38 @@
+name: Fetch kintone Data
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Every hour at minute 0 UTC
+  workflow_dispatch:  # Manual trigger for testing
+
+jobs:
+  fetch-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Fetch kintone data
+        env:
+          KINTONE_BASE_URL: ${{ secrets.KINTONE_BASE_URL }}
+          KINTONE_API_TOKEN_80: ${{ secrets.KINTONE_API_TOKEN_80 }}
+          KINTONE_API_TOKEN_325: ${{ secrets.KINTONE_API_TOKEN_325 }}
+        run: npm run fetch-data
+      
+      - name: Commit and push if changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add output/data.json
+          if ! git diff --quiet --cached; then
+            git commit -m "Update kintone data [skip ci]"
+            git push
+          fi
