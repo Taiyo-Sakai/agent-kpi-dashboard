@@ -7,74 +7,74 @@ const KINTONE_API_TOKEN_80 = process.env.KINTONE_API_TOKEN_80;
 const KINTONE_API_TOKEN_325 = process.env.KINTONE_API_TOKEN_325;
 
 async function fetchKintoneData(appId, token) {
-  const url = `${KINTONE_BASE_URL}/k/v1/records.json?app=${appId}&totalCount=true`;
-  console.log(`Fetching app ${appId} from ${KINTONE_BASE_URL}...`);
-  
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'X-Cybozu-API-Token': token
+  let allRecords = [];
+  let offset = 0;
+  const limit = 100;
+  while (true) {
+    const url = `${KINTONE_BASE_URL}/k/v1/records.json?app=${appId}&limit=${limit}&offset=${offset}`;
+    const response = await fetch(url, { method: 'GET', headers: { 'X-Cybozu-API-Token': token } });
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(`Failed to fetch app ${appId}: ${response.status} - ${err}`);
     }
-  });
-  
-  if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(`Failed to fetch app ${appId}: ${response.status} ${response.statusText} - ${errorBody}`);
+    const data = await response.json();
+    const records = data.records || [];
+    allRecords = allRecords.concat(records);
+    if (records.length < limit) break;
+    offset += limit;
   }
-  
-  const data = await response.json();
-  console.log(`App ${appId}: ${data.records.length} records fetched`);
-  return data.records || [];
+  console.log(`App ${appId}: ${allRecords.length}件取得`);
+  return allRecords;
 }
 
-function getFieldValue(record, fieldNames) {
-  for (let fieldName of fieldNames) {
-    if (record[fieldName] && record[fieldName].value !== undefined) {
-      return record[fieldName].value;
-    }
+function getSelectName(record, fieldName) {
+  if (record[fieldName] && record[fieldName].value && record[fieldName].value.length > 0) {
+    return record[fieldName].value[0].name;
+  }
+  return null;
+}
+
+function getFieldValue(record, fieldName) {
+  if (record[fieldName] && record[fieldName].value !== undefined && record[fieldName].value !== '') {
+    return record[fieldName].value;
   }
   return null;
 }
 
 function determineGrade(subtable) {
   if (!subtable || !Array.isArray(subtable)) return 'D';
-  
   for (let item of subtable) {
     const row = item.value;
-    if (getFieldValue(row, ['final_interview_date', 'finalinterviewdate'])) return 'A';
+    if (getFieldValue(row, 'final_interview_actual_date')) return 'A';
   }
   for (let item of subtable) {
     const row = item.value;
-    if (getFieldValue(row, ['second_interview_date', 'secondinterviewdate'])) return 'B';
+    if (getFieldValue(row, 'second_interview_actual_date')) return 'B';
   }
   for (let item of subtable) {
     const row = item.value;
-    const first = getFieldValue(row, ['first_interview_date', 'firstinterviewdate']);
-    const secondSched = getFieldValue(row, ['second_interview_scheduled_date']);
-    const finalSched = getFieldValue(row, ['final_interview_scheduled_date']);
-    if (first && (secondSched || finalSched)) return 'C';
+    const first = getFieldValue(row, 'first_interview_actual_date');
+    const s2 = getFieldValue(row, 'second_interview_scheduled_date');
+    const sf = getFieldValue(row, 'final_interview_scheduled_date');
+    if (first && (s2 || sf)) return 'C';
   }
   for (let item of subtable) {
     const row = item.value;
-    if (getFieldValue(row, ['first_interview_date', 'firstinterviewdate'])) return 'D+';
+    if (getFieldValue(row, 'first_interview_actual_date')) return 'D+';
   }
   return 'D';
 }
 
 async function main() {
   try {
-    console.log('Starting kintone data fetch...');
-    console.log('KINTONE_BASE_URL:', KINTONE_BASE_URL ? 'SET' : 'NOT SET');
-    console.log('KINTONE_API_TOKEN_325:', KINTONE_API_TOKEN_325 ? 'SET' : 'NOT SET');
-    console.log('KINTONE_API_TOKEN_80:', KINTONE_API_TOKEN_80 ? 'SET' : 'NOT SET');
-
+    console.log('kintoneデータ取得開始...');
     const app325Records = await fetchKintoneData(325, KINTONE_API_TOKEN_325);
     const app80Records = await fetchKintoneData(80, KINTONE_API_TOKEN_80);
 
     const caMap = {};
     for (let record of app325Records) {
-      const caName = getFieldValue(record, ['CA_name', 'ca_name']);
-      const division = getFieldValue(record, ['division', 'Department']);
+      const caName = getSelectName(record, 'Tanto');
+      const division = getSelectName(record, 'tantou_soshiki');
       if (!caName) continue;
       if (!caMap[caName]) {
         caMap[caName] = { name: caName, division: division || '部門不明', summary: { projects_created: 0 } };
@@ -84,9 +84,9 @@ async function main() {
 
     const raMap = {};
     for (let record of app80Records) {
-      const raName = getFieldValue(record, ['recommend_by', 'recommended_by', 'recommender']);
-      const team = getFieldValue(record, ['team']);
-      const subtable = getFieldValue(record, ['deal_status_1']);
+      const raName = getSelectName(record, 'tanto');
+      const team = getSelectName(record, 'tanto_organization');
+      const subtable = getFieldValue(record, 'deal_status_1');
       if (!raName) continue;
       if (!raMap[raName]) {
         raMap[raName] = { name: raName, team: team || 'チーム不明', grades: { D: 0, 'D+': 0, C: 0, B: 0, A: 0 }, total_deals: 0 };
@@ -119,8 +119,7 @@ async function main() {
     const outputDir = path.join(__dirname, 'output');
     if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
     fs.writeFileSync(path.join(outputDir, 'data.json'), JSON.stringify(output, null, 2), 'utf-8');
-    console.log('✅ Data saved to output/data.json');
-
+    console.log(`✅ 完了！CA: ${output.ca_list.length}名, RA: ${output.ra_list.length}名`);
   } catch (error) {
     console.error('❌ Error:', error.message);
     process.exit(1);
