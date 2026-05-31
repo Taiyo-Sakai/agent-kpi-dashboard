@@ -9,7 +9,6 @@ const FULL_FETCH = process.env.FULL_FETCH === 'true';
 
 function getFromDate() {
   if (FULL_FETCH) return '2025-01-01';
-  // 今年度の4月1日（日本の会計年度）
   const now = new Date();
   const year = now.getMonth() >= 3 ? now.getFullYear() : now.getFullYear() - 1;
   return `${year}-04-01`;
@@ -41,12 +40,14 @@ function determineGrade(subtable) {
   return 'D';
 }
 
-async function fetchAndAggregate(appId, token, query, processRecord) {
+async function fetchAndAggregate(appId, token, query, fields, processRecord) {
   let offset = 0;
   let total = 0;
   const limit = 100;
+  // 必要なフィールドだけ取得（高速化）
+  const fieldParams = fields.map((f, i) => `&fields[${i}]=${encodeURIComponent(f)}`).join('');
   while (true) {
-    const url = `${KINTONE_BASE_URL}/k/v1/records.json?app=${appId}&limit=${limit}&offset=${offset}&query=${encodeURIComponent(query)}`;
+    const url = `${KINTONE_BASE_URL}/k/v1/records.json?app=${appId}&limit=${limit}&offset=${offset}&query=${encodeURIComponent(query)}${fieldParams}`;
     const response = await fetch(url, { method: 'GET', headers: { 'X-Cybozu-API-Token': token } });
     if (!response.ok) {
       const err = await response.text();
@@ -69,10 +70,12 @@ async function main() {
     const fromDate = getFromDate();
     console.log(`取得期間: ${fromDate} 以降 (${FULL_FETCH ? '全件モード' : '今年度モード'})`);
 
+    // CA集計（App325）- 必要フィールドのみ
     const caMap = {};
     const total325 = await fetchAndAggregate(
       325, KINTONE_API_TOKEN_325,
       `sakusei_Nichiji >= "${fromDate}T00:00:00+0900" order by $id desc`,
+      ['Tanto', 'tantou_soshiki'],
       (record) => {
         const caName = getSelectName(record, 'Tanto');
         const division = getSelectName(record, 'tantou_soshiki');
@@ -82,10 +85,12 @@ async function main() {
       }
     );
 
+    // RA集計（App80）- 必要フィールドのみ
     const raMap = {};
     const total80 = await fetchAndAggregate(
       80, KINTONE_API_TOKEN_80,
       `registration_date >= "${fromDate}" order by $id desc`,
+      ['tanto', 'tanto_organization', 'deal_status_1'],
       (record) => {
         const raName = getSelectName(record, 'tanto');
         const team = getSelectName(record, 'tanto_organization');
