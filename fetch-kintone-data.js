@@ -87,6 +87,8 @@ async function main() {
       ['Tanto', 'tantou_soshiki'],
       (record) => {
         const caName = getSelectName(record, 'Tanto');
+        const divCheck = getSelectName(record, 'tantou_soshiki');
+        if (divCheck && divCheck.includes('営業開発')) return;
         const division = getSelectName(record, 'tantou_soshiki');
         if (!caName) return;
         if (!caMap[caName]) caMap[caName] = { name: caName, division: division || '部門不明', summary: { projects_created: 0 } };
@@ -101,6 +103,8 @@ async function main() {
       ['tanto', 'tanto_organization', 'deal_status_1'],
       (record) => {
         const raName = getSelectName(record, 'tanto');
+        const teamCheck = getSelectName(record, 'tanto_organization');
+        if (teamCheck && teamCheck.includes('営業開発')) return;
         const team = getSelectName(record, 'tanto_organization');
         const subtable = getFieldValue(record, 'deal_status_1');
         if (!raName) return;
@@ -144,3 +148,4 @@ async function main() {
 }
 
 main();
+
