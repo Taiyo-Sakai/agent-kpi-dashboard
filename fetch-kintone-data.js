@@ -116,7 +116,7 @@ function getDepartment(record) {
 async function fetchMonthly(token) {
   const monthly = {};
   const query = 'sakusei_Nichiji >= "2025-01-01T00:00:00+0900" order by $id desc';
-  const fields = ['seiyaku_date', 'seikyu_taxfree', 'uriage_henkin', 'Henkin_Kingaku', '返金種類', 'tantou_soshiki'];
+  const fields = ['seiyaku_date', 'seikyu_taxfree', 'uriage_henkin', 'tantou_soshiki'];
   
   const createRes = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json`, {
     method: 'POST',
@@ -147,34 +147,17 @@ async function fetchMonthly(token) {
       const month = seiyakuDate.substring(0, 7);
       const uriage = parseFloat(record['seikyu_taxfree']?.value || 0);
       const uriageAfter = parseFloat(record['uriage_henkin']?.value || 0);
-      const henkinAmt = parseFloat(record['Henkin_Kingaku']?.value || 0);
-      const henkinType = record['返金種類']?.value || '';
       const dept = getDepartment(record);
       
-      // 返金種類で分類
-      const isNyushaMae = henkinType === '入社前辞退' || henkinType === '内定取消'; // 入社前
-      const isHayaki = henkinType === '早期離職'; // 入社後（早期離職）
+      if (!monthly[month]) monthly[month] = { 全体: { count: 0, uriage: 0, uriage_after: 0 } };
+      if (!monthly[month][dept]) monthly[month][dept] = { count: 0, uriage: 0, uriage_after: 0 };
       
-      const entry = { count: 0, uriage: 0, uriage_after: 0,
-        henkin_nyushamae_cnt: 0, henkin_nyushamae: 0,  // 入社前辞退・内定取消
-        henkin_hayaki_cnt: 0, henkin_hayaki: 0 };       // 早期離職（入社後）
-      
-      if (!monthly[month]) monthly[month] = { 全体: {...entry} };
-      if (!monthly[month][dept]) monthly[month][dept] = {...entry};
-      
-      ['全体', dept].forEach(key => {
-        monthly[month][key].count += 1;
-        monthly[month][key].uriage += uriage;
-        monthly[month][key].uriage_after += uriageAfter;
-        if (isNyushaMae && henkinAmt > 0) {
-          monthly[month][key].henkin_nyushamae_cnt += 1;
-          monthly[month][key].henkin_nyushamae += henkinAmt;
-        }
-        if (isHayaki && henkinAmt > 0) {
-          monthly[month][key].henkin_hayaki_cnt += 1;
-          monthly[month][key].henkin_hayaki += henkinAmt;
-        }
-      });
+      monthly[month]['全体'].count += 1;
+      monthly[month]['全体'].uriage += uriage;
+      monthly[month]['全体'].uriage_after += uriageAfter;
+      monthly[month][dept].count += 1;
+      monthly[month][dept].uriage += uriage;
+      monthly[month][dept].uriage_after += uriageAfter;
     }
     next = data.next;
   }
@@ -184,10 +167,59 @@ async function fetchMonthly(token) {
     for (const d of Object.values(m)) {
       d.uriage = Math.round(d.uriage / 10000);
       d.uriage_after = Math.round(d.uriage_after / 10000);
+    }
+  }
+  // --- 返金額を返金発生日（Henkin_Hasseibi）で別途集計 ---
+  const refundQuery = 'Henkin_Hasseibi >= "2025-01-01" order by $id desc';
+  const refundFields = ['Henkin_Hasseibi', 'Henkin_Kingaku', '返金種類', 'tantou_soshiki'];
+  
+  const refundRes = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json`, {
+    method: 'POST',
+    headers: { 'X-Cybozu-API-Token': token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ app: 325, query: refundQuery, fields: refundFields, size: 500 })
+  });
+  if (!refundRes.ok) throw new Error(`返金カーソル失敗: ${refundRes.status}`);
+  const { id: refundCursorId } = await refundRes.json();
+
+  let refundNext = true;
+  while (refundNext) {
+    const rr = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json?id=${refundCursorId}`, {
+      method: 'GET', headers: { 'X-Cybozu-API-Token': token }
+    });
+    const rdata = await rr.json();
+    for (const record of rdata.records) {
+      const orgs = (record['tantou_soshiki'] && record['tantou_soshiki'].value) || [];
+      if (!orgs.some(o => o.name === 'エージェント')) continue;
+      const henkinDate = record['Henkin_Hasseibi'] && record['Henkin_Hasseibi'].value;
+      if (!henkinDate) continue;
+      const henkinMonth = henkinDate.substring(0, 7);
+      const henkinAmt = parseFloat(record['Henkin_Kingaku']?.value || 0);
+      if (henkinAmt <= 0) continue;
+      const henkinType = record['返金種類']?.value || '';
+      const isNyushaMae = henkinType === '入社前辞退' || henkinType === '内定取消';
+      const isHayaki = henkinType === '早期離職';
+      if (!monthly[henkinMonth]) monthly[henkinMonth] = { 全体: { count: 0, uriage: 0, uriage_after: 0, henkin_nyushamae: 0, henkin_nyushamae_cnt: 0, henkin_hayaki: 0, henkin_hayaki_cnt: 0 } };
+      if (!monthly[henkinMonth]['全体']) monthly[henkinMonth]['全体'] = { count: 0, uriage: 0, uriage_after: 0, henkin_nyushamae: 0, henkin_nyushamae_cnt: 0, henkin_hayaki: 0, henkin_hayaki_cnt: 0 };
+      if (isNyushaMae) {
+        monthly[henkinMonth]['全体'].henkin_nyushamae = (monthly[henkinMonth]['全体'].henkin_nyushamae || 0) + henkinAmt;
+        monthly[henkinMonth]['全体'].henkin_nyushamae_cnt = (monthly[henkinMonth]['全体'].henkin_nyushamae_cnt || 0) + 1;
+      }
+      if (isHayaki) {
+        monthly[henkinMonth]['全体'].henkin_hayaki = (monthly[henkinMonth]['全体'].henkin_hayaki || 0) + henkinAmt;
+        monthly[henkinMonth]['全体'].henkin_hayaki_cnt = (monthly[henkinMonth]['全体'].henkin_hayaki_cnt || 0) + 1;
+      }
+    }
+    refundNext = rdata.next;
+  }
+
+  // 万円に変換（返金額）
+  for (const m of Object.values(monthly)) {
+    for (const d of Object.values(m)) {
       d.henkin_nyushamae = Math.round((d.henkin_nyushamae || 0) / 10000);
       d.henkin_hayaki = Math.round((d.henkin_hayaki || 0) / 10000);
     }
   }
+
   console.log(`月次集計完了: ${Object.keys(monthly).sort().join(', ')}`);
   return monthly;
 }
