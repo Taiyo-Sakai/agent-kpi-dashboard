@@ -7,12 +7,9 @@ const KINTONE_API_TOKEN_80 = process.env.KINTONE_API_TOKEN_80;
 const KINTONE_API_TOKEN_325 = process.env.KINTONE_API_TOKEN_325;
 const FULL_FETCH = process.env.FULL_FETCH === 'true';
 
-function getFromDate() {
-  if (FULL_FETCH) return '2025-01-01';
-  const now = new Date();
-  const year = now.getMonth() >= 3 ? now.getFullYear() : now.getFullYear() - 1;
-  return `${year}-04-01`;
-}
+const OUTPUT_DIR = path.join(__dirname, 'output');
+const CACHE_FILE = path.join(OUTPUT_DIR, 'ra_cache.json');
+const DATA_FILE = path.join(OUTPUT_DIR, 'data.json');
 
 function getSelectName(record, fieldName) {
   const f = record[fieldName];
@@ -24,6 +21,19 @@ function getFieldValue(record, fieldName) {
   const f = record[fieldName];
   if (f && f.value !== undefined && f.value !== '') return f.value;
   return null;
+}
+
+function isAgentMember(record) {
+  const orgs = (record['tanto_organization'] && record['tanto_organization'].value) || [];
+  return orgs.some(org => org.name === 'エージェント');
+}
+
+function getTeamName(record) {
+  const orgs = (record['tanto_organization'] && record['tanto_organization'].value) || [];
+  const skip = ['エージェント', '建設Ⅰ部', '建設Ⅱ部', '不動産部', '電気主任・製造部',
+                '士業部', 'Dについてが分かる', 'Xについてが分かる', '掘り起こし希望者'];
+  const team = orgs.find(org => !skip.includes(org.name));
+  return team ? team.name : null;
 }
 
 function determineGrade(subtable) {
@@ -40,9 +50,13 @@ function determineGrade(subtable) {
   return 'D';
 }
 
-// カーソルAPIで高速取得（500件/リクエスト）
-async function fetchAndAggregate(appId, token, query, fields, processRecord) {
-  // カーソル作成
+async function fetchAndProcess(appId, token, query, fields, processRecord) {
+  let offset = 0;
+  let total = 0;
+  const limit = 500;
+  const fieldParams = fields.map((f, i) => `&fields[${i}]=${encodeURIComponent(f)}`).join('');
+
+  // カーソルAPIで取得
   const createRes = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json`, {
     method: 'POST',
     headers: { 'X-Cybozu-API-Token': token, 'Content-Type': 'application/json' },
@@ -54,17 +68,13 @@ async function fetchAndAggregate(appId, token, query, fields, processRecord) {
   }
   const { id: cursorId } = await createRes.json();
 
-  let total = 0;
   let next = true;
   while (next) {
     const res = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json?id=${cursorId}`, {
       method: 'GET',
       headers: { 'X-Cybozu-API-Token': token }
     });
-    if (!res.ok) {
-      const err = await res.text();
-      throw new Error(`カーソル取得失敗 App${appId}: ${res.status} - ${err}`);
-    }
+    if (!res.ok) throw new Error(`カーソル取得失敗: ${res.status}`);
     const data = await res.json();
     for (const record of data.records) processRecord(record);
     total += data.records.length;
@@ -75,76 +85,122 @@ async function fetchAndAggregate(appId, token, query, fields, processRecord) {
   return total;
 }
 
+function buildRaMap(raCache) {
+  const raMap = {};
+  for (const [id, rec] of Object.entries(raCache.records || {})) {
+    const { raName, team, grade } = rec;
+    if (!raName) continue;
+    if (!raMap[raName]) {
+      raMap[raName] = { name: raName, team: team || 'チーム不明', grades: { D: 0, 'D+': 0, C: 0, B: 0, A: 0 }, total_deals: 0 };
+    }
+    raMap[raName].grades[grade] = (raMap[raName].grades[grade] || 0) + 1;
+    raMap[raName].total_deals += 1;
+  }
+  return raMap;
+}
+
 async function main() {
   try {
-    const fromDate = getFromDate();
-    console.log(`取得期間: ${fromDate} 以降 (${FULL_FETCH ? '全件' : '今年度'})`);
+    if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+
+    // --- RAキャッシュ読み込み ---
+    let raCache = { lastSync: null, records: {} };
+    if (!FULL_FETCH && fs.existsSync(CACHE_FILE)) {
+      raCache = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
+      console.log(`キャッシュ読み込み: ${Object.keys(raCache.records).length}件 / 最終同期: ${raCache.lastSync}`);
+    }
+
+    // --- App80クエリ決定 ---
+    let app80Query;
+    if (FULL_FETCH || !raCache.lastSync) {
+      app80Query = 'registration_date >= "2025-01-01" order by $id asc';
+      console.log('モード: 全件取得（2025年1月以降）');
+      if (FULL_FETCH) raCache.records = {}; // フル取得時はキャッシュをリセット
+    } else {
+      // 差分取得: 前回同期時刻以降に更新されたレコードのみ
+      const lastSyncJST = new Date(raCache.lastSync).toISOString().replace('Z', '+0900').replace(/\+09:?00$/, '+0900');
+      app80Query = `updated_datetime > "${raCache.lastSync.replace('Z', '+0000')}" order by $id asc`;
+      console.log(`モード: 差分取得（${raCache.lastSync} 以降）`);
+    }
+
+    // --- App80差分/全件取得 ---
+    const now = new Date().toISOString();
+    let app80Count = 0;
+    app80Count = await fetchAndProcess(
+      80, KINTONE_API_TOKEN_80, app80Query,
+      ['$id', 'tanto', 'tanto_organization', 'deal_status_1'],
+      (record) => {
+        const id = record['$id'] && record['$id'].value;
+        if (!id) return;
+        if (!isAgentMember(record)) {
+          delete raCache.records[id]; // エージェント以外は削除
+          return;
+        }
+        const raName = getSelectName(record, 'tanto');
+        if (!raName) return;
+        const team = getTeamName(record);
+        const subtable = getFieldValue(record, 'deal_status_1');
+        const grade = determineGrade(subtable);
+        raCache.records[id] = { raName, team, grade };
+      }
+    );
+
+    raCache.lastSync = now;
+    fs.writeFileSync(CACHE_FILE, JSON.stringify(raCache));
+    console.log(`キャッシュ保存: ${Object.keys(raCache.records).length}件`);
+
+    // --- App325 CA取得（今年度分） ---
+    const now2 = new Date();
+    const fiscalYear = now2.getMonth() >= 3 ? now2.getFullYear() : now2.getFullYear() - 1;
+    const fromDate = `${fiscalYear}-04-01`;
 
     const caMap = {};
-    const total325 = await fetchAndAggregate(
+    const total325 = await fetchAndProcess(
       325, KINTONE_API_TOKEN_325,
       `sakusei_Nichiji >= "${fromDate}T00:00:00+0900" order by $id desc`,
       ['Tanto', 'tantou_soshiki'],
       (record) => {
-        const caName = getSelectName(record, 'Tanto');
-        // エージェント事業部のみ（組織リストに「エージェント」が含まれるか確認）
         const caOrgs = (record['tantou_soshiki'] && record['tantou_soshiki'].value) || [];
-        const isAgentCA = caOrgs.some(org => org.name === 'エージェント');
-        if (!isAgentCA) return;
-        const division = getSelectName(record, 'tantou_soshiki');
+        const isAgent = caOrgs.some(org => org.name === 'エージェント');
+        if (!isAgent) return;
+        const caName = getSelectName(record, 'Tanto');
         if (!caName) return;
-        if (!caMap[caName]) caMap[caName] = { name: caName, division: division || '部門不明', summary: { projects_created: 0 } };
+        const division = caOrgs.find(org => org.name !== 'エージェント')?.name || '部門不明';
+        if (!caMap[caName]) caMap[caName] = { name: caName, division, summary: { projects_created: 0 } };
         caMap[caName].summary.projects_created += 1;
       }
     );
 
-    const raMap = {};
-    const total80 = await fetchAndAggregate(
-      80, KINTONE_API_TOKEN_80,
-      `registration_date >= "${fromDate}" order by $id desc`,
-      ['tanto', 'tanto_organization', 'deal_status_1'],
-      (record) => {
-        const raName = getSelectName(record, 'tanto');
-        // エージェント事業部のみ（組織リストに「エージェント」が含まれるか確認）
-        const raOrgs = (record['tanto_organization'] && record['tanto_organization'].value) || [];
-        const isAgentRA = raOrgs.some(org => org.name === 'エージェント');
-        if (!isAgentRA) return;
-        const team = getSelectName(record, 'tanto_organization');
-        const subtable = getFieldValue(record, 'deal_status_1');
-        if (!raName) return;
-        if (!raMap[raName]) raMap[raName] = { name: raName, team: team || 'チーム不明', grades: { D: 0, 'D+': 0, C: 0, B: 0, A: 0 }, total_deals: 0 };
-        const grade = determineGrade(subtable);
-        raMap[raName].grades[grade] += 1;
-        raMap[raName].total_deals += 1;
-      }
-    );
-
+    // --- raMap 構築 ---
+    const raMap = buildRaMap(raCache);
     const raList = Object.values(raMap).map(ra => {
       const weights = { A: 1.0, B: 0.75, C: 0.5, 'D+': 0.25, D: 0.1 };
       let w = 0;
-      for (let g in ra.grades) w += ra.grades[g] * weights[g];
-      ra.grade_score = ra.total_deals > 0 ? (w / ra.total_deals).toFixed(2) : 0;
+      for (let g in ra.grades) w += (ra.grades[g] || 0) * (weights[g] || 0);
+      ra.grade_score = ra.total_deals > 0 ? (w / ra.total_deals).toFixed(2) : '0.00';
       ra.points = ra.total_deals * 10;
       return ra;
     }).sort((a, b) => parseFloat(b.grade_score) - parseFloat(a.grade_score));
 
+    const caList = Object.values(caMap).sort((a, b) => b.summary.projects_created - a.summary.projects_created);
+
     const output = {
-      lastUpdate: new Date().toISOString(),
+      lastUpdate: now,
       dataFrom: fromDate,
       fullFetch: FULL_FETCH,
-      ca_list: Object.values(caMap).sort((a, b) => b.summary.projects_created - a.summary.projects_created),
+      ca_list: caList,
       ra_list: raList,
       summary: {
-        total_interviews: total80,
+        total_interviews: Object.keys(raCache.records).length,
         total_projects: total325,
         total_points: raList.reduce((s, r) => s + r.points, 0)
       }
     };
 
-    const outputDir = path.join(__dirname, 'output');
-    if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
-    fs.writeFileSync(path.join(outputDir, 'data.json'), JSON.stringify(output, null, 2), 'utf-8');
-    console.log(`✅ 完了！CA: ${output.ca_list.length}名, RA: ${output.ra_list.length}名`);
+    fs.writeFileSync(DATA_FILE, JSON.stringify(output, null, 2), 'utf-8');
+    console.log(`✅ 完了！CA: ${caList.length}名, RA: ${raList.length}名`);
+    console.log(`   キャッシュ総レコード: ${Object.keys(raCache.records).length}件`);
+
   } catch (error) {
     console.error('❌ Error:', error.message);
     process.exit(1);
@@ -152,5 +208,3 @@ async function main() {
 }
 
 main();
-
-
