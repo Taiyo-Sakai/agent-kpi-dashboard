@@ -116,7 +116,7 @@ function getDepartment(record) {
 async function fetchMonthly(token) {
   const monthly = {};
   const query = 'sakusei_Nichiji >= "2025-01-01T00:00:00+0900" order by $id desc';
-  const fields = ['seiyaku_date', 'seikyu_taxfree', 'uriage_henkin', 'tantou_soshiki'];
+  const fields = ['seiyaku_date', 'seikyu_taxfree', 'uriage_henkin', 'Henkin_Kingaku', '返金種類', 'tantou_soshiki'];
   
   const createRes = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json`, {
     method: 'POST',
@@ -147,17 +147,34 @@ async function fetchMonthly(token) {
       const month = seiyakuDate.substring(0, 7);
       const uriage = parseFloat(record['seikyu_taxfree']?.value || 0);
       const uriageAfter = parseFloat(record['uriage_henkin']?.value || 0);
+      const henkinAmt = parseFloat(record['Henkin_Kingaku']?.value || 0);
+      const henkinType = record['返金種類']?.value || '';
       const dept = getDepartment(record);
       
-      if (!monthly[month]) monthly[month] = { 全体: { count: 0, uriage: 0, uriage_after: 0 } };
-      if (!monthly[month][dept]) monthly[month][dept] = { count: 0, uriage: 0, uriage_after: 0 };
+      // 返金種類で分類
+      const isNyushaMae = henkinType === '入社前辞退' || henkinType === '内定取消'; // 入社前
+      const isHayaki = henkinType === '早期離職'; // 入社後（早期離職）
       
-      monthly[month]['全体'].count += 1;
-      monthly[month]['全体'].uriage += uriage;
-      monthly[month]['全体'].uriage_after += uriageAfter;
-      monthly[month][dept].count += 1;
-      monthly[month][dept].uriage += uriage;
-      monthly[month][dept].uriage_after += uriageAfter;
+      const entry = { count: 0, uriage: 0, uriage_after: 0,
+        henkin_nyushamae_cnt: 0, henkin_nyushamae: 0,  // 入社前辞退・内定取消
+        henkin_hayaki_cnt: 0, henkin_hayaki: 0 };       // 早期離職（入社後）
+      
+      if (!monthly[month]) monthly[month] = { 全体: {...entry} };
+      if (!monthly[month][dept]) monthly[month][dept] = {...entry};
+      
+      ['全体', dept].forEach(key => {
+        monthly[month][key].count += 1;
+        monthly[month][key].uriage += uriage;
+        monthly[month][key].uriage_after += uriageAfter;
+        if (isNyushaMae && henkinAmt > 0) {
+          monthly[month][key].henkin_nyushamae_cnt += 1;
+          monthly[month][key].henkin_nyushamae += henkinAmt;
+        }
+        if (isHayaki && henkinAmt > 0) {
+          monthly[month][key].henkin_hayaki_cnt += 1;
+          monthly[month][key].henkin_hayaki += henkinAmt;
+        }
+      });
     }
     next = data.next;
   }
@@ -167,6 +184,8 @@ async function fetchMonthly(token) {
     for (const d of Object.values(m)) {
       d.uriage = Math.round(d.uriage / 10000);
       d.uriage_after = Math.round(d.uriage_after / 10000);
+      d.henkin_nyushamae = Math.round((d.henkin_nyushamae || 0) / 10000);
+      d.henkin_hayaki = Math.round((d.henkin_hayaki || 0) / 10000);
     }
   }
   console.log(`月次集計完了: ${Object.keys(monthly).sort().join(', ')}`);
