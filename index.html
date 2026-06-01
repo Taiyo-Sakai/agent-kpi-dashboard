@@ -4,460 +4,402 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>エージェント事業部 KPI ダッシュボード 2026</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Hiragino Sans','Meiryo',sans-serif;background:#f5f6fa;color:#2d3436;font-size:13px}
-.header{background:white;border-bottom:1px solid #e0e0e0;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:48px;position:sticky;top:0;z-index:100}
-.header-left{display:flex;align-items:center;gap:8px}
-.header-title{font-size:16px;font-weight:bold;color:#1a3a5c}
-.header-title .year{color:#0984e3}
-.header-title .sub{font-size:11px;color:#999;font-weight:normal;margin-left:4px}
-.header-right{display:flex;align-items:center;gap:12px;font-size:11px;color:#666}
-.update-btn{background:#0984e3;color:white;border:none;padding:6px 16px;border-radius:4px;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:4px}
-.tabs{background:white;border-bottom:2px solid #e0e0e0;padding:0 20px;display:flex;overflow-x:auto;position:sticky;top:48px;z-index:99}
-.tab{padding:12px 14px;cursor:pointer;font-size:12px;color:#888;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap}
-.tab.active{color:#0984e3;border-bottom-color:#0984e3;font-weight:bold}
-.tab:hover{color:#0984e3}
-.content{padding:20px;max-width:1600px;margin:0 auto}
+body{font-family:-apple-system,'Hiragino Sans','Meiryo',sans-serif;background:#f0f2f5;color:#1a1a2e;font-size:13px}
+
+/* ヘッダー */
+.header{background:#fff;border-bottom:1px solid #e8eaed;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:200;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.htitle{font-size:17px;font-weight:700;color:#1a1a2e;letter-spacing:-.3px}
+.htitle .yr{color:#1976d2}
+.htitle .sub{font-size:11px;color:#9aa3af;font-weight:400;margin-left:10px}
+.hright{display:flex;align-items:center;gap:16px;font-size:11px;color:#6b7280}
+.upd-btn{background:#1976d2;color:#fff;border:none;padding:7px 18px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:.3px}
+.upd-btn:hover{background:#1565c0}
+
+/* タブ */
+.tabs{background:#fff;border-bottom:2px solid #e8eaed;padding:0 24px;display:flex;position:sticky;top:52px;z-index:199}
+.tab{padding:14px 16px;cursor:pointer;font-size:12px;color:#6b7280;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;font-weight:500;transition:color .15s}
+.tab.active{color:#1976d2;border-bottom-color:#1976d2;font-weight:700}
+.tab:hover{color:#1976d2}
+
+.content{padding:20px 24px;max-width:1680px;margin:0 auto}
 .tab-content{display:none}
 .tab-content.active{display:block}
+
 /* FOCUS */
-.focus-card{background:white;border-radius:8px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);display:flex;gap:20px}
-.focus-left{flex:1}
-.focus-tag{display:inline-block;background:#f0f4ff;color:#0984e3;font-size:11px;padding:2px 8px;border-radius:3px;font-weight:bold;margin-bottom:8px}
-.focus-title{font-size:14px;font-weight:bold;color:#2d3436;margin-bottom:12px}
-.focus-rate{font-size:52px;font-weight:bold;line-height:1;margin-bottom:4px}
-.focus-rate.over{color:#00b894}
-.focus-rate.under{color:#e17055}
-.focus-sub{font-size:12px;color:#888;margin-bottom:12px}
-.progress-wrap{background:#f0f0f0;border-radius:4px;height:10px;margin:8px 0 4px}
-.progress-bar{height:10px;border-radius:4px;transition:width .5s}
-.progress-bar.over{background:#00b894}
-.progress-bar.under{background:#0984e3}
-.progress-nums{display:flex;justify-content:space-between;font-size:11px;color:#666;margin-top:4px}
-.focus-detail{display:flex;gap:24px;margin-top:12px}
-.focus-num{text-align:center}
-.focus-num .lbl{font-size:11px;color:#999}
-.focus-num .val{font-size:16px;font-weight:bold;color:#2d3436}
-.focus-num .val.orange{color:#e17055}
-.focus-right{display:flex;gap:12px;min-width:500px}
-.focus-ranking{flex:1;background:#fafafa;border-radius:6px;padding:12px}
-.focus-ranking h4{font-size:12px;font-weight:bold;margin-bottom:8px}
-.focus-ranking .item{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f0f0f0;font-size:12px}
-.focus-ranking .item:last-child{border-bottom:none}
-.focus-ranking .dept{color:#2d3436}
-.focus-ranking .rate-g{color:#00b894;font-weight:bold}
-.focus-ranking .rate-r{color:#e17055;font-weight:bold}
+.focus-card{background:#fff;border-radius:10px;padding:22px 24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07);display:flex;gap:24px;align-items:stretch}
+.focus-left{flex:1.2}
+.focus-tag{display:inline-flex;align-items:center;gap:4px;background:#e8f0fe;color:#1976d2;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;margin-bottom:10px;letter-spacing:.5px}
+.focus-month-title{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:14px}
+.focus-pct{font-size:58px;font-weight:800;line-height:1;margin-bottom:6px;letter-spacing:-2px}
+.focus-pct.over{color:#0a8a62}
+.focus-pct.under{color:#d32f2f}
+.focus-compare{font-size:12px;margin-bottom:14px}
+.focus-compare .label{color:#6b7280}
+.focus-compare .diff{font-weight:700;margin-left:4px}
+.focus-compare .diff.pos{color:#0a8a62}
+.focus-compare .diff.neg{color:#d32f2f}
+.focus-bar-wrap{background:#e8eaed;border-radius:3px;height:8px;margin:10px 0 6px}
+.focus-bar{height:8px;border-radius:3px;transition:width .6s ease}
+.focus-bar.over{background:#0a8a62}
+.focus-bar.under{background:#1976d2}
+.focus-bar-labels{display:flex;justify-content:space-between;font-size:10px;color:#9aa3af;margin-bottom:14px}
+.focus-nums{display:flex;gap:32px}
+.focus-num .lbl{font-size:10px;color:#9aa3af;margin-bottom:3px}
+.focus-num .val{font-size:15px;font-weight:700;color:#1a1a2e}
+.focus-num .val.warn{color:#e65100}
+.focus-divider{width:1px;background:#e8eaed;margin:0 4px}
+.focus-right{display:flex;gap:12px;min-width:480px}
+.focus-rank-box{flex:1;border:1px solid #e8eaed;border-radius:8px;padding:14px}
+.focus-rank-box h4{font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:10px;display:flex;align-items:center;gap:5px}
+.rank-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f3f4f6;font-size:12px}
+.rank-row:last-child{border-bottom:none}
+.rank-dept{color:#374151;font-weight:500}
+.rank-rate.over{color:#0a8a62;font-weight:700}
+.rank-rate.under{color:#d32f2f;font-weight:700}
+
 /* セクション */
-.section{background:white;border-radius:8px;padding:0;box-shadow:0 1px 4px rgba(0,0,0,.08);margin-bottom:16px;overflow:hidden}
-.section-header{padding:14px 20px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:bold;color:#2d3436}
-.section-header::before{content:'';display:inline-block;width:4px;height:16px;background:#0984e3;border-radius:2px}
+.section{background:#fff;border-radius:10px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.07);overflow:hidden}
+.sec-header{padding:14px 20px;border-bottom:1px solid #f3f4f6;font-size:13px;font-weight:700;color:#1a1a2e;display:flex;align-items:center;gap:8px}
+.sec-header::before{content:'';display:inline-block;width:4px;height:15px;background:#1976d2;border-radius:2px}
+
 /* 月次テーブル */
-.monthly-wrap{overflow-x:auto}
-.monthly-table{width:100%;border-collapse:collapse;min-width:1400px;font-size:11px}
-.monthly-table th{background:#2c3e50;color:white;padding:7px 8px;text-align:center;font-weight:normal;white-space:nowrap;border-right:1px solid #3d5166}
-.monthly-table th.q-col{background:#1a2a3a}
-.monthly-table th:first-child{text-align:left;min-width:120px}
-.monthly-table td{padding:5px 8px;text-align:right;border-bottom:1px solid #f5f5f5;border-right:1px solid #f0f0f0}
-.monthly-table td:first-child{text-align:left;font-size:11px;color:#666;background:#fafafa;border-right:2px solid #e0e0e0}
-.monthly-table .q-col{background:#f8fafc !important;font-weight:bold}
-.monthly-table tr.dept-header td{background:#eef2f7;font-weight:bold;color:#1a3a5c;font-size:12px;padding:8px}
-.monthly-table tr.dept-header td:first-child{font-size:13px}
-.monthly-table tr.metric-row td{padding:4px 8px}
-.monthly-table .cur-month{background:#fffde7 !important}
-.val-plan{color:#888}
-.val-actual{font-weight:bold;color:#2d3436}
-.val-貯金.pos{color:#00b894;font-weight:bold}
-.val-貯金.neg{color:#e17055;font-weight:bold}
-.val-rate.over{color:#00b894;font-weight:bold}
-.val-rate.under{color:#e17055;font-weight:bold}
-.val-cnt{color:#555}
-/* 別タブ */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mtbl{width:100%;border-collapse:collapse;font-size:12px;min-width:1500px}
+.mtbl thead th{background:#263238;color:#eceff1;padding:9px 10px;text-align:center;font-weight:600;font-size:11px;white-space:nowrap;border-right:1px solid #37474f;position:sticky;top:0}
+.mtbl thead th.q-h{background:#1a2327}
+.mtbl thead th.tot-h{background:#1a2327}
+.mtbl thead th:first-child{text-align:left;min-width:130px;background:#263238}
+.mtbl tbody td{padding:5px 10px;text-align:right;border-bottom:1px solid #f3f4f6;border-right:1px solid #f3f4f6;font-size:12px;color:#374151}
+.mtbl tbody td:first-child{text-align:left;background:#f8fafc;color:#546e7a;font-size:11px;border-right:2px solid #e2e8f0;font-weight:500;padding-left:12px}
+.mtbl .q-col{background:#f1f5f9 !important;font-weight:600;color:#263238 !important}
+.mtbl td.q-col{color:#263238}
+.mtbl .cur-m{background:#fffbeb !important}
+.mtbl .cur-m.q-col{background:#fef3c7 !important}
+
+/* 部署ヘッダー行 */
+.dept-hrow td{background:#eceff1 !important;color:#263238 !important;font-weight:700;font-size:13px;padding:9px 12px !important;border-bottom:2px solid #cfd8dc !important;letter-spacing:.3px}
+
+/* 値の色 */
+.v-plan{color:#78909c;font-size:11px}
+.v-actual{color:#1a1a2e;font-weight:700}
+.v-cnt{color:#546e7a}
+.v-choki.pos{color:#0a8a62;font-weight:700}
+.v-choki.neg{color:#d32f2f;font-weight:700}
+.v-rate.over{color:#0a8a62;font-weight:700}
+.v-rate.under{color:#d32f2f;font-weight:700}
+.v-rate.zero{color:#9aa3af}
+
+/* CA/RA タブ */
 .filter-bar{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-.filter-label{font-size:11px;color:#888}
-.filter-select{border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;background:white;cursor:pointer}
-.kpi-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
-.kpi-card{background:white;border-radius:6px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.kpi-card .lbl{font-size:11px;color:#888;margin-bottom:6px}
-.kpi-card .val{font-size:22px;font-weight:bold;color:#2d3436}
-.kpi-card .val.gold{color:#f39c12}
-.kpi-card .val.blue{color:#0984e3}
-.kpi-card .val.green{color:#00b894}
-.kpi-card .sub{font-size:11px;color:#aaa;margin-top:2px}
+.fl{font-size:11px;color:#6b7280;font-weight:500}
+.fsel{border:1px solid #d1d5db;border-radius:5px;padding:5px 10px;font-size:12px;background:#fff;cursor:pointer;color:#374151}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.kcard{background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.07);border:1px solid #f3f4f6}
+.kcard .klbl{font-size:10px;color:#6b7280;font-weight:500;margin-bottom:6px;letter-spacing:.3px}
+.kcard .kval{font-size:24px;font-weight:800;color:#1a1a2e;line-height:1.2}
+.kcard .kval.blue{color:#1976d2}
+.kcard .kval.gold{color:#f57c00}
+.kcard .kval.green{color:#0a8a62}
+.kcard .ksub{font-size:11px;color:#9aa3af;margin-top:3px}
+
+/* ポディウム */
 .podium{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin-bottom:20px}
-.p-item{background:white;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);text-align:center;position:relative}
-.p-item.r1{width:280px;border:2px solid #f39c12;order:2}
-.p-item.r2{width:220px;order:1}
-.p-item.r3{width:220px;order:3}
-.p-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);border-radius:12px;padding:2px 10px;font-size:11px;font-weight:bold;color:white}
-.bg-gold{background:#f39c12}
-.bg-silver{background:#b2bec3}
-.bg-bronze{background:#e17055}
-.p-name{font-size:16px;font-weight:bold;margin:12px 0 4px}
-.r1 .p-name{font-size:20px}
-.p-sub{font-size:11px;color:#888;margin-bottom:8px}
-.p-val{font-size:24px;font-weight:bold;color:#0984e3}
-.r1 .p-val{font-size:32px;color:#f39c12}
-.p-unit{font-size:12px;color:#888}
-.ranking-table{background:white;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden}
-.ranking-table table{width:100%;border-collapse:collapse}
-.ranking-table th{background:#1a3a5c;color:white;padding:10px 16px;text-align:left;font-size:11px;font-weight:normal}
-.ranking-table td{padding:10px 16px;border-bottom:1px solid #f1f3f5;font-size:13px}
-.ranking-table tr:hover td{background:#f8f9fa}
-.rn{font-weight:bold;color:#aaa;font-size:12px}
-.rn.t{color:#f39c12}
-.top10d td{background:#1a3a5c !important;color:white;text-align:center;font-size:11px;font-weight:bold;padding:6px !important;letter-spacing:2px}
-.ga{background:#e8f5e9;color:#2e7d32;border-radius:4px;padding:2px 6px;font-weight:bold}
-.gb{background:#e3f2fd;color:#1565c0;border-radius:4px;padding:2px 6px;font-weight:bold}
-.gc{background:#fff9c4;color:#f57f17;border-radius:4px;padding:2px 6px;font-weight:bold}
-.gdp{background:#fce4ec;color:#c62828;border-radius:4px;padding:2px 6px;font-weight:bold}
-.gd{background:#eee;color:#616161;border-radius:4px;padding:2px 6px;font-weight:bold}
-#loading{text-align:center;padding:60px;color:#888}
+.pd{background:#fff;border-radius:10px;padding:20px 16px;box-shadow:0 2px 10px rgba(0,0,0,.08);text-align:center;position:relative;border:1px solid #f3f4f6}
+.pd.r1{width:280px;border:2px solid #f57c00;order:2}
+.pd.r2{width:220px;order:1}
+.pd.r3{width:220px;order:3}
+.pd-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
+.bg-g{background:#f57c00}
+.bg-s{background:#78909c}
+.bg-b{background:#bf360c}
+.pd-name{font-size:16px;font-weight:700;margin:14px 0 4px;color:#1a1a2e}
+.r1 .pd-name{font-size:20px}
+.pd-sub{font-size:11px;color:#78909c;margin-bottom:10px}
+.pd-val{font-size:26px;font-weight:800;color:#1976d2}
+.r1 .pd-val{font-size:34px;color:#f57c00}
+.pd-unit{font-size:12px;color:#78909c;font-weight:400}
+
+/* ランキングテーブル */
+.rtbl-wrap{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.07);overflow:hidden;border:1px solid #f3f4f6}
+.rtbl{width:100%;border-collapse:collapse}
+.rtbl th{background:#263238;color:#eceff1;padding:10px 16px;text-align:left;font-size:11px;font-weight:600;letter-spacing:.3px}
+.rtbl td{padding:10px 16px;border-bottom:1px solid #f3f4f6;font-size:13px;color:#374151}
+.rtbl tr:last-child td{border-bottom:none}
+.rtbl tr:hover td{background:#f8fafc}
+.rnum{font-weight:700;color:#9aa3af;font-size:12px}
+.rnum.top{color:#f57c00}
+.top10d td{background:#263238 !important;color:#eceff1;text-align:center;font-size:11px;font-weight:700;padding:7px !important;letter-spacing:2px}
+.ga{background:#e8f5e9;color:#1b5e20;border-radius:4px;padding:2px 7px;font-weight:700;font-size:11px}
+.gb{background:#e3f2fd;color:#0d47a1;border-radius:4px;padding:2px 7px;font-weight:700;font-size:11px}
+.gc{background:#fff8e1;color:#e65100;border-radius:4px;padding:2px 7px;font-weight:700;font-size:11px}
+.gdp{background:#fce4ec;color:#880e4f;border-radius:4px;padding:2px 7px;font-weight:700;font-size:11px}
+.gd{background:#f5f5f5;color:#424242;border-radius:4px;padding:2px 7px;font-weight:700;font-size:11px}
+
+#loading{text-align:center;padding:80px;color:#6b7280;font-size:14px}
 </style>
 </head>
 <body>
+
 <div class="header">
-  <div class="header-left">
-    <div class="header-title">エージェント事業部 KPI ダッシュボード <span class="year">2026</span><span class="sub">チーム / 個人 / 目標達成</span></div>
+  <div style="display:flex;align-items:center">
+    <div class="htitle">エージェント事業部 KPI ダッシュボード <span class="yr">2026</span><span class="sub">チーム / 個人 / 目標達成</span></div>
   </div>
-  <div class="header-right">
+  <div class="hright">
     <span id="headerInfo">読み込み中...</span>
-    <button class="update-btn" onclick="loadData()">⟳ 更新</button>
+    <button class="upd-btn" onclick="loadData()">⟳ 更新</button>
   </div>
 </div>
 
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('summary')">📋 全体サマリー</div>
-  <div class="tab" onclick="switchTab('ca-ranking')">🏆 CA個人ランキング</div>
-  <div class="tab" onclick="switchTab('ra-ranking')">📊 RAグレードランキング</div>
+  <div class="tab active" onclick="sw('summary')">📋 全体サマリー</div>
+  <div class="tab" onclick="sw('ca')">🏆 CA個人ランキング</div>
+  <div class="tab" onclick="sw('ra')">📊 RAグレードランキング</div>
 </div>
 
 <div class="content">
   <div id="loading">データ読み込み中...</div>
 
-  <!-- 全体サマリー -->
   <div id="summary" class="tab-content">
     <div id="focus-card" class="focus-card"></div>
     <div class="section">
-      <div class="section-header">エージェント事業部 月次サマリー</div>
-      <div class="monthly-wrap"><div id="overall-table"></div></div>
+      <div class="sec-header">エージェント事業部 月次サマリー</div>
+      <div class="tbl-wrap" id="overall-tbl"></div>
     </div>
     <div class="section">
-      <div class="section-header">部署別 月次サマリー</div>
-      <div class="monthly-wrap"><div id="dept-table"></div></div>
+      <div class="sec-header">部署別 月次サマリー（Q別合計付き）</div>
+      <div class="tbl-wrap" id="dept-tbl"></div>
     </div>
   </div>
 
-  <!-- CA個人ランキング -->
-  <div id="ca-ranking" class="tab-content">
+  <div id="ca" class="tab-content">
     <div class="filter-bar">
-      <span class="filter-label">部門:</span>
-      <select class="filter-select" id="ca-filter" onchange="renderCA()">
-        <option value="all">全部門</option>
-      </select>
+      <span class="fl">部門:</span>
+      <select class="fsel" id="ca-f" onchange="renderCA()"><option value="all">全部門</option></select>
     </div>
-    <div class="kpi-cards" id="ca-kpi"></div>
-    <div class="podium" id="ca-podium"></div>
-    <div style="background:white;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden">
-      <table style="width:100%;border-collapse:collapse">
-        <thead><tr style="background:#1a3a5c;color:white"><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">#</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">名前</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">部門</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">成約数</th></tr></thead>
-        <tbody id="ca-table"></tbody>
-      </table>
-    </div>
+    <div class="kpi-grid" id="ca-kpi"></div>
+    <div class="podium" id="ca-pod"></div>
+    <div class="rtbl-wrap"><table class="rtbl">
+      <thead><tr><th>#</th><th>名前</th><th>部門</th><th>成約数（今年度）</th></tr></thead>
+      <tbody id="ca-tbl"></tbody>
+    </table></div>
   </div>
 
-  <!-- RAグレードランキング -->
-  <div id="ra-ranking" class="tab-content">
+  <div id="ra" class="tab-content">
     <div class="filter-bar">
-      <span class="filter-label">チーム:</span>
-      <select class="filter-select" id="ra-filter" onchange="renderRA()">
-        <option value="all">全チーム</option>
-      </select>
+      <span class="fl">チーム:</span>
+      <select class="fsel" id="ra-f" onchange="renderRA()"><option value="all">全チーム</option></select>
     </div>
-    <div class="kpi-cards" id="ra-kpi"></div>
-    <div class="podium" id="ra-podium"></div>
-    <div style="background:white;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden">
-      <table style="width:100%;border-collapse:collapse">
-        <thead><tr style="background:#1a3a5c;color:white"><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">#</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">名前</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">チーム</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">A</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">B</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">C</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">D+</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">D</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">スコア</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">ポイント</th></tr></thead>
-        <tbody id="ra-table"></tbody>
-      </table>
-    </div>
+    <div class="kpi-grid" id="ra-kpi"></div>
+    <div class="podium" id="ra-pod"></div>
+    <div class="rtbl-wrap"><table class="rtbl">
+      <thead><tr><th>#</th><th>名前</th><th>チーム</th><th>A</th><th>B</th><th>C</th><th>D+</th><th>D</th><th>スコア</th><th>ポイント</th></tr></thead>
+      <tbody id="ra-tbl"></tbody>
+    </table></div>
   </div>
 </div>
 
 <script>
-let data=null,targets=null;
-const MONTHS=['01','02','03','04','05','06','07','08','09','10','11','12'];
+let D=null,T=null;
+const MO=['01','02','03','04','05','06','07','08','09','10','11','12'];
 const DEPTS=['建設Ⅰ部','建設Ⅱ部','不動産部','電気主任・製造部','士業部'];
-const DEPT_KEYS={'全体':'全体','建設Ⅰ部':'建設Ⅰ部','建設Ⅱ部':'建設Ⅱ部','不動産部':'不動産','電気主任・製造部':'電気主任','士業部':'士業'};
+const TK={'全体':'全体','建設Ⅰ部':'建設Ⅰ部','建設Ⅱ部':'建設Ⅱ部','不動産部':'不動産','電気主任・製造部':'電気主任','士業部':'士業'};
 
-function switchTab(id){
-  ['summary','ca-ranking','ra-ranking'].forEach((t,i)=>{
+function sw(id){
+  ['summary','ca','ra'].forEach((t,i)=>{
     document.querySelectorAll('.tab')[i].classList.toggle('active',t===id);
     document.getElementById(t).classList.toggle('active',t===id);
   });
 }
 
-function nowYM(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;}
+function nowM(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;}
+function fmt(n){return Math.round(n||0).toLocaleString();}
+function fmtR(r){return r==null||isNaN(r)?'-':r.toFixed(1)+'%';}
+function rc(r){return r>=100?'over':r===0?'zero':'under';}
 
-function getActual(month,dept){
-  const m=data.monthly||{};
-  const d=m[month]|{};
-  const key=dept==='全体'?'全体':dept;
-  return (d[month]||{})[key]||{count:0,uriage:0,uriage_after:0};
+function getPlan(dept,mo,key){
+  const tk=TK[dept]||dept;
+  return ((T[tk]||{})[key]||{})[mo]||0;
+}
+function getAct(mo,dept){
+  const m=(D.monthly||{})[mo]||{};
+  return m[dept]||{count:0,uriage:0,uriage_after:0};
 }
 
-function getActuals(month){
-  const m=(data.monthly||{})[month]||{};
-  return m;
-}
+function buildTable(deptFilter){
+  const yr='2026';
+  const months=MO.map(m=>`${yr}-${m}`);
+  const Q=[[0,1,2],[3,4,5],[6,7,8],[9,10,11]];
+  const QL=['1Q計','2Q計','3Q計','4Q計'];
+  const nm=nowM();
 
-function getPlan(dept,month,key){
-  const tk=DEPT_KEYS[dept]||dept;
-  return ((targets[tk]||{})[key]||{})[month]||0;
-}
-
-function fmtNum(n){return Math.round(n).toLocaleString();}
-function fmtRate(r){return r>0?r.toFixed(1)+'%':'-';}
-function rateClass(r){return r>=100?'over':'under';}
-
-function buildMonthlyTable(dept,tableEl){
-  const nowM=nowYM();
-  const year='2026';
-  const allMonths=MONTHS.map(m=>`${year}-${m}`);
-  const quarters=[[0,1,2],[3,4,5],[6,7,8],[9,10,11]];
-  const qLabels=['1Q計','2Q計','3Q計','4Q計'];
-
-  // ヘッダー行
+  // 列構築
   let cols=[];
-  quarters.forEach((q,qi)=>{
-    q.forEach(mi=>{const mo=allMonths[mi];cols.push({type:'month',month:mo,label:(mi+1)+'月'});});
-    cols.push({type:'q',label:qLabels[qi],months:q.map(mi=>allMonths[mi])});
+  Q.forEach((q,qi)=>{
+    q.forEach(mi=>cols.push({t:'m',mo:months[mi],lbl:(mi+1)+'月'}));
+    cols.push({t:'q',lbl:QL[qi],mos:q.map(i=>months[i])});
   });
-  cols.push({type:'total',label:'合計',months:allMonths});
+  cols.push({t:'tot',lbl:'合計',mos:months});
 
-  let html=`<table class="monthly-table"><thead><tr>
-    <th style="text-align:left">区分</th>`;
+  let h=`<table class="mtbl"><thead><tr><th style="text-align:left">`;
+  h+=deptFilter?'区分':'ブランド / 区分';
+  h+='</th>';
   cols.forEach(c=>{
-    const cls=c.type!=='month'?'q-col':'';
-    const isCur=c.type==='month'&&c.month===nowM?'style="background:#fff3cd"':'';
-    html+=`<th class="${cls}" ${isCur}>${c.label}</th>`;
+    const qcls=c.t!=='m'?'q-h':'';
+    const curSt=c.t==='m'&&c.mo===nm?'style="background:#fffbeb"':'';
+    h+=`<th class="${qcls}" ${curSt}>${c.lbl}</th>`;
   });
-  html+=`</tr></thead><tbody>`;
+  h+=`</tr></thead><tbody>`;
 
-  // 各指標行
-  const metrics=[
-    {key:'単月目標',cls:'val-plan'},
-    {key:'単月実績',cls:'val-actual'},
-    {key:'件数',cls:'val-cnt'},
-    {key:'貯金',cls:'val-貯金'},
-    {key:'達成率',cls:'val-rate'},
+  const rows=[
+    {k:'単月目標',fn:(a,p)=>fmt(p),cls:()=>'v-plan'},
+    {k:'単月実績',fn:(a,p)=>fmt(a.uriage),cls:()=>'v-actual'},
+    {k:'件数',fn:(a,p)=>a.count+'件',cls:()=>'v-cnt'},
+    {k:'貯金',fn:(a,p)=>{const d=Math.round(a.uriage-p);return(d>=0?'+':'')+fmt(d);},cls:(a,p)=>{const d=a.uriage-p;return'v-choki '+(d>=0?'pos':'neg');}},
+    {k:'達成率',fn:(a,p)=>{const r=p>0?a.uriage/p*100:null;return r==null?'-':r.toFixed(1)+'%';},cls:(a,p)=>{const r=p>0?a.uriage/p*100:0;return'v-rate '+rc(r);}},
   ];
 
-  const monthly=data.monthly||{};
+  const dList=deptFilter?[deptFilter]:DEPTS;
 
-  metrics.forEach(({key,cls})=>{
-    html+=`<tr class="metric-row"><td>${key}</td>`;
-    let totActU=0,totPlanU=0,totActC=0;
-    
-    cols.forEach(c=>{
-      const isCur=c.type==='month'&&c.month===nowM?'cur-month':'';
-      const months=c.type==='month'?[c.month]:c.months;
-      let actU=0,planU=0,actC=0;
-      months.forEach(m=>{
-        const d=monthly[m]||{};
-        const dd=dept==='全体'?d['全体']:d[dept];
-        actU+=(dd?.uriage||0);
-        actC+=(dd?.count||0);
-        planU+=getPlan(dept,m,'売上合計（返金前）[目標]');
+  dList.forEach(dept=>{
+    if(!deptFilter){
+      h+=`<tr class="dept-hrow"><td colspan="${cols.length+1}">${dept}</td></tr>`;
+    }
+    rows.forEach(row=>{
+      h+=`<tr><td>${row.k}</td>`;
+      cols.forEach(c=>{
+        const mos=c.t==='m'?[c.mo]:c.mos;
+        let totA={count:0,uriage:0};
+        let totP=0;
+        mos.forEach(mo=>{
+          const a=getAct(mo,dept);
+          totA.count+=a.count;
+          totA.uriage+=(a.uriage||0);
+          totP+=getPlan(dept,mo,'売上合計（返金前）[目標]');
+        });
+        const qcls=c.t!=='m'?'q-col':'';
+        const curcls=c.t==='m'&&c.mo===nm?'cur-m':'';
+        const vcls=row.cls(totA,totP);
+        h+=`<td class="${vcls} ${qcls} ${curcls}">${row.fn(totA,totP)}</td>`;
       });
-      if(c.type==='total'){totActU=actU;totPlanU=planU;totActC=actC;}
-
-      let val='',vCls=cls;
-      if(key==='単月目標'){val=fmtNum(planU);}
-      else if(key==='単月実績'){val=fmtNum(actU);}
-      else if(key==='件数'){val=actC+'件';}
-      else if(key==='貯金'){
-        const diff=Math.round(actU-planU);
-        val=(diff>=0?'+':'')+fmtNum(diff);
-        vCls=`val-貯金 ${diff>=0?'pos':'neg'}`;
-      }else if(key==='達成率'){
-        const rate=planU>0?actU/planU*100:0;
-        val=fmtRate(rate);
-        vCls=`val-rate ${rateClass(rate)}`;
-      }
-      html+=`<td class="${vCls} ${c.type!=='month'?'q-col':''} ${isCur}">${val}</td>`;
+      h+=`</tr>`;
     });
-    html+=`</tr>`;
   });
-  html+=`</tbody></table>`;
-  tableEl.innerHTML=html;
+
+  h+=`</tbody></table>`;
+  return h;
 }
 
 function renderSummary(){
-  if(!data||!targets)return;
-  const nowM=nowYM();
-  const monthly=data.monthly||{};
-  const curData=(monthly[nowM]||{})['全体']||{count:0,uriage:0};
-  const curPlan=getPlan('全体',nowM,'売上合計（返金前）[目標]');
-  const curCnt=curData.count;
-  const curCntPlan=getPlan('全体',nowM,'総成約数（目標）');
-  const curRate=curPlan>0?curData.uriage/curPlan*100:0;
+  if(!D||!T)return;
+  const nm=nowM();
+  const curA=getAct(nm,'全体');
+  const curP=getPlan('全体',nm,'売上合計（返金前）[目標]');
+  const curCnt=curA.count;
+  const curCntP=getPlan('全体',nm,'総成約数（目標）');
+  const rate=curP>0?curA.uriage/curP*100:0;
 
-  // FOCUSカード
-  const topDepts=DEPTS.map(d=>{
-    const act=((monthly[nowM]||{})[d]||{}).uriage||0;
-    const plan=getPlan(d,nowM,'売上合計（返金前）[目標]');
-    const rate=plan>0?act/plan*100:0;
-    return{dept:d,rate};
-  }).sort((a,b)=>b.rate-a.rate);
+  const deptRates=DEPTS.map(d=>{
+    const a=getAct(nm,d);
+    const p=getPlan(d,nm,'売上合計（返金前）[目標]');
+    return{d,r:p>0?a.uriage/p*100:0};
+  }).sort((a,b)=>b.r-a.r);
 
-  const top3=topDepts.slice(0,3);
-  const bottom3=topDepts.slice(-3).reverse();
+  const top3=deptRates.slice(0,3);
+  const bot3=[...deptRates].sort((a,b)=>a.r-b.r).slice(0,3);
 
   document.getElementById('focus-card').innerHTML=`
     <div class="focus-left">
       <div class="focus-tag">FOCUS</div>
-      <div class="focus-title">${nowM.replace('-','年')}月の売上進捗（エージェント事業部全体）</div>
-      <div class="focus-rate ${curRate>=100?'over':'under'}">${curRate.toFixed(1)}%</div>
-      <div class="focus-sub">${nowM.replace('-','年')}月達成率（目安比 ${curRate>=100?'+':''}${(curRate-100).toFixed(1)}%）</div>
-      <div class="progress-wrap"><div class="progress-bar ${curRate>=100?'over':'under'}" style="width:${Math.min(curRate,100)}%"></div></div>
-      <div class="progress-nums">
+      <div class="focus-month-title">${nm.replace('-','年')}月の売上進捗（エージェント事業部全体）</div>
+      <div class="focus-pct ${rate>=100?'over':'under'}">${rate.toFixed(1)}%</div>
+      <div class="focus-compare">
+        <span class="label">${nm.replace('-','年')}月達成率</span>
+        <span class="diff ${rate>=100?'pos':'neg'}">(目安比 ${rate>=100?'+':''}${(rate-Math.min(100,new Date().getDate()/30*100)).toFixed(1)}%)</span>
+      </div>
+      <div class="focus-bar-wrap"><div class="focus-bar ${rate>=100?'over':'under'}" style="width:${Math.min(rate,100)}%"></div></div>
+      <div class="focus-bar-labels">
         <span>0%</span>
         <span>営業日進捗目安: ${Math.round(new Date().getDate()/30*100)}%</span>
         <span>100%</span>
       </div>
-      <div class="focus-detail">
-        <div class="focus-num"><div class="lbl">実績</div><div class="val">${fmtNum(curData.uriage)} 万円</div></div>
-        <div class="focus-num"><div class="lbl">目標</div><div class="val">${fmtNum(curPlan)} 万円</div></div>
-        <div class="focus-num"><div class="lbl">目標まで</div><div class="val orange">${fmtNum(Math.max(0,curPlan-curData.uriage))} 万円</div></div>
-        <div class="focus-num"><div class="lbl">件数</div><div class="val">${curCnt} / ${curCntPlan} 件</div></div>
+      <div class="focus-nums">
+        <div class="focus-num"><div class="lbl">実績</div><div class="val">${fmt(curA.uriage)} 万円</div></div>
+        <div class="focus-divider"></div>
+        <div class="focus-num"><div class="lbl">目標</div><div class="val">${fmt(curP)} 万円</div></div>
+        <div class="focus-divider"></div>
+        <div class="focus-num"><div class="lbl">目標まで</div><div class="val warn">${fmt(Math.max(0,curP-curA.uriage))} 万円</div></div>
+        <div class="focus-divider"></div>
+        <div class="focus-num"><div class="lbl">件数</div><div class="val">${curCnt} / ${curCntP} 件</div></div>
       </div>
     </div>
     <div class="focus-right">
-      <div class="focus-ranking">
+      <div class="focus-rank-box">
         <h4>🔥 トップ3 部署</h4>
-        ${top3.map(d=>`<div class="item"><span class="dept">${d.dept}</span><span class="${d.rate>=100?'rate-g':'rate-r'}">${fmtRate(d.rate)}</span></div>`).join('')}
+        ${top3.map(x=>`<div class="rank-row"><span class="rank-dept">${x.d}</span><span class="rank-rate ${rc(x.r)}">${fmtR(x.r)}</span></div>`).join('')}
       </div>
-      <div class="focus-ranking">
+      <div class="focus-rank-box">
         <h4>⚠️ 要注意 部署</h4>
-        ${bottom3.map(d=>`<div class="item"><span class="dept">${d.dept}</span><span class="${d.rate>=100?'rate-g':'rate-r'}">${fmtRate(d.rate)}</span></div>`).join('')}
+        ${bot3.map(x=>`<div class="rank-row"><span class="rank-dept">${x.d}</span><span class="rank-rate ${rc(x.r)}">${fmtR(x.r)}</span></div>`).join('')}
       </div>
-    </div>
-  `;
+    </div>`;
 
-  // 全体テーブル
-  buildMonthlyTable('全体',document.getElementById('overall-table'));
-
-  // 部署別テーブル
-  const year='2026';
-  const allMonths=MONTHS.map(m=>`${year}-${m}`);
-  const quarters=[[0,1,2],[3,4,5],[6,7,8],[9,10,11]];
-  const qLabels=['1Q計','2Q計','3Q計','4Q計'];
-  const nowM2=nowYM();
-
-  let cols=[];
-  quarters.forEach((q,qi)=>{
-    q.forEach(mi=>{const mo=allMonths[mi];cols.push({type:'month',month:mo,label:(mi+1)+'月'});});
-    cols.push({type:'q',label:qLabels[qi],months:q.map(mi=>allMonths[mi])});
-  });
-  cols.push({type:'total',label:'合計',months:allMonths});
-
-  let html=`<table class="monthly-table"><thead><tr>
-    <th style="text-align:left">部署 / 区分</th>`;
-  cols.forEach(c=>{
-    const isCur=c.type==='month'&&c.month===nowM2?'style="background:#fff3cd"':'';
-    html+=`<th class="${c.type!=='month'?'q-col':''}" ${isCur}>${c.label}</th>`;
-  });
-  html+=`</tr></thead><tbody>`;
-
-  DEPTS.forEach(dept=>{
-    html+=`<tr class="dept-header"><td colspan="${cols.length+1}">${dept}</td></tr>`;
-    const metrics=[
-      {key:'目標',cls:'val-plan'},
-      {key:'実績',cls:'val-actual'},
-      {key:'件数',cls:'val-cnt'},
-      {key:'貯金',cls:'val-貯金'},
-      {key:'達成率',cls:'val-rate'},
-    ];
-    metrics.forEach(({key,cls})=>{
-      html+=`<tr class="metric-row"><td style="padding-left:20px">${key}</td>`;
-      cols.forEach(c=>{
-        const isCur=c.type==='month'&&c.month===nowM2?'cur-month':'';
-        const months=c.type==='month'?[c.month]:c.months;
-        let actU=0,planU=0,actC=0;
-        months.forEach(m=>{
-          const d=(monthly[m]||{})[dept]||{};
-          actU+=(d.uriage||0);
-          actC+=(d.count||0);
-          planU+=getPlan(dept,m,'売上合計（返金前）[目標]');
-        });
-        let val='',vCls=cls;
-        if(key==='目標'){val=fmtNum(planU);}
-        else if(key==='実績'){val=fmtNum(actU);}
-        else if(key==='件数'){val=actC+'件';}
-        else if(key==='貯金'){const d2=Math.round(actU-planU);val=(d2>=0?'+':'')+fmtNum(d2);vCls=`val-貯金 ${d2>=0?'pos':'neg'}`;}
-        else if(key==='達成率'){const r=planU>0?actU/planU*100:0;val=fmtRate(r);vCls=`val-rate ${rateClass(r)}`;}
-        html+=`<td class="${vCls} ${c.type!=='month'?'q-col':''} ${isCur}">${val}</td>`;
-      });
-      html+=`</tr>`;
-    });
-  });
-  html+=`</tbody></table>`;
-  document.getElementById('dept-table').innerHTML=html;
+  document.getElementById('overall-tbl').innerHTML=buildTable('全体');
+  document.getElementById('dept-tbl').innerHTML=buildTable(null);
 }
 
-function renderPodium(el,items,vKey,unit){
+function podium(el,items,vk,unit){
   if(!items||!items.length)return;
-  const top3=items.slice(0,3);
-  const order=top3.length>=3?[top3[1],top3[0],top3[2]]:top3;
-  const cfg=[{cls:'r2',bg:'bg-silver',lbl:'🥈 2nd'},{cls:'r1',bg:'bg-gold',lbl:'🥇 1st'},{cls:'r3',bg:'bg-bronze',lbl:'🥉 3rd'}];
-  const ro=top3.length>=3?[1,0,2]:[0];
-  el.innerHTML=order.map((item,i)=>{
-    const c=cfg[ro[i]];
-    const v=parseFloat(item[vKey])||0;
-    return`<div class="p-item ${c.cls}"><span class="p-badge ${c.bg}">${c.lbl}</span>
-      <div class="p-name">${item.name}</div><div class="p-sub">${item.division||item.team||''}</div>
-      <div class="p-val">${v}<span class="p-unit">${unit}</span></div></div>`;
+  const t=items.slice(0,3);
+  const ord=t.length>=3?[t[1],t[0],t[2]]:t;
+  const cfg=[{c:'r2',b:'bg-s',l:'🥈 2nd PLACE'},{c:'r1',b:'bg-g',l:'🥇 1st PLACE'},{c:'r3',b:'bg-b',l:'🥉 3rd PLACE'}];
+  const ri=t.length>=3?[1,0,2]:[0];
+  el.innerHTML=ord.map((x,i)=>{
+    const c=cfg[ri[i]];
+    const v=parseFloat(x[vk])||0;
+    return`<div class="pd ${c.c}"><span class="pd-badge ${c.b}">${c.l}</span>
+      <div class="pd-name">${x.name}</div><div class="pd-sub">${x.division||x.team||''}</div>
+      <div class="pd-val">${v}<span class="pd-unit">${unit}</span></div></div>`;
   }).join('');
 }
 
 function renderCA(){
-  if(!data)return;
-  const f=document.getElementById('ca-filter').value;
-  let list=[...data.ca_list];
+  if(!D)return;
+  const f=document.getElementById('ca-f').value;
+  let list=[...D.ca_list];
   if(f!=='all')list=list.filter(c=>c.division===f);
   const tot=list.reduce((s,c)=>s+c.summary.projects_created,0);
   document.getElementById('ca-kpi').innerHTML=`
-    <div class="kpi-card"><div class="lbl">👥 対象人数</div><div class="val blue">${list.length} 名</div></div>
-    <div class="kpi-card"><div class="lbl">🏆 合計成約数</div><div class="val">${tot} 件</div></div>
-    <div class="kpi-card"><div class="lbl">📊 平均</div><div class="val">${list.length?(tot/list.length).toFixed(1):0} 件</div></div>
-    <div class="kpi-card"><div class="lbl">🥇 TOP1</div><div class="val gold">${list[0]?.summary.projects_created||0} 件</div><div class="sub">${list[0]?.name||'-'}</div></div>
-    <div class="kpi-card"><div class="lbl">📅 集計期間</div><div class="val" style="font-size:13px">${data.dataFrom||'-'}〜</div></div>`;
-  renderPodium(document.getElementById('ca-podium'),list.map(c=>({...c,_v:c.summary.projects_created})),'_v','件');
-  document.getElementById('ca-table').innerHTML=list.map((c,i)=>`
+    <div class="kcard"><div class="klbl">👥 対象人数</div><div class="kval blue">${list.length}<span style="font-size:14px;font-weight:400;color:#6b7280"> 名</span></div></div>
+    <div class="kcard"><div class="klbl">🏆 合計成約数</div><div class="kval">${tot}<span style="font-size:14px;font-weight:400;color:#6b7280"> 件</span></div></div>
+    <div class="kcard"><div class="klbl">📊 平均成約数</div><div class="kval">${list.length?(tot/list.length).toFixed(1):0}<span style="font-size:14px;font-weight:400;color:#6b7280"> 件</span></div></div>
+    <div class="kcard"><div class="klbl">🥇 TOP1</div><div class="kval gold">${list[0]?.summary.projects_created||0}<span style="font-size:14px;font-weight:400;color:#6b7280"> 件</span></div><div class="ksub">${list[0]?.name||'-'}</div></div>
+    <div class="kcard"><div class="klbl">📅 集計期間</div><div class="kval" style="font-size:14px">${D.dataFrom||'-'}〜</div></div>`;
+  podium(document.getElementById('ca-pod'),list.map(c=>({...c,_v:c.summary.projects_created})),'_v','件');
+  document.getElementById('ca-tbl').innerHTML=list.map((c,i)=>`
     ${i===10?'<tr class="top10d"><td colspan="4">★ ここまで TOP 10 ★</td></tr>':''}
-    <tr><td><span class="rn ${i<3?'t':''}">#${i+1}</span></td>
-    <td><strong>${c.name}</strong></td><td>${c.division||'-'}</td><td><strong>${c.summary.projects_created}</strong> 件</td></tr>`).join('');
+    <tr><td><span class="rnum ${i<3?'top':''}">#${i+1}</span></td>
+    <td><strong>${c.name}</strong></td><td><span style="background:#f1f5f9;padding:2px 8px;border-radius:4px;font-size:11px">${c.division||'-'}</span></td>
+    <td><strong style="font-size:15px">${c.summary.projects_created}</strong> 件</td></tr>`).join('');
 }
 
 function renderRA(){
-  if(!data)return;
-  const f=document.getElementById('ra-filter').value;
-  let list=[...data.ra_list];
+  if(!D)return;
+  const f=document.getElementById('ra-f').value;
+  let list=[...D.ra_list];
   if(f!=='all')list=list.filter(r=>r.team===f);
   document.getElementById('ra-kpi').innerHTML=`
-    <div class="kpi-card"><div class="lbl">👥 対象人数</div><div class="val blue">${list.length} 名</div></div>
-    <div class="kpi-card"><div class="lbl">📋 総案件数</div><div class="val">${list.reduce((s,r)=>s+r.total_deals,0)} 件</div></div>
-    <div class="kpi-card"><div class="lbl">⭐ 総ポイント</div><div class="val">${list.reduce((s,r)=>s+r.points,0)}</div></div>
-    <div class="kpi-card"><div class="lbl">🥇 TOP1</div><div class="val gold">${list[0]?.grade_score||'-'}</div><div class="sub">${list[0]?.name||'-'}</div></div>
-    <div class="kpi-card"><div class="lbl">📦 全件</div><div class="val" style="font-size:13px">${(data.summary.total_interviews||0).toLocaleString()} 件</div></div>`;
-  renderPodium(document.getElementById('ra-podium'),list.map(r=>({...r,_v:parseFloat(r.grade_score)})),'_v','pt');
-  document.getElementById('ra-table').innerHTML=list.map((r,i)=>`
+    <div class="kcard"><div class="klbl">👥 対象人数</div><div class="kval blue">${list.length}<span style="font-size:14px;font-weight:400;color:#6b7280"> 名</span></div></div>
+    <div class="kcard"><div class="klbl">📋 総案件数</div><div class="kval">${list.reduce((s,r)=>s+r.total_deals,0).toLocaleString()}<span style="font-size:14px;font-weight:400;color:#6b7280"> 件</span></div></div>
+    <div class="kcard"><div class="klbl">⭐ 総ポイント</div><div class="kval">${list.reduce((s,r)=>s+r.points,0).toLocaleString()}</div></div>
+    <div class="kcard"><div class="klbl">🥇 TOP1スコア</div><div class="kval gold">${list[0]?.grade_score||'-'}</div><div class="ksub">${list[0]?.name||'-'}</div></div>
+    <div class="kcard"><div class="klbl">📦 全件キャッシュ</div><div class="kval" style="font-size:14px">${(D.summary.total_interviews||0).toLocaleString()}<span style="font-size:12px;font-weight:400;color:#6b7280"> 件</span></div></div>`;
+  podium(document.getElementById('ra-pod'),list.map(r=>({...r,_v:parseFloat(r.grade_score)})),'_v','pt');
+  document.getElementById('ra-tbl').innerHTML=list.map((r,i)=>`
     ${i===10?'<tr class="top10d"><td colspan="10">★ ここまで TOP 10 ★</td></tr>':''}
-    <tr><td><span class="rn ${i<3?'t':''}">#${i+1}</span></td>
-    <td><strong>${r.name}</strong></td><td>${r.team||'-'}</td>
+    <tr><td><span class="rnum ${i<3?'top':''}">#${i+1}</span></td>
+    <td><strong>${r.name}</strong></td><td><span style="background:#f1f5f9;padding:2px 8px;border-radius:4px;font-size:11px">${r.team||'-'}</span></td>
     <td><span class="ga">${r.grades.A}</span></td><td><span class="gb">${r.grades.B}</span></td>
     <td><span class="gc">${r.grades.C}</span></td><td><span class="gdp">${r.grades['D+']}</span></td>
     <td><span class="gd">${r.grades.D}</span></td>
@@ -470,17 +412,15 @@ function loadData(){
     fetch('output/data.json?t='+t).then(r=>r.json()),
     fetch('output/targets.json?t='+t).then(r=>r.json())
   ]).then(([d,tg])=>{
-    data=d;targets=tg;
+    D=d;T=tg;
     document.getElementById('loading').style.display='none';
     document.getElementById('summary').classList.add('active');
     const upd=new Date(d.lastUpdate).toLocaleString('ja-JP');
     document.getElementById('headerInfo').textContent=`最終更新: ${upd} ／ 単位: 万円 ／ CA: ${d.ca_list.length}名 ／ RA: ${d.ra_list.length}名`;
     const divs=[...new Set(d.ca_list.map(c=>c.division).filter(Boolean))];
-    const cf=document.getElementById('ca-filter');
-    divs.forEach(div=>{const o=document.createElement('option');o.value=div;o.textContent=div;cf.appendChild(o);});
+    divs.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;document.getElementById('ca-f').appendChild(o);});
     const teams=[...new Set(d.ra_list.map(r=>r.team).filter(Boolean))];
-    const rf=document.getElementById('ra-filter');
-    teams.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;rf.appendChild(o);});
+    teams.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;document.getElementById('ra-f').appendChild(o);});
     renderSummary();renderCA();renderRA();
   }).catch(e=>{document.getElementById('loading').textContent='エラー: '+e.message;});
 }
