@@ -75,8 +75,8 @@ body{font-family:-apple-system,'Hiragino Sans','Meiryo',sans-serif;background:#f
 .mtbl tbody td:first-child{text-align:left;background:#f8fafc;color:#546e7a;font-size:11px;border-right:2px solid #e2e8f0;font-weight:500;padding-left:12px}
 .mtbl .q-col{background:#f1f5f9 !important;font-weight:600;color:#263238 !important}
 .mtbl td.q-col{color:#263238}
-.mtbl .cur-m{background:#fffbeb !important}
-.mtbl .cur-m.q-col{background:#fef3c7 !important}
+.mtbl .cur-m{background:inherit !important}
+.mtbl .cur-m.q-col{background:#f1f5f9 !important}
 
 /* 部署ヘッダー行 */
 .dept-hrow td{background:#eceff1 !important;color:#263238 !important;font-weight:700;font-size:13px;padding:9px 12px !important;border-bottom:2px solid #cfd8dc !important;letter-spacing:.3px}
@@ -247,17 +247,20 @@ function buildTable(deptFilter){
   h+='</th>';
   cols.forEach(c=>{
     const qcls=c.t!=='m'?'q-h':'';
-    const curSt=c.t==='m'&&c.mo===nm?'style="background:#fffbeb"':'';
+    const curSt='';
     h+=`<th class="${qcls}" ${curSt}>${c.lbl}</th>`;
   });
   h+=`</tr></thead><tbody>`;
 
   const rows=[
-    {k:'単月目標',fn:(a,p)=>fmt(p),cls:()=>'v-plan'},
-    {k:'単月実績',fn:(a,p)=>fmt(a.uriage),cls:()=>'v-actual'},
-    {k:'件数',fn:(a,p)=>a.count+'件',cls:()=>'v-cnt'},
-    {k:'貯金',fn:(a,p)=>{const d=Math.round(a.uriage-p);return(d>=0?'+':'')+fmt(d);},cls:(a,p)=>{const d=a.uriage-p;return'v-choki '+(d>=0?'pos':'neg');}},
-    {k:'達成率',fn:(a,p)=>{const r=p>0?a.uriage/p*100:null;return r==null?'-':r.toFixed(1)+'%';},cls:(a,p)=>{const r=p>0?a.uriage/p*100:0;return'v-rate '+rc(r);}},
+    {k:'単月目標（返金前）',fn:(a,p,pa)=>fmt(p),cls:()=>'v-plan'},
+    {k:'単月実績（返金前）',fn:(a,p,pa)=>fmt(a.uriage),cls:()=>'v-actual'},
+    {k:'単月目標（返金後）',fn:(a,p,pa)=>fmt(pa),cls:()=>'v-plan'},
+    {k:'単月実績（返金後）',fn:(a,p,pa)=>fmt(a.uriage_after),cls:()=>'v-actual'},
+    {k:'件数',fn:(a,p,pa)=>a.count+'件',cls:()=>'v-cnt'},
+    {k:'貯金（返金前）',fn:(a,p,pa)=>{const d=Math.round(a.uriage-p);return(d>=0?'+':'')+fmt(d);},cls:(a,p)=>{const d=a.uriage-p;return'v-choki '+(d>=0?'pos':'neg');}},
+    {k:'達成率（返金前）',fn:(a,p,pa)=>{const r=p>0?a.uriage/p*100:null;return r==null?'-':r.toFixed(1)+'%';},cls:(a,p)=>{const r=p>0?a.uriage/p*100:0;return'v-rate '+rc(r);}},
+    {k:'達成率（返金後）',fn:(a,p,pa)=>{const r=pa>0?a.uriage_after/pa*100:null;return r==null?'-':r.toFixed(1)+'%';},cls:(a,p,pa)=>{const r=pa>0?a.uriage_after/pa*100:0;return'v-rate '+rc(r);}},
   ];
 
   const dList=deptFilter?[deptFilter]:DEPTS;
@@ -270,18 +273,20 @@ function buildTable(deptFilter){
       h+=`<tr><td>${row.k}</td>`;
       cols.forEach(c=>{
         const mos=c.t==='m'?[c.mo]:c.mos;
-        let totA={count:0,uriage:0};
-        let totP=0;
+        let totA={count:0,uriage:0,uriage_after:0};
+        let totP=0,totPa=0;
         mos.forEach(mo=>{
           const a=getAct(mo,dept);
           totA.count+=a.count;
           totA.uriage+=(a.uriage||0);
+          totA.uriage_after+=(a.uriage_after||0);
           totP+=getPlan(dept,mo,'売上合計（返金前）[目標]');
+          totPa+=getPlan(dept,mo,'売上合計（返金後）[目標]');
         });
         const qcls=c.t!=='m'?'q-col':'';
-        const curcls=c.t==='m'&&c.mo===nm?'cur-m':'';
-        const vcls=row.cls(totA,totP);
-        h+=`<td class="${vcls} ${qcls} ${curcls}">${row.fn(totA,totP)}</td>`;
+        const curcls='';
+        const vcls=row.cls(totA,totP,totPa);
+        h+=`<td class="${vcls} ${qcls} ${curcls}">${row.fn(totA,totP,totPa)}</td>`;
       });
       h+=`</tr>`;
     });
