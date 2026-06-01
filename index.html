@@ -266,9 +266,10 @@ function buildTable(deptFilter){
     {k:'返金額（入社前辞退）',fn:(a,p,pa)=>a.henkin_nyushamae>0?fmt(a.henkin_nyushamae)+'万':'-',cls:()=>'v-plan'},
     {k:'返金額（早期離職）',fn:(a,p,pa)=>a.henkin_hayaki>0?fmt(a.henkin_hayaki)+'万':'-',cls:()=>'v-plan'},
     {k:'売上目標（返金後）',fn:(a,p,pa)=>fmt(pa),cls:()=>'v-plan'},
-    {k:'売上実績（返金後）',fn:(a,p,pa)=>fmt(a.uriage_after),cls:()=>'v-actual'},
-    {k:'達成率（返金後）',fn:(a,p,pa)=>{const r=pa>0?a.uriage_after/pa*100:null;return r==null?'-':r.toFixed(1)+'%';},cls:(a,p,pa)=>{const r=pa>0?a.uriage_after/pa*100:0;return'v-rate '+rc(r);}},
+    {k:'売上実績（返金後）',fn:(a,p,pa)=>{const after=a.uriage-(a.henkin_nyushamae||0)-(a.henkin_hayaki||0);return fmt(after);},cls:()=>'v-actual'},
+    {k:'達成率（返金後）',fn:(a,p,pa)=>{const after=a.uriage-(a.henkin_nyushamae||0)-(a.henkin_hayaki||0);const r=pa>0?after/pa*100:null;return r==null?'-':r.toFixed(1)+'%';},cls:(a,p,pa)=>{const after=a.uriage-(a.henkin_nyushamae||0)-(a.henkin_hayaki||0);const r=pa>0?after/pa*100:0;return'v-rate '+rc(r);}},
     {k:'貯金（返金前）',fn:(a,p,pa)=>{const d=Math.round(a.uriage-p);return(d>=0?'+':'')+fmt(d);},cls:(a,p)=>{const d=a.uriage-p;return'v-choki '+(d>=0?'pos':'neg');}},
+    {k:'貯金（返金後）',fn:(a,p,pa)=>{const after=a.uriage-(a.henkin_nyushamae||0)-(a.henkin_hayaki||0);const d=Math.round(after-pa);return(d>=0?'+':'')+fmt(d);},cls:(a,p,pa)=>{const after=a.uriage-(a.henkin_nyushamae||0)-(a.henkin_hayaki||0);const d=after-pa;return'v-choki '+(d>=0?'pos':'neg');}},
   ];
 
   const dList=deptFilter?[deptFilter]:DEPTS;
