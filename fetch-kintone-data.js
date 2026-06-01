@@ -169,8 +169,45 @@ async function fetchMonthly(token) {
       d.uriage_after = Math.round(d.uriage_after / 10000);
     }
   }
+  // --- REAも月次集計に追加 ---
+  console.log('REA成約データ取得中...');
+  const createResREA = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json`, {
+    method: 'POST',
+    headers: { 'X-Cybozu-API-Token': token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ app: 325, query: queryREA, fields, size: 500 })
+  });
+  if (createResREA.ok) {
+    const { id: reaId } = await createResREA.json();
+    let reaNext = true;
+    while (reaNext) {
+      const rr = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json?id=${reaId}`, {
+        method: 'GET', headers: { 'X-Cybozu-API-Token': token }
+      });
+      const rdata = await rr.json();
+      for (const record of rdata.records) {
+        const seiyakuDate = record['seiyaku_date'] && record['seiyaku_date'].value;
+        if (!seiyakuDate) continue;
+        const month = seiyakuDate.substring(0, 7);
+        const uriage = parseFloat(record['seikyu_taxfree']?.value || 0);
+        const uriageAfter = parseFloat(record['uriage_henkin']?.value || 0);
+        const dept = getDepartment(record);
+        if (!monthly[month]) monthly[month] = { 全体: { count: 0, uriage: 0, uriage_after: 0, henkin_nyushamae: 0, henkin_nyushamae_cnt: 0, henkin_hayaki: 0, henkin_hayaki_cnt: 0 } };
+        if (!monthly[month][dept]) monthly[month][dept] = { count: 0, uriage: 0, uriage_after: 0, henkin_nyushamae: 0, henkin_nyushamae_cnt: 0, henkin_hayaki: 0, henkin_hayaki_cnt: 0 };
+        ['全体', dept].forEach(key => {
+          monthly[month][key].count += 1;
+          monthly[month][key].uriage += uriage;
+          monthly[month][key].uriage_after += uriageAfter;
+        });
+      }
+      reaNext = rdata.next;
+    }
+    console.log('REA成約データ取得完了');
+  }
+
   // --- 返金額を返金発生日（Henkin_Hasseibi）で別途集計 ---
-  const refundQuery = 'Henkin_Hasseibi >= "2025-01-01" order by $id desc';
+  const refundQuery = 'Henkin_Hasseibi >= "2025-01-01" and seiyaku_Shuryui in ("即戦力人材") order by $id desc';
+  // REA返金も別途集計
+  const refundQueryREA = 'Henkin_Hasseibi >= "2025-01-01" and seiyaku_Shuryui in ("HH（着手金）","コンサルティング","フリーランス","リファラル") and soshiki_drop in ("エージェント") order by $id desc';
   const refundFields = ['Henkin_Hasseibi', 'Henkin_Kingaku', '返金種類', 'tantou_soshiki'];
   
   const refundRes = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json`, {
@@ -217,6 +254,38 @@ async function fetchMonthly(token) {
     for (const d of Object.values(m)) {
       d.henkin_nyushamae = Math.round((d.henkin_nyushamae || 0) / 10000);
       d.henkin_hayaki = Math.round((d.henkin_hayaki || 0) / 10000);
+    }
+  }
+
+  // REA返金も集計
+  const createResREARef = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json`, {
+    method: 'POST',
+    headers: { 'X-Cybozu-API-Token': token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ app: 325, query: refundQueryREA, fields: refundFields, size: 500 })
+  });
+  if (createResREARef.ok) {
+    const { id: reaRefId } = await createResREARef.json();
+    let reaRefNext = true;
+    while (reaRefNext) {
+      const rr = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json?id=${reaRefId}`, {
+        method: 'GET', headers: { 'X-Cybozu-API-Token': token }
+      });
+      const rdata = await rr.json();
+      for (const record of rdata.records) {
+        const henkinDate = record['Henkin_Hasseibi'] && record['Henkin_Hasseibi'].value;
+        if (!henkinDate) continue;
+        const henkinMonth = henkinDate.substring(0, 7);
+        const henkinAmt = parseFloat(record['Henkin_Kingaku']?.value || 0);
+        if (henkinAmt <= 0) continue;
+        const henkinType = record['返金種類']?.value || '';
+        const isNyushaMae = henkinType === '入社前辞退' || henkinType === '内定取消';
+        const isHayaki = henkinType === '早期離職';
+        if (!monthly[henkinMonth]) monthly[henkinMonth] = { 全体: { count: 0, uriage: 0, uriage_after: 0, henkin_nyushamae: 0, henkin_nyushamae_cnt: 0, henkin_hayaki: 0, henkin_hayaki_cnt: 0 } };
+        if (!monthly[henkinMonth]['全体']) monthly[henkinMonth]['全体'] = { count: 0, uriage: 0, uriage_after: 0, henkin_nyushamae: 0, henkin_nyushamae_cnt: 0, henkin_hayaki: 0, henkin_hayaki_cnt: 0 };
+        if (isNyushaMae) { monthly[henkinMonth]['全体'].henkin_nyushamae = (monthly[henkinMonth]['全体'].henkin_nyushamae || 0) + henkinAmt; monthly[henkinMonth]['全体'].henkin_nyushamae_cnt = (monthly[henkinMonth]['全体'].henkin_nyushamae_cnt || 0) + 1; }
+        if (isHayaki) { monthly[henkinMonth]['全体'].henkin_hayaki = (monthly[henkinMonth]['全体'].henkin_hayaki || 0) + henkinAmt; monthly[henkinMonth]['全体'].henkin_hayaki_cnt = (monthly[henkinMonth]['全体'].henkin_hayaki_cnt || 0) + 1; }
+      }
+      reaRefNext = rdata.next;
     }
   }
 
