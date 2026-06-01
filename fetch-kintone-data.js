@@ -94,6 +94,85 @@ function buildRaMap(raCache) {
   return raMap;
 }
 
+
+// ===== 部署判定（App325のtantou_soshikiから）=====
+const DEPT_MAP = {
+  '建設Ⅰ部': '建設Ⅰ部',
+  '建設Ⅱ部': '建設Ⅱ部',
+  '不動産部': '不動産部',
+  '電気主任・製造部': '電気主任・製造部',
+  '士業部': '士業部',
+};
+function getDepartment(record) {
+  const orgs = (record['tantou_soshiki'] && record['tantou_soshiki'].value) || [];
+  const orgNames = orgs.map(o => o.name);
+  for (const [key] of Object.entries(DEPT_MAP)) {
+    if (orgNames.includes(key)) return key;
+  }
+  return 'その他';
+}
+
+// ===== 月次集計（成約数・売上を月次・部署別）=====
+async function fetchMonthly(token) {
+  const monthly = {};
+  const query = 'sakusei_Nichiji >= "2025-01-01T00:00:00+0900" order by $id desc';
+  const fields = ['seiyaku_date', 'seikyu_taxfree', 'uriage_henkin', 'tantou_soshiki'];
+  
+  const createRes = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json`, {
+    method: 'POST',
+    headers: { 'X-Cybozu-API-Token': token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ app: 325, query, fields, size: 500 })
+  });
+  if (!createRes.ok) {
+    const err = await createRes.text();
+    throw new Error(`月次取得カーソル失敗: ${createRes.status} - ${err}`);
+  }
+  const { id: cursorId } = await createRes.json();
+
+  let next = true;
+  while (next) {
+    const res = await fetch(`${KINTONE_BASE_URL}/k/v1/records/cursor.json?id=${cursorId}`, {
+      method: 'GET', headers: { 'X-Cybozu-API-Token': token }
+    });
+    if (!res.ok) throw new Error(`月次取得失敗: ${res.status}`);
+    const data = await res.json();
+    
+    for (const record of data.records) {
+      const orgs = (record['tantou_soshiki'] && record['tantou_soshiki'].value) || [];
+      if (!orgs.some(o => o.name === 'エージェント')) continue;
+      
+      const seiyakuDate = record['seiyaku_date'] && record['seiyaku_date'].value;
+      if (!seiyakuDate) continue;
+      
+      const month = seiyakuDate.substring(0, 7);
+      const uriage = parseFloat(record['seikyu_taxfree']?.value || 0);
+      const uriageAfter = parseFloat(record['uriage_henkin']?.value || 0);
+      const dept = getDepartment(record);
+      
+      if (!monthly[month]) monthly[month] = { 全体: { count: 0, uriage: 0, uriage_after: 0 } };
+      if (!monthly[month][dept]) monthly[month][dept] = { count: 0, uriage: 0, uriage_after: 0 };
+      
+      monthly[month]['全体'].count += 1;
+      monthly[month]['全体'].uriage += uriage;
+      monthly[month]['全体'].uriage_after += uriageAfter;
+      monthly[month][dept].count += 1;
+      monthly[month][dept].uriage += uriage;
+      monthly[month][dept].uriage_after += uriageAfter;
+    }
+    next = data.next;
+  }
+  
+  // 万円に変換・丸め
+  for (const m of Object.values(monthly)) {
+    for (const d of Object.values(m)) {
+      d.uriage = Math.round(d.uriage / 10000);
+      d.uriage_after = Math.round(d.uriage_after / 10000);
+    }
+  }
+  console.log(`月次集計完了: ${Object.keys(monthly).sort().join(', ')}`);
+  return monthly;
+}
+
 async function main() {
   try {
     if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -120,6 +199,8 @@ async function main() {
 
     // --- App80差分/全件取得 ---
     const now = new Date().toISOString();
+    console.log('月次集計開始...');
+    const monthly = await fetchMonthly(KINTONE_API_TOKEN_325);
     let app80Count = 0;
     app80Count = await fetchAndProcess(
       80, KINTONE_API_TOKEN_80, app80Query,
@@ -177,6 +258,7 @@ async function main() {
 
     const output = {
       lastUpdate: now,
+      monthly,
       dataFrom: fromDate,
       fullFetch: FULL_FETCH,
       ca_list: caList,
@@ -199,4 +281,5 @@ async function main() {
 }
 
 main();
+
 
