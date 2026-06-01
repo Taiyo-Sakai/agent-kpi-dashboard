@@ -6,140 +6,147 @@
 <title>エージェント事業部 KPI ダッシュボード 2026</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: #f5f6fa; color: #2d3436; font-size: 13px; }
-.header { background: white; border-bottom: 1px solid #e0e0e0; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 48px; }
-.header-title { font-size: 16px; font-weight: bold; color: #1a3a5c; }
-.header-title span { color: #0984e3; }
-.header-sub { font-size: 11px; color: #888; border-left: 1px solid #ddd; padding-left: 12px; margin-left: 12px; }
-.header-right { display: flex; align-items: center; gap: 16px; font-size: 11px; color: #666; }
-.update-btn { background: #0984e3; color: white; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 12px; }
-.tabs { background: white; border-bottom: 2px solid #e0e0e0; padding: 0 20px; display: flex; overflow-x: auto; }
-.tab { padding: 12px 16px; cursor: pointer; font-size: 12px; color: #888; border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; }
-.tab.active { color: #0984e3; border-bottom-color: #0984e3; font-weight: bold; }
-.tab:hover { color: #0984e3; }
-.content { padding: 20px; max-width: 1400px; margin: 0 auto; }
-.tab-content { display: none; }
-.tab-content.active { display: block; }
-.filter-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-.filter-label { font-size: 11px; color: #888; }
-.filter-select { border: 1px solid #ddd; border-radius: 4px; padding: 4px 8px; font-size: 12px; background: white; cursor: pointer; }
-.kpi-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px; }
-.kpi-card { background: white; border-radius: 6px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.kpi-card .label { font-size: 11px; color: #888; margin-bottom: 6px; }
-.kpi-card .value { font-size: 22px; font-weight: bold; color: #2d3436; }
-.kpi-card .value.gold { color: #f39c12; }
-.kpi-card .value.blue { color: #0984e3; }
-.kpi-card .value.green { color: #00b894; }
-.kpi-card .value.red { color: #e17055; }
-.kpi-card .sub { font-size: 11px; color: #aaa; margin-top: 2px; }
-.podium { display: flex; align-items: flex-end; justify-content: center; gap: 12px; margin-bottom: 24px; }
-.podium-item { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; position: relative; }
-.podium-item.rank1 { width: 280px; border: 2px solid #f39c12; order: 2; }
-.podium-item.rank2 { width: 220px; order: 1; }
-.podium-item.rank3 { width: 220px; order: 3; }
-.podium-rank-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); border-radius: 12px; padding: 2px 10px; font-size: 11px; font-weight: bold; color: white; }
-.gold-badge { background: #f39c12; }
-.silver-badge { background: #b2bec3; }
-.bronze-badge { background: #e17055; }
-.podium-name { font-size: 16px; font-weight: bold; margin: 12px 0 4px; }
-.podium-item.rank1 .podium-name { font-size: 20px; }
-.podium-sub { font-size: 11px; color: #888; margin-bottom: 8px; }
-.podium-value { font-size: 24px; font-weight: bold; color: #0984e3; }
-.podium-item.rank1 .podium-value { font-size: 32px; color: #f39c12; }
-.podium-unit { font-size: 12px; color: #888; }
-.ranking-table { background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 20px; }
-.ranking-table table { width: 100%; border-collapse: collapse; }
-.ranking-table th { background: #1a3a5c; color: white; padding: 10px 16px; text-align: left; font-size: 11px; font-weight: normal; }
-.ranking-table td { padding: 10px 16px; border-bottom: 1px solid #f1f3f5; font-size: 13px; }
-.ranking-table tr:last-child td { border-bottom: none; }
-.ranking-table tr:hover td { background: #f8f9fa; }
-.rank-num { font-weight: bold; color: #aaa; font-size: 12px; }
-.rank-num.top3 { color: #f39c12; }
-.top10-divider td { background: #1a3a5c !important; color: white; text-align: center; font-size: 11px; font-weight: bold; padding: 6px !important; letter-spacing: 2px; }
-.grade-A { background: #e8f5e9; color: #2e7d32; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
-.grade-B { background: #e3f2fd; color: #1565c0; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
-.grade-C { background: #fff9c4; color: #f57f17; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
-.grade-Dp { background: #fce4ec; color: #c62828; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
-.grade-D { background: #eeeeee; color: #616161; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
-.section-title { font-size: 13px; font-weight: bold; color: #2d3436; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; border-left: 4px solid #0984e3; padding-left: 8px; }
-/* 月次推移 */
-.monthly-focus { background: white; border-radius: 8px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.focus-label { font-size: 12px; color: #888; margin-bottom: 4px; }
-.focus-rate { font-size: 48px; font-weight: bold; color: #e17055; }
-.focus-rate.good { color: #00b894; }
-.focus-sub { font-size: 13px; color: #888; margin-top: 4px; }
-.progress-bar-wrap { margin: 12px 0; background: #f0f0f0; border-radius: 4px; height: 12px; position: relative; }
-.progress-bar { height: 12px; border-radius: 4px; background: #0984e3; transition: width 0.5s; }
-.progress-labels { display: flex; justify-content: space-between; font-size: 11px; color: #888; margin-top: 4px; }
-.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-.chart-card { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.chart-card canvas { max-height: 260px; }
-.monthly-table { background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow-x: auto; margin-bottom: 20px; }
-.monthly-table table { width: 100%; border-collapse: collapse; min-width: 800px; }
-.monthly-table th { background: #1a3a5c; color: white; padding: 8px 12px; text-align: center; font-size: 11px; font-weight: normal; }
-.monthly-table th:first-child { text-align: left; }
-.monthly-table td { padding: 8px 12px; border-bottom: 1px solid #f1f3f5; font-size: 12px; text-align: center; }
-.monthly-table td:first-child { text-align: left; font-weight: bold; }
-.monthly-table .plan { color: #888; }
-.monthly-table .actual { font-weight: bold; }
-.monthly-table .rate-good { color: #00b894; font-weight: bold; }
-.monthly-table .rate-bad { color: #e17055; font-weight: bold; }
-.monthly-table .current-month { background: #fff9e6 !important; }
-#loading { text-align: center; padding: 60px; color: #888; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Hiragino Sans','Meiryo',sans-serif;background:#f5f6fa;color:#2d3436;font-size:13px}
+.header{background:white;border-bottom:1px solid #e0e0e0;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:48px;position:sticky;top:0;z-index:100}
+.header-left{display:flex;align-items:center;gap:8px}
+.header-title{font-size:16px;font-weight:bold;color:#1a3a5c}
+.header-title .year{color:#0984e3}
+.header-title .sub{font-size:11px;color:#999;font-weight:normal;margin-left:4px}
+.header-right{display:flex;align-items:center;gap:12px;font-size:11px;color:#666}
+.update-btn{background:#0984e3;color:white;border:none;padding:6px 16px;border-radius:4px;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:4px}
+.tabs{background:white;border-bottom:2px solid #e0e0e0;padding:0 20px;display:flex;overflow-x:auto;position:sticky;top:48px;z-index:99}
+.tab{padding:12px 14px;cursor:pointer;font-size:12px;color:#888;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap}
+.tab.active{color:#0984e3;border-bottom-color:#0984e3;font-weight:bold}
+.tab:hover{color:#0984e3}
+.content{padding:20px;max-width:1600px;margin:0 auto}
+.tab-content{display:none}
+.tab-content.active{display:block}
+/* FOCUS */
+.focus-card{background:white;border-radius:8px;padding:20px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);display:flex;gap:20px}
+.focus-left{flex:1}
+.focus-tag{display:inline-block;background:#f0f4ff;color:#0984e3;font-size:11px;padding:2px 8px;border-radius:3px;font-weight:bold;margin-bottom:8px}
+.focus-title{font-size:14px;font-weight:bold;color:#2d3436;margin-bottom:12px}
+.focus-rate{font-size:52px;font-weight:bold;line-height:1;margin-bottom:4px}
+.focus-rate.over{color:#00b894}
+.focus-rate.under{color:#e17055}
+.focus-sub{font-size:12px;color:#888;margin-bottom:12px}
+.progress-wrap{background:#f0f0f0;border-radius:4px;height:10px;margin:8px 0 4px}
+.progress-bar{height:10px;border-radius:4px;transition:width .5s}
+.progress-bar.over{background:#00b894}
+.progress-bar.under{background:#0984e3}
+.progress-nums{display:flex;justify-content:space-between;font-size:11px;color:#666;margin-top:4px}
+.focus-detail{display:flex;gap:24px;margin-top:12px}
+.focus-num{text-align:center}
+.focus-num .lbl{font-size:11px;color:#999}
+.focus-num .val{font-size:16px;font-weight:bold;color:#2d3436}
+.focus-num .val.orange{color:#e17055}
+.focus-right{display:flex;gap:12px;min-width:500px}
+.focus-ranking{flex:1;background:#fafafa;border-radius:6px;padding:12px}
+.focus-ranking h4{font-size:12px;font-weight:bold;margin-bottom:8px}
+.focus-ranking .item{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f0f0f0;font-size:12px}
+.focus-ranking .item:last-child{border-bottom:none}
+.focus-ranking .dept{color:#2d3436}
+.focus-ranking .rate-g{color:#00b894;font-weight:bold}
+.focus-ranking .rate-r{color:#e17055;font-weight:bold}
+/* セクション */
+.section{background:white;border-radius:8px;padding:0;box-shadow:0 1px 4px rgba(0,0,0,.08);margin-bottom:16px;overflow:hidden}
+.section-header{padding:14px 20px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:bold;color:#2d3436}
+.section-header::before{content:'';display:inline-block;width:4px;height:16px;background:#0984e3;border-radius:2px}
+/* 月次テーブル */
+.monthly-wrap{overflow-x:auto}
+.monthly-table{width:100%;border-collapse:collapse;min-width:1400px;font-size:11px}
+.monthly-table th{background:#2c3e50;color:white;padding:7px 8px;text-align:center;font-weight:normal;white-space:nowrap;border-right:1px solid #3d5166}
+.monthly-table th.q-col{background:#1a2a3a}
+.monthly-table th:first-child{text-align:left;min-width:120px}
+.monthly-table td{padding:5px 8px;text-align:right;border-bottom:1px solid #f5f5f5;border-right:1px solid #f0f0f0}
+.monthly-table td:first-child{text-align:left;font-size:11px;color:#666;background:#fafafa;border-right:2px solid #e0e0e0}
+.monthly-table .q-col{background:#f8fafc !important;font-weight:bold}
+.monthly-table tr.dept-header td{background:#eef2f7;font-weight:bold;color:#1a3a5c;font-size:12px;padding:8px}
+.monthly-table tr.dept-header td:first-child{font-size:13px}
+.monthly-table tr.metric-row td{padding:4px 8px}
+.monthly-table .cur-month{background:#fffde7 !important}
+.val-plan{color:#888}
+.val-actual{font-weight:bold;color:#2d3436}
+.val-貯金.pos{color:#00b894;font-weight:bold}
+.val-貯金.neg{color:#e17055;font-weight:bold}
+.val-rate.over{color:#00b894;font-weight:bold}
+.val-rate.under{color:#e17055;font-weight:bold}
+.val-cnt{color:#555}
+/* 別タブ */
+.filter-bar{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.filter-label{font-size:11px;color:#888}
+.filter-select{border:1px solid #ddd;border-radius:4px;padding:4px 8px;font-size:12px;background:white;cursor:pointer}
+.kpi-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.kpi-card{background:white;border-radius:6px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.kpi-card .lbl{font-size:11px;color:#888;margin-bottom:6px}
+.kpi-card .val{font-size:22px;font-weight:bold;color:#2d3436}
+.kpi-card .val.gold{color:#f39c12}
+.kpi-card .val.blue{color:#0984e3}
+.kpi-card .val.green{color:#00b894}
+.kpi-card .sub{font-size:11px;color:#aaa;margin-top:2px}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin-bottom:20px}
+.p-item{background:white;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);text-align:center;position:relative}
+.p-item.r1{width:280px;border:2px solid #f39c12;order:2}
+.p-item.r2{width:220px;order:1}
+.p-item.r3{width:220px;order:3}
+.p-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);border-radius:12px;padding:2px 10px;font-size:11px;font-weight:bold;color:white}
+.bg-gold{background:#f39c12}
+.bg-silver{background:#b2bec3}
+.bg-bronze{background:#e17055}
+.p-name{font-size:16px;font-weight:bold;margin:12px 0 4px}
+.r1 .p-name{font-size:20px}
+.p-sub{font-size:11px;color:#888;margin-bottom:8px}
+.p-val{font-size:24px;font-weight:bold;color:#0984e3}
+.r1 .p-val{font-size:32px;color:#f39c12}
+.p-unit{font-size:12px;color:#888}
+.ranking-table{background:white;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden}
+.ranking-table table{width:100%;border-collapse:collapse}
+.ranking-table th{background:#1a3a5c;color:white;padding:10px 16px;text-align:left;font-size:11px;font-weight:normal}
+.ranking-table td{padding:10px 16px;border-bottom:1px solid #f1f3f5;font-size:13px}
+.ranking-table tr:hover td{background:#f8f9fa}
+.rn{font-weight:bold;color:#aaa;font-size:12px}
+.rn.t{color:#f39c12}
+.top10d td{background:#1a3a5c !important;color:white;text-align:center;font-size:11px;font-weight:bold;padding:6px !important;letter-spacing:2px}
+.ga{background:#e8f5e9;color:#2e7d32;border-radius:4px;padding:2px 6px;font-weight:bold}
+.gb{background:#e3f2fd;color:#1565c0;border-radius:4px;padding:2px 6px;font-weight:bold}
+.gc{background:#fff9c4;color:#f57f17;border-radius:4px;padding:2px 6px;font-weight:bold}
+.gdp{background:#fce4ec;color:#c62828;border-radius:4px;padding:2px 6px;font-weight:bold}
+.gd{background:#eee;color:#616161;border-radius:4px;padding:2px 6px;font-weight:bold}
+#loading{text-align:center;padding:60px;color:#888}
 </style>
 </head>
 <body>
 <div class="header">
-  <div class="header-left" style="display:flex;align-items:center">
-    <div class="header-title">エージェント事業部 KPI ダッシュボード <span>2026</span></div>
-    <div class="header-sub">CA個人 / RAグレード / 月次推移</div>
+  <div class="header-left">
+    <div class="header-title">エージェント事業部 KPI ダッシュボード <span class="year">2026</span><span class="sub">チーム / 個人 / 目標達成</span></div>
   </div>
   <div class="header-right">
     <span id="headerInfo">読み込み中...</span>
     <button class="update-btn" onclick="loadData()">⟳ 更新</button>
   </div>
 </div>
+
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('monthly')">📈 月次推移</div>
+  <div class="tab active" onclick="switchTab('summary')">📋 全体サマリー</div>
   <div class="tab" onclick="switchTab('ca-ranking')">🏆 CA個人ランキング</div>
   <div class="tab" onclick="switchTab('ra-ranking')">📊 RAグレードランキング</div>
 </div>
+
 <div class="content">
   <div id="loading">データ読み込み中...</div>
 
-  <!-- 月次推移 -->
-  <div id="monthly" class="tab-content">
-    <div class="filter-bar">
-      <span class="filter-label">部署:</span>
-      <select class="filter-select" id="monthly-dept" onchange="renderMonthly()">
-        <option value="全体">全体</option>
-        <option value="建設Ⅰ部">建設Ⅰ部</option>
-        <option value="建設Ⅱ部">建設Ⅱ部</option>
-        <option value="不動産部">不動産部</option>
-        <option value="電気主任・製造部">電気主任・製造部</option>
-        <option value="士業部">士業部</option>
-      </select>
-      <span class="filter-label">指標:</span>
-      <select class="filter-select" id="monthly-metric" onchange="renderMonthly()">
-        <option value="count">成約数</option>
-        <option value="uriage">売上（万円）</option>
-      </select>
+  <!-- 全体サマリー -->
+  <div id="summary" class="tab-content">
+    <div id="focus-card" class="focus-card"></div>
+    <div class="section">
+      <div class="section-header">エージェント事業部 月次サマリー</div>
+      <div class="monthly-wrap"><div id="overall-table"></div></div>
     </div>
-    <div id="monthly-focus" class="monthly-focus"></div>
-    <div class="kpi-cards" id="monthly-kpi-cards"></div>
-    <div class="charts-grid">
-      <div class="chart-card">
-        <div class="section-title">月次 目標 vs 実績</div>
-        <canvas id="monthly-bar-chart"></canvas>
-      </div>
-      <div class="chart-card">
-        <div class="section-title">月次 達成率推移</div>
-        <canvas id="monthly-rate-chart"></canvas>
-      </div>
+    <div class="section">
+      <div class="section-header">部署別 月次サマリー</div>
+      <div class="monthly-wrap"><div id="dept-table"></div></div>
     </div>
-    <div class="section-title">部署別 月次サマリー</div>
-    <div class="monthly-table" id="monthly-dept-table"></div>
   </div>
 
   <!-- CA個人ランキング -->
@@ -150,12 +157,13 @@ body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: #f5f6fa; 
         <option value="all">全部門</option>
       </select>
     </div>
-    <div class="kpi-cards" id="ca-kpi-cards"></div>
+    <div class="kpi-cards" id="ca-kpi"></div>
     <div class="podium" id="ca-podium"></div>
-    <div class="section-title">全員ランキング</div>
-    <div class="ranking-table">
-      <table><thead><tr><th>#</th><th>名前</th><th>部門</th><th>成約数</th></tr></thead>
-      <tbody id="ca-table"></tbody></table>
+    <div style="background:white;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden">
+      <table style="width:100%;border-collapse:collapse">
+        <thead><tr style="background:#1a3a5c;color:white"><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">#</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">名前</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">部門</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">成約数</th></tr></thead>
+        <tbody id="ca-table"></tbody>
+      </table>
     </div>
   </div>
 
@@ -167,251 +175,315 @@ body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: #f5f6fa; 
         <option value="all">全チーム</option>
       </select>
     </div>
-    <div class="kpi-cards" id="ra-kpi-cards"></div>
+    <div class="kpi-cards" id="ra-kpi"></div>
     <div class="podium" id="ra-podium"></div>
-    <div class="section-title">全員ランキング</div>
-    <div class="ranking-table">
-      <table><thead><tr><th>#</th><th>名前</th><th>チーム</th><th>A</th><th>B</th><th>C</th><th>D+</th><th>D</th><th>スコア</th><th>ポイント</th></tr></thead>
-      <tbody id="ra-table"></tbody></table>
+    <div style="background:white;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden">
+      <table style="width:100%;border-collapse:collapse">
+        <thead><tr style="background:#1a3a5c;color:white"><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">#</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">名前</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">チーム</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">A</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">B</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">C</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">D+</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">D</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">スコア</th><th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:normal">ポイント</th></tr></thead>
+        <tbody id="ra-table"></tbody>
+      </table>
     </div>
   </div>
 </div>
 
 <script>
-let data = null, targets = null;
-let barChart = null, rateChart = null;
+let data=null,targets=null;
+const MONTHS=['01','02','03','04','05','06','07','08','09','10','11','12'];
+const DEPTS=['建設Ⅰ部','建設Ⅱ部','不動産部','電気主任・製造部','士業部'];
+const DEPT_KEYS={'全体':'全体','建設Ⅰ部':'建設Ⅰ部','建設Ⅱ部':'建設Ⅱ部','不動産部':'不動産','電気主任・製造部':'電気主任','士業部':'士業'};
 
-function switchTab(id) {
-  const ids = ['monthly', 'ca-ranking', 'ra-ranking'];
-  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', ids[i] === id));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-function currentMonth() {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-}
-
-function renderMonthly() {
-  if (!data || !targets) return;
-  const dept = document.getElementById('monthly-dept').value;
-  const metric = document.getElementById('monthly-metric').value;
-  const monthly = data.monthly || {};
-  const nowMonth = currentMonth();
-
-  // 2026年の月のみ
-  const months = Object.keys(monthly).filter(m => m >= '2026-01').sort();
-  
-  // 目標値キー
-  const targetDeptKey = dept === '全体' ? '全体' : dept;
-  const targetKey = metric === 'count' ? '総成約数（目標）' : '売上合計（返金前）[目標]';
-  const targetData = (targets[targetDeptKey] || targets['全体'] || {})[targetKey] || {};
-
-  const actuals = months.map(m => {
-    const d2 = (monthly[m] || {})[dept === '全体' ? '全体' : dept];
-    return d2 ? (metric === 'count' ? d2.count : d2.uriage) : 0;
+function switchTab(id){
+  ['summary','ca-ranking','ra-ranking'].forEach((t,i)=>{
+    document.querySelectorAll('.tab')[i].classList.toggle('active',t===id);
+    document.getElementById(t).classList.toggle('active',t===id);
   });
-  const plans = months.map(m => Math.round(targetData[m] || 0));
+}
 
-  // 当月フォーカス
-  const curIdx = months.indexOf(nowMonth);
-  const curActual = curIdx >= 0 ? actuals[curIdx] : 0;
-  const curPlan = curIdx >= 0 ? plans[curIdx] : 0;
-  const curRate = curPlan > 0 ? (curActual / curPlan * 100) : 0;
-  const unit = metric === 'count' ? '件' : '万円';
+function nowYM(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;}
 
-  document.getElementById('monthly-focus').innerHTML = `
-    <div class="focus-label">FOCUS｜${nowMonth.replace('-','年')}月の${dept === '全体' ? '全社' : dept} ${metric === 'count' ? '成約数' : '売上'}</div>
-    <div class="focus-rate ${curRate >= 100 ? 'good' : ''}">${curRate.toFixed(1)}%</div>
-    <div class="focus-sub">${nowMonth.replace('-','年')}月 達成率（目安比 ${curRate >= 100 ? '+' : ''}${(curRate - 100).toFixed(1)}%）</div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar" style="width:${Math.min(curRate,100)}%;background:${curRate>=100?'#00b894':'#0984e3'}"></div>
+function getActual(month,dept){
+  const m=data.monthly||{};
+  const d=m[month]|{};
+  const key=dept==='全体'?'全体':dept;
+  return (d[month]||{})[key]||{count:0,uriage:0,uriage_after:0};
+}
+
+function getActuals(month){
+  const m=(data.monthly||{})[month]||{};
+  return m;
+}
+
+function getPlan(dept,month,key){
+  const tk=DEPT_KEYS[dept]||dept;
+  return ((targets[tk]||{})[key]||{})[month]||0;
+}
+
+function fmtNum(n){return Math.round(n).toLocaleString();}
+function fmtRate(r){return r>0?r.toFixed(1)+'%':'-';}
+function rateClass(r){return r>=100?'over':'under';}
+
+function buildMonthlyTable(dept,tableEl){
+  const nowM=nowYM();
+  const year='2026';
+  const allMonths=MONTHS.map(m=>`${year}-${m}`);
+  const quarters=[[0,1,2],[3,4,5],[6,7,8],[9,10,11]];
+  const qLabels=['1Q計','2Q計','3Q計','4Q計'];
+
+  // ヘッダー行
+  let cols=[];
+  quarters.forEach((q,qi)=>{
+    q.forEach(mi=>{const mo=allMonths[mi];cols.push({type:'month',month:mo,label:(mi+1)+'月'});});
+    cols.push({type:'q',label:qLabels[qi],months:q.map(mi=>allMonths[mi])});
+  });
+  cols.push({type:'total',label:'合計',months:allMonths});
+
+  let html=`<table class="monthly-table"><thead><tr>
+    <th style="text-align:left">区分</th>`;
+  cols.forEach(c=>{
+    const cls=c.type!=='month'?'q-col':'';
+    const isCur=c.type==='month'&&c.month===nowM?'style="background:#fff3cd"':'';
+    html+=`<th class="${cls}" ${isCur}>${c.label}</th>`;
+  });
+  html+=`</tr></thead><tbody>`;
+
+  // 各指標行
+  const metrics=[
+    {key:'単月目標',cls:'val-plan'},
+    {key:'単月実績',cls:'val-actual'},
+    {key:'件数',cls:'val-cnt'},
+    {key:'貯金',cls:'val-貯金'},
+    {key:'達成率',cls:'val-rate'},
+  ];
+
+  const monthly=data.monthly||{};
+
+  metrics.forEach(({key,cls})=>{
+    html+=`<tr class="metric-row"><td>${key}</td>`;
+    let totActU=0,totPlanU=0,totActC=0;
+    
+    cols.forEach(c=>{
+      const isCur=c.type==='month'&&c.month===nowM?'cur-month':'';
+      const months=c.type==='month'?[c.month]:c.months;
+      let actU=0,planU=0,actC=0;
+      months.forEach(m=>{
+        const d=monthly[m]||{};
+        const dd=dept==='全体'?d['全体']:d[dept];
+        actU+=(dd?.uriage||0);
+        actC+=(dd?.count||0);
+        planU+=getPlan(dept,m,'売上合計（返金前）[目標]');
+      });
+      if(c.type==='total'){totActU=actU;totPlanU=planU;totActC=actC;}
+
+      let val='',vCls=cls;
+      if(key==='単月目標'){val=fmtNum(planU);}
+      else if(key==='単月実績'){val=fmtNum(actU);}
+      else if(key==='件数'){val=actC+'件';}
+      else if(key==='貯金'){
+        const diff=Math.round(actU-planU);
+        val=(diff>=0?'+':'')+fmtNum(diff);
+        vCls=`val-貯金 ${diff>=0?'pos':'neg'}`;
+      }else if(key==='達成率'){
+        const rate=planU>0?actU/planU*100:0;
+        val=fmtRate(rate);
+        vCls=`val-rate ${rateClass(rate)}`;
+      }
+      html+=`<td class="${vCls} ${c.type!=='month'?'q-col':''} ${isCur}">${val}</td>`;
+    });
+    html+=`</tr>`;
+  });
+  html+=`</tbody></table>`;
+  tableEl.innerHTML=html;
+}
+
+function renderSummary(){
+  if(!data||!targets)return;
+  const nowM=nowYM();
+  const monthly=data.monthly||{};
+  const curData=(monthly[nowM]||{})['全体']||{count:0,uriage:0};
+  const curPlan=getPlan('全体',nowM,'売上合計（返金前）[目標]');
+  const curCnt=curData.count;
+  const curCntPlan=getPlan('全体',nowM,'総成約数（目標）');
+  const curRate=curPlan>0?curData.uriage/curPlan*100:0;
+
+  // FOCUSカード
+  const topDepts=DEPTS.map(d=>{
+    const act=((monthly[nowM]||{})[d]||{}).uriage||0;
+    const plan=getPlan(d,nowM,'売上合計（返金前）[目標]');
+    const rate=plan>0?act/plan*100:0;
+    return{dept:d,rate};
+  }).sort((a,b)=>b.rate-a.rate);
+
+  const top3=topDepts.slice(0,3);
+  const bottom3=topDepts.slice(-3).reverse();
+
+  document.getElementById('focus-card').innerHTML=`
+    <div class="focus-left">
+      <div class="focus-tag">FOCUS</div>
+      <div class="focus-title">${nowM.replace('-','年')}月の売上進捗（エージェント事業部全体）</div>
+      <div class="focus-rate ${curRate>=100?'over':'under'}">${curRate.toFixed(1)}%</div>
+      <div class="focus-sub">${nowM.replace('-','年')}月達成率（目安比 ${curRate>=100?'+':''}${(curRate-100).toFixed(1)}%）</div>
+      <div class="progress-wrap"><div class="progress-bar ${curRate>=100?'over':'under'}" style="width:${Math.min(curRate,100)}%"></div></div>
+      <div class="progress-nums">
+        <span>0%</span>
+        <span>営業日進捗目安: ${Math.round(new Date().getDate()/30*100)}%</span>
+        <span>100%</span>
+      </div>
+      <div class="focus-detail">
+        <div class="focus-num"><div class="lbl">実績</div><div class="val">${fmtNum(curData.uriage)} 万円</div></div>
+        <div class="focus-num"><div class="lbl">目標</div><div class="val">${fmtNum(curPlan)} 万円</div></div>
+        <div class="focus-num"><div class="lbl">目標まで</div><div class="val orange">${fmtNum(Math.max(0,curPlan-curData.uriage))} 万円</div></div>
+        <div class="focus-num"><div class="lbl">件数</div><div class="val">${curCnt} / ${curCntPlan} 件</div></div>
+      </div>
     </div>
-    <div class="progress-labels">
-      <span>0%</span>
-      <span>実績 <strong>${curActual.toLocaleString()}${unit}</strong></span>
-      <span>目標 <strong>${curPlan.toLocaleString()}${unit}</strong></span>
-      <span>100%</span>
+    <div class="focus-right">
+      <div class="focus-ranking">
+        <h4>🔥 トップ3 部署</h4>
+        ${top3.map(d=>`<div class="item"><span class="dept">${d.dept}</span><span class="${d.rate>=100?'rate-g':'rate-r'}">${fmtRate(d.rate)}</span></div>`).join('')}
+      </div>
+      <div class="focus-ranking">
+        <h4>⚠️ 要注意 部署</h4>
+        ${bottom3.map(d=>`<div class="item"><span class="dept">${d.dept}</span><span class="${d.rate>=100?'rate-g':'rate-r'}">${fmtRate(d.rate)}</span></div>`).join('')}
+      </div>
     </div>
   `;
 
-  // KPIカード（年度累計）
-  const ytdActual = actuals.reduce((s,v)=>s+v,0);
-  const ytdPlan = plans.reduce((s,v)=>s+v,0);
-  const ytdRate = ytdPlan > 0 ? (ytdActual / ytdPlan * 100) : 0;
-  document.getElementById('monthly-kpi-cards').innerHTML = `
-    <div class="kpi-card"><div class="label">📅 今年度累計実績</div><div class="value blue">${ytdActual.toLocaleString()}${unit}</div></div>
-    <div class="kpi-card"><div class="label">🎯 今年度累計目標</div><div class="value">${ytdPlan.toLocaleString()}${unit}</div></div>
-    <div class="kpi-card"><div class="label">📊 年度達成率</div><div class="value ${ytdRate>=100?'green':''}${ytdRate<80?'red':''}">${ytdRate.toFixed(1)}%</div></div>
-    <div class="kpi-card"><div class="label">📈 今月実績</div><div class="value gold">${curActual.toLocaleString()}${unit}</div></div>
-    <div class="kpi-card"><div class="label">🎯 今月目標</div><div class="value">${curPlan.toLocaleString()}${unit}</div></div>
-  `;
-
-  // 棒グラフ
-  const labels = months.map(m => m.replace('2026-',''));
-  if (barChart) barChart.destroy();
-  barChart = new Chart(document.getElementById('monthly-bar-chart'), {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [
-        { label: '目標', data: plans, backgroundColor: 'rgba(100,149,237,0.3)', borderColor: 'rgba(100,149,237,0.8)', borderWidth: 1 },
-        { label: '実績', data: actuals, backgroundColor: actuals.map((v,i) => v >= plans[i] ? 'rgba(0,184,148,0.7)' : 'rgba(225,112,85,0.7)'), borderColor: 'transparent', borderWidth: 1 }
-      ]
-    },
-    options: { responsive: true, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true } } }
-  });
-
-  // 達成率折れ線
-  const rates = months.map((m,i) => plans[i] > 0 ? (actuals[i] / plans[i] * 100) : null);
-  if (rateChart) rateChart.destroy();
-  rateChart = new Chart(document.getElementById('monthly-rate-chart'), {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        { label: '達成率(%)', data: rates, borderColor: '#0984e3', backgroundColor: 'rgba(9,132,227,0.1)', fill: true, tension: 0.3, pointRadius: 4 },
-        { label: '100%ライン', data: months.map(() => 100), borderColor: '#e17055', borderDash: [5,5], borderWidth: 1, pointRadius: 0 }
-      ]
-    },
-    options: { responsive: true, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true } } }
-  });
+  // 全体テーブル
+  buildMonthlyTable('全体',document.getElementById('overall-table'));
 
   // 部署別テーブル
-  const depts = ['建設Ⅰ部','建設Ⅱ部','不動産部','電気主任・製造部','士業部'];
-  const recentMonths = months.slice(-6);
-  let html = `<table><thead><tr><th>部署</th>`;
-  recentMonths.forEach(m => { html += `<th>${m.replace('2026-','')+'月'}</th>`; });
-  html += `<th>年度累計</th></tr></thead><tbody>`;
-  
-  for (const d of depts) {
-    const tKey = metric === 'count' ? '総成約数（目標）' : '売上合計（返金前）[目標]';
-    const tData = (targets[d] || {})[tKey] || {};
-    html += `<tr>`;
-    html += `<td>${d}</td>`;
-    let ytd = 0, ytdP = 0;
-    recentMonths.forEach(m => {
-      const act = (monthly[m] && monthly[m][d]) ? (metric==='count' ? monthly[m][d].count : monthly[m][d].uriage) : 0;
-      const plan = Math.round(tData[m] || 0);
-      const rate = plan > 0 ? (act/plan*100) : null;
-      const isCur = m === nowMonth;
-      ytd += act; ytdP += plan;
-      html += `<td class="${isCur?'current-month':''}">
-        <div class="actual">${act.toLocaleString()}</div>
-        <div class="plan">/${plan.toLocaleString()}${unit}</div>
-        ${rate !== null ? `<div class="${rate>=100?'rate-good':'rate-bad'}">${rate.toFixed(0)}%</div>` : ''}
-      </td>`;
+  const year='2026';
+  const allMonths=MONTHS.map(m=>`${year}-${m}`);
+  const quarters=[[0,1,2],[3,4,5],[6,7,8],[9,10,11]];
+  const qLabels=['1Q計','2Q計','3Q計','4Q計'];
+  const nowM2=nowYM();
+
+  let cols=[];
+  quarters.forEach((q,qi)=>{
+    q.forEach(mi=>{const mo=allMonths[mi];cols.push({type:'month',month:mo,label:(mi+1)+'月'});});
+    cols.push({type:'q',label:qLabels[qi],months:q.map(mi=>allMonths[mi])});
+  });
+  cols.push({type:'total',label:'合計',months:allMonths});
+
+  let html=`<table class="monthly-table"><thead><tr>
+    <th style="text-align:left">部署 / 区分</th>`;
+  cols.forEach(c=>{
+    const isCur=c.type==='month'&&c.month===nowM2?'style="background:#fff3cd"':'';
+    html+=`<th class="${c.type!=='month'?'q-col':''}" ${isCur}>${c.label}</th>`;
+  });
+  html+=`</tr></thead><tbody>`;
+
+  DEPTS.forEach(dept=>{
+    html+=`<tr class="dept-header"><td colspan="${cols.length+1}">${dept}</td></tr>`;
+    const metrics=[
+      {key:'目標',cls:'val-plan'},
+      {key:'実績',cls:'val-actual'},
+      {key:'件数',cls:'val-cnt'},
+      {key:'貯金',cls:'val-貯金'},
+      {key:'達成率',cls:'val-rate'},
+    ];
+    metrics.forEach(({key,cls})=>{
+      html+=`<tr class="metric-row"><td style="padding-left:20px">${key}</td>`;
+      cols.forEach(c=>{
+        const isCur=c.type==='month'&&c.month===nowM2?'cur-month':'';
+        const months=c.type==='month'?[c.month]:c.months;
+        let actU=0,planU=0,actC=0;
+        months.forEach(m=>{
+          const d=(monthly[m]||{})[dept]||{};
+          actU+=(d.uriage||0);
+          actC+=(d.count||0);
+          planU+=getPlan(dept,m,'売上合計（返金前）[目標]');
+        });
+        let val='',vCls=cls;
+        if(key==='目標'){val=fmtNum(planU);}
+        else if(key==='実績'){val=fmtNum(actU);}
+        else if(key==='件数'){val=actC+'件';}
+        else if(key==='貯金'){const d2=Math.round(actU-planU);val=(d2>=0?'+':'')+fmtNum(d2);vCls=`val-貯金 ${d2>=0?'pos':'neg'}`;}
+        else if(key==='達成率'){const r=planU>0?actU/planU*100:0;val=fmtRate(r);vCls=`val-rate ${rateClass(r)}`;}
+        html+=`<td class="${vCls} ${c.type!=='month'?'q-col':''} ${isCur}">${val}</td>`;
+      });
+      html+=`</tr>`;
     });
-    const ytdRate = ytdP > 0 ? (ytd/ytdP*100) : null;
-    html += `<td><div class="actual">${ytd.toLocaleString()}</div><div class="plan">/${ytdP.toLocaleString()}${unit}</div>${ytdRate!==null?`<div class="${ytdRate>=100?'rate-good':'rate-bad'}">${ytdRate.toFixed(0)}%</div>`:''}</td>`;
-    html += `</tr>`;
-  }
-  html += `</tbody></table>`;
-  document.getElementById('monthly-dept-table').innerHTML = html;
+  });
+  html+=`</tbody></table>`;
+  document.getElementById('dept-table').innerHTML=html;
 }
 
-function renderPodium(container, items, valueKey, unit) {
-  if (!items || items.length === 0) return;
-  const top3 = items.slice(0, 3);
-  const order = top3.length >= 3 ? [top3[1], top3[0], top3[2]] : top3;
-  const cfg = [
-    {cls:'rank2', badge:'silver-badge', label:'🥈 2nd'},
-    {cls:'rank1', badge:'gold-badge', label:'🥇 1st'},
-    {cls:'rank3', badge:'bronze-badge', label:'🥉 3rd'}
-  ];
-  const rankOrder = top3.length >= 3 ? [1,0,2] : [0];
-  container.innerHTML = order.map((item, i) => {
-    const c = cfg[rankOrder[i]];
-    const val = parseFloat(item[valueKey]) || 0;
-    return `<div class="podium-item ${c.cls}">
-      <span class="podium-rank-badge ${c.badge}">${c.label}</span>
-      <div class="podium-name">${item.name}</div>
-      <div class="podium-sub">${item.division || item.team || ''}</div>
-      <div class="podium-value">${val}<span class="podium-unit">${unit}</span></div>
-    </div>`;
+function renderPodium(el,items,vKey,unit){
+  if(!items||!items.length)return;
+  const top3=items.slice(0,3);
+  const order=top3.length>=3?[top3[1],top3[0],top3[2]]:top3;
+  const cfg=[{cls:'r2',bg:'bg-silver',lbl:'🥈 2nd'},{cls:'r1',bg:'bg-gold',lbl:'🥇 1st'},{cls:'r3',bg:'bg-bronze',lbl:'🥉 3rd'}];
+  const ro=top3.length>=3?[1,0,2]:[0];
+  el.innerHTML=order.map((item,i)=>{
+    const c=cfg[ro[i]];
+    const v=parseFloat(item[vKey])||0;
+    return`<div class="p-item ${c.cls}"><span class="p-badge ${c.bg}">${c.lbl}</span>
+      <div class="p-name">${item.name}</div><div class="p-sub">${item.division||item.team||''}</div>
+      <div class="p-val">${v}<span class="p-unit">${unit}</span></div></div>`;
   }).join('');
 }
 
-function renderCA() {
-  if (!data) return;
-  const filter = document.getElementById('ca-filter').value;
-  let list = [...data.ca_list];
-  if (filter !== 'all') list = list.filter(c => c.division === filter);
-  const total = list.reduce((s,c)=>s+c.summary.projects_created,0);
-  const avg = list.length > 0 ? (total/list.length).toFixed(1) : 0;
-  document.getElementById('ca-kpi-cards').innerHTML = `
-    <div class="kpi-card"><div class="label">👥 対象人数</div><div class="value blue">${list.length} 名</div></div>
-    <div class="kpi-card"><div class="label">🏆 合計成約数</div><div class="value">${total} 件</div></div>
-    <div class="kpi-card"><div class="label">📊 平均成約数</div><div class="value">${avg} 件</div></div>
-    <div class="kpi-card"><div class="label">🥇 TOP1</div><div class="value gold">${list[0]?.summary.projects_created||0} 件</div><div class="sub">${list[0]?.name||'-'}</div></div>
-    <div class="kpi-card"><div class="label">📅 集計期間</div><div class="value" style="font-size:13px">${data.dataFrom||'-'}〜</div></div>
-  `;
-  renderPodium(document.getElementById('ca-podium'), list.map(c=>({...c,_v:c.summary.projects_created})), '_v', '件');
-  document.getElementById('ca-table').innerHTML = list.map((c,i) => `
-    ${i===10?'<tr class="top10-divider"><td colspan="4">★ ここまで TOP 10 ★</td></tr>':''}
-    <tr><td><span class="rank-num ${i<3?'top3':''}"> #${i+1}</span></td>
-    <td><strong>${c.name}</strong></td><td>${c.division||'-'}</td><td><strong>${c.summary.projects_created}</strong> 件</td></tr>
-  `).join('');
+function renderCA(){
+  if(!data)return;
+  const f=document.getElementById('ca-filter').value;
+  let list=[...data.ca_list];
+  if(f!=='all')list=list.filter(c=>c.division===f);
+  const tot=list.reduce((s,c)=>s+c.summary.projects_created,0);
+  document.getElementById('ca-kpi').innerHTML=`
+    <div class="kpi-card"><div class="lbl">👥 対象人数</div><div class="val blue">${list.length} 名</div></div>
+    <div class="kpi-card"><div class="lbl">🏆 合計成約数</div><div class="val">${tot} 件</div></div>
+    <div class="kpi-card"><div class="lbl">📊 平均</div><div class="val">${list.length?(tot/list.length).toFixed(1):0} 件</div></div>
+    <div class="kpi-card"><div class="lbl">🥇 TOP1</div><div class="val gold">${list[0]?.summary.projects_created||0} 件</div><div class="sub">${list[0]?.name||'-'}</div></div>
+    <div class="kpi-card"><div class="lbl">📅 集計期間</div><div class="val" style="font-size:13px">${data.dataFrom||'-'}〜</div></div>`;
+  renderPodium(document.getElementById('ca-podium'),list.map(c=>({...c,_v:c.summary.projects_created})),'_v','件');
+  document.getElementById('ca-table').innerHTML=list.map((c,i)=>`
+    ${i===10?'<tr class="top10d"><td colspan="4">★ ここまで TOP 10 ★</td></tr>':''}
+    <tr><td><span class="rn ${i<3?'t':''}">#${i+1}</span></td>
+    <td><strong>${c.name}</strong></td><td>${c.division||'-'}</td><td><strong>${c.summary.projects_created}</strong> 件</td></tr>`).join('');
 }
 
-function renderRA() {
-  if (!data) return;
-  const filter = document.getElementById('ra-filter').value;
-  let list = [...data.ra_list];
-  if (filter !== 'all') list = list.filter(r=>r.team===filter);
-  const totalPts = list.reduce((s,r)=>s+r.points,0);
-  document.getElementById('ra-kpi-cards').innerHTML = `
-    <div class="kpi-card"><div class="label">👥 対象人数</div><div class="value blue">${list.length} 名</div></div>
-    <div class="kpi-card"><div class="label">📋 総案件数</div><div class="value">${list.reduce((s,r)=>s+r.total_deals,0)} 件</div></div>
-    <div class="kpi-card"><div class="label">⭐ 総ポイント</div><div class="value">${totalPts}</div></div>
-    <div class="kpi-card"><div class="label">🥇 TOP1スコア</div><div class="value gold">${list[0]?.grade_score||'-'}</div><div class="sub">${list[0]?.name||'-'}</div></div>
-    <div class="kpi-card"><div class="label">📅 全件キャッシュ</div><div class="value" style="font-size:13px">${data.summary.total_interviews.toLocaleString()} 件</div></div>
-  `;
-  renderPodium(document.getElementById('ra-podium'), list.map(r=>({...r,_v:parseFloat(r.grade_score)})), '_v', 'pt');
-  document.getElementById('ra-table').innerHTML = list.map((r,i) => `
-    ${i===10?'<tr class="top10-divider"><td colspan="10">★ ここまで TOP 10 ★</td></tr>':''}
-    <tr><td><span class="rank-num ${i<3?'top3':''}"> #${i+1}</span></td>
+function renderRA(){
+  if(!data)return;
+  const f=document.getElementById('ra-filter').value;
+  let list=[...data.ra_list];
+  if(f!=='all')list=list.filter(r=>r.team===f);
+  document.getElementById('ra-kpi').innerHTML=`
+    <div class="kpi-card"><div class="lbl">👥 対象人数</div><div class="val blue">${list.length} 名</div></div>
+    <div class="kpi-card"><div class="lbl">📋 総案件数</div><div class="val">${list.reduce((s,r)=>s+r.total_deals,0)} 件</div></div>
+    <div class="kpi-card"><div class="lbl">⭐ 総ポイント</div><div class="val">${list.reduce((s,r)=>s+r.points,0)}</div></div>
+    <div class="kpi-card"><div class="lbl">🥇 TOP1</div><div class="val gold">${list[0]?.grade_score||'-'}</div><div class="sub">${list[0]?.name||'-'}</div></div>
+    <div class="kpi-card"><div class="lbl">📦 全件</div><div class="val" style="font-size:13px">${(data.summary.total_interviews||0).toLocaleString()} 件</div></div>`;
+  renderPodium(document.getElementById('ra-podium'),list.map(r=>({...r,_v:parseFloat(r.grade_score)})),'_v','pt');
+  document.getElementById('ra-table').innerHTML=list.map((r,i)=>`
+    ${i===10?'<tr class="top10d"><td colspan="10">★ ここまで TOP 10 ★</td></tr>':''}
+    <tr><td><span class="rn ${i<3?'t':''}">#${i+1}</span></td>
     <td><strong>${r.name}</strong></td><td>${r.team||'-'}</td>
-    <td><span class="grade-A">${r.grades.A}</span></td><td><span class="grade-B">${r.grades.B}</span></td>
-    <td><span class="grade-C">${r.grades.C}</span></td><td><span class="grade-Dp">${r.grades['D+']}</span></td>
-    <td><span class="grade-D">${r.grades.D}</span></td>
-    <td><strong>${r.grade_score}</strong></td><td>${r.points}</td></tr>
-  `).join('');
+    <td><span class="ga">${r.grades.A}</span></td><td><span class="gb">${r.grades.B}</span></td>
+    <td><span class="gc">${r.grades.C}</span></td><td><span class="gdp">${r.grades['D+']}</span></td>
+    <td><span class="gd">${r.grades.D}</span></td>
+    <td><strong>${r.grade_score}</strong></td><td>${r.points}</td></tr>`).join('');
 }
 
-function loadData() {
-  const t = Date.now();
+function loadData(){
+  const t=Date.now();
   Promise.all([
     fetch('output/data.json?t='+t).then(r=>r.json()),
     fetch('output/targets.json?t='+t).then(r=>r.json())
-  ]).then(([d, tg]) => {
-    data = d; targets = tg;
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('monthly').classList.add('active');
-
-    const updated = new Date(d.lastUpdate).toLocaleString('ja-JP');
-    document.getElementById('headerInfo').textContent =
-      `最終更新: ${updated} ／ CA: ${d.ca_list.length}名 ／ RA: ${d.ra_list.length}名`;
-
-    // CAフィルター動的生成
-    const divs = [...new Set(d.ca_list.map(c=>c.division).filter(Boolean))];
-    const cf = document.getElementById('ca-filter');
-    divs.forEach(div => { const o=document.createElement('option'); o.value=div; o.textContent=div; cf.appendChild(o); });
-
-    // RAフィルター動的生成
-    const teams = [...new Set(d.ra_list.map(r=>r.team).filter(Boolean))];
-    const rf = document.getElementById('ra-filter');
-    teams.forEach(t => { const o=document.createElement('option'); o.value=t; o.textContent=t; rf.appendChild(o); });
-
-    renderMonthly();
-    renderCA();
-    renderRA();
-  }).catch(e => {
-    document.getElementById('loading').textContent = 'データ読み込みエラー: ' + e.message;
-  });
+  ]).then(([d,tg])=>{
+    data=d;targets=tg;
+    document.getElementById('loading').style.display='none';
+    document.getElementById('summary').classList.add('active');
+    const upd=new Date(d.lastUpdate).toLocaleString('ja-JP');
+    document.getElementById('headerInfo').textContent=`最終更新: ${upd} ／ 単位: 万円 ／ CA: ${d.ca_list.length}名 ／ RA: ${d.ra_list.length}名`;
+    const divs=[...new Set(d.ca_list.map(c=>c.division).filter(Boolean))];
+    const cf=document.getElementById('ca-filter');
+    divs.forEach(div=>{const o=document.createElement('option');o.value=div;o.textContent=div;cf.appendChild(o);});
+    const teams=[...new Set(d.ra_list.map(r=>r.team).filter(Boolean))];
+    const rf=document.getElementById('ra-filter');
+    teams.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;rf.appendChild(o);});
+    renderSummary();renderCA();renderRA();
+  }).catch(e=>{document.getElementById('loading').textContent='エラー: '+e.message;});
 }
-
 loadData();
 </script>
 </body>
