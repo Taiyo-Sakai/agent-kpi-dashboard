@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-06-01T10:20:02.224Z",
+  "lastUpdate": "2026-06-01T11:48:28.229Z",
   "monthly": {
     "2026-06": {
       "全体": {
@@ -8,74 +8,91 @@
         "uriage_after": 724,
         "henkin_nyushamae": 402,
         "henkin_nyushamae_cnt": 2,
-        "henkin_hayaki": 0
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 2,
         "uriage": 284,
         "uriage_after": 284,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 2,
         "uriage": 440,
         "uriage_after": 440,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2026-05": {
       "全体": {
-        "count": 101,
-        "uriage": 24062,
-        "uriage_after": 23899,
+        "count": 100,
+        "uriage": 24022,
+        "uriage_after": 23859,
         "henkin_nyushamae": 3328,
         "henkin_nyushamae_cnt": 14,
-        "henkin_hayaki": 872,
-        "henkin_hayaki_cnt": 8
+        "henkin_hayaki": 777,
+        "henkin_hayaki_cnt": 7
       },
       "建設Ⅰ部": {
         "count": 36,
         "uriage": 10538,
         "uriage_after": 10538,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 16,
         "uriage": 2193,
         "uriage_after": 2193,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 9,
         "uriage": 1122,
         "uriage_after": 1122,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 26,
         "uriage": 7745,
         "uriage_after": 7582,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 12,
         "uriage": 1925,
         "uriage_after": 1925,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "その他": {
-        "count": 2,
-        "uriage": 540,
-        "uriage_after": 540,
+        "count": 1,
+        "uriage": 500,
+        "uriage_after": 500,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2026-04": {
@@ -83,59 +100,71 @@
         "count": 121,
         "uriage": 31464,
         "uriage_after": 29389,
-        "henkin_hayaki": 823,
-        "henkin_hayaki_cnt": 8,
         "henkin_nyushamae": 5710,
-        "henkin_nyushamae_cnt": 21
+        "henkin_nyushamae_cnt": 21,
+        "henkin_hayaki": 823,
+        "henkin_hayaki_cnt": 8
       },
       "不動産部": {
         "count": 13,
         "uriage": 3108,
         "uriage_after": 2585,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 44,
         "uriage": 12137,
         "uriage_after": 11363,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 10,
         "uriage": 1796,
         "uriage_after": 1327,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 42,
         "uriage": 11934,
         "uriage_after": 11692,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 9,
         "uriage": 1454,
         "uriage_after": 1454,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "その他": {
         "count": 3,
         "uriage": 1035,
         "uriage_after": 968,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2026-03": {
       "全体": {
-        "count": 130,
-        "uriage": 31585,
-        "uriage_after": 29210,
+        "count": 129,
+        "uriage": 31399,
+        "uriage_after": 29119,
         "henkin_nyushamae": 7846,
         "henkin_nyushamae_cnt": 34,
         "henkin_hayaki": 1143,
@@ -146,42 +175,54 @@
         "uriage": 10504,
         "uriage_after": 9110,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 41,
         "uriage": 11975,
         "uriage_after": 11913,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
-        "count": 23,
-        "uriage": 4181,
-        "uriage_after": 3888,
+        "count": 24,
+        "uriage": 4211,
+        "uriage_after": 3918,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
-      },
-      "その他": {
-        "count": 3,
-        "uriage": 432,
-        "uriage_after": 337,
-        "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 14,
         "uriage": 2841,
         "uriage_after": 2415,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 12,
         "uriage": 1652,
         "uriage_after": 1547,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
+      },
+      "その他": {
+        "count": 1,
+        "uriage": 216,
+        "uriage_after": 216,
+        "henkin_nyushamae": 0,
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2026-02": {
@@ -199,95 +240,119 @@
         "uriage": 1239,
         "uriage_after": 994,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
-      },
-      "その他": {
-        "count": 3,
-        "uriage": 1721,
-        "uriage_after": 1721,
-        "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 25,
         "uriage": 4499,
         "uriage_after": 2977,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 34,
         "uriage": 9446,
         "uriage_after": 8597,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 32,
         "uriage": 9405,
         "uriage_after": 9069,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 9,
         "uriage": 1278,
         "uriage_after": 818,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
+      },
+      "その他": {
+        "count": 3,
+        "uriage": 1721,
+        "uriage_after": 1721,
+        "henkin_nyushamae": 0,
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2026-01": {
       "全体": {
-        "count": 103,
-        "uriage": 24116,
-        "uriage_after": 20915,
+        "count": 102,
+        "uriage": 24086,
+        "uriage_after": 20885,
         "henkin_nyushamae": 6470,
         "henkin_nyushamae_cnt": 23,
-        "henkin_hayaki": 532,
-        "henkin_hayaki_cnt": 8
+        "henkin_hayaki": 604,
+        "henkin_hayaki_cnt": 9
       },
       "建設Ⅰ部": {
-        "count": 37,
-        "uriage": 9385,
-        "uriage_after": 8395,
+        "count": 36,
+        "uriage": 9355,
+        "uriage_after": 8365,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 12,
         "uriage": 1528,
         "uriage_after": 1396,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 37,
         "uriage": 9768,
         "uriage_after": 8180,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "その他": {
         "count": 2,
         "uriage": 918,
         "uriage_after": 918,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 10,
         "uriage": 1308,
         "uriage_after": 818,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 5,
         "uriage": 1208,
         "uriage_after": 1208,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-12": {
@@ -305,49 +370,61 @@
         "uriage": 2355,
         "uriage_after": 1005,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 42,
         "uriage": 9854,
         "uriage_after": 7250,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 38,
         "uriage": 10338,
         "uriage_after": 8802,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 6,
         "uriage": 685,
         "uriage_after": 585,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 9,
         "uriage": 844,
         "uriage_after": 844,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "その他": {
         "count": 3,
         "uriage": 501,
         "uriage_after": 375,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-11": {
       "全体": {
-        "count": 112,
-        "uriage": 26267,
-        "uriage_after": 18549,
+        "count": 113,
+        "uriage": 26411,
+        "uriage_after": 18621,
         "henkin_nyushamae": 2750,
         "henkin_nyushamae_cnt": 10,
         "henkin_hayaki": 1011,
@@ -358,42 +435,54 @@
         "uriage": 10426,
         "uriage_after": 6603,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 12,
         "uriage": 1900,
         "uriage_after": 1156,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 46,
         "uriage": 12581,
         "uriage_after": 9842,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 11,
         "uriage": 1142,
         "uriage_after": 730,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "その他": {
-        "count": 1,
-        "uriage": 60,
-        "uriage_after": 60,
+        "count": 2,
+        "uriage": 204,
+        "uriage_after": 132,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 1,
         "uriage": 158,
         "uriage_after": 158,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-10": {
@@ -411,42 +500,54 @@
         "uriage": 13276,
         "uriage_after": 9807,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 4,
         "uriage": 656,
         "uriage_after": 200,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 8,
         "uriage": 882,
         "uriage_after": 613,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 37,
         "uriage": 10773,
         "uriage_after": 9480,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 10,
         "uriage": 2273,
         "uriage_after": 2163,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "その他": {
         "count": 1,
         "uriage": 300,
         "uriage_after": 300,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-09": {
@@ -464,49 +565,61 @@
         "uriage": 2916,
         "uriage_after": 1642,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 46,
         "uriage": 10142,
         "uriage_after": 6535,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 52,
         "uriage": 12732,
         "uriage_after": 10968,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 10,
         "uriage": 1775,
         "uriage_after": 1153,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
-      },
-      "その他": {
-        "count": 3,
-        "uriage": 1330,
-        "uriage_after": 1330,
-        "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 4,
         "uriage": 610,
         "uriage_after": 476,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
+      },
+      "その他": {
+        "count": 3,
+        "uriage": 1330,
+        "uriage_after": 1330,
+        "henkin_nyushamae": 0,
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-08": {
       "全体": {
-        "count": 71,
-        "uriage": 16186,
-        "uriage_after": 13380,
+        "count": 72,
+        "uriage": 16427,
+        "uriage_after": 13621,
         "henkin_nyushamae": 326,
         "henkin_nyushamae_cnt": 2,
         "henkin_hayaki": 147,
@@ -517,42 +630,54 @@
         "uriage": 2066,
         "uriage_after": 1761,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 24,
         "uriage": 6073,
         "uriage_after": 5412,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 26,
         "uriage": 6124,
         "uriage_after": 4844,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 8,
         "uriage": 921,
         "uriage_after": 614,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 1,
         "uriage": 252,
         "uriage_after": 0,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "その他": {
-        "count": 2,
-        "uriage": 750,
-        "uriage_after": 750,
+        "count": 3,
+        "uriage": 991,
+        "uriage_after": 991,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-07": {
@@ -561,93 +686,128 @@
         "uriage": 31205,
         "uriage_after": 23990,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 43,
         "uriage": 11790,
         "uriage_after": 9285,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 57,
         "uriage": 14254,
         "uriage_after": 10635,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 13,
         "uriage": 1234,
         "uriage_after": 676,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
-      },
-      "その他": {
-        "count": 4,
-        "uriage": 1261,
-        "uriage_after": 1261,
-        "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 16,
         "uriage": 2570,
         "uriage_after": 2037,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
+      },
+      "その他": {
+        "count": 4,
+        "uriage": 1261,
+        "uriage_after": 1261,
+        "henkin_nyushamae": 0,
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 1,
         "uriage": 97,
         "uriage_after": 97,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-06": {
       "全体": {
         "count": 112,
-        "uriage": 24308,
-        "uriage_after": 17049,
+        "uriage": 24483,
+        "uriage_after": 17224,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 39,
         "uriage": 9068,
         "uriage_after": 7738,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
-        "count": 43,
-        "uriage": 10601,
-        "uriage_after": 6952,
+        "count": 42,
+        "uriage": 10401,
+        "uriage_after": 6752,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 3,
         "uriage": 435,
         "uriage_after": 251,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 12,
         "uriage": 1426,
         "uriage_after": 986,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
+      },
+      "その他": {
+        "count": 1,
+        "uriage": 375,
+        "uriage_after": 375,
+        "henkin_nyushamae": 0,
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 15,
         "uriage": 2778,
         "uriage_after": 1122,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-05": {
@@ -657,207 +817,286 @@
         "uriage_after": 13720,
         "henkin_nyushamae": 521,
         "henkin_nyushamae_cnt": 2,
-        "henkin_hayaki": 0
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 36,
         "uriage": 8260,
         "uriage_after": 6067,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 14,
         "uriage": 2013,
         "uriage_after": 1099,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 26,
         "uriage": 6446,
         "uriage_after": 5574,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 5,
         "uriage": 785,
         "uriage_after": 698,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 1,
         "uriage": 282,
         "uriage_after": 282,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-04": {
       "全体": {
-        "count": 81,
-        "uriage": 17384,
-        "uriage_after": 15485,
+        "count": 83,
+        "uriage": 17750,
+        "uriage_after": 15851,
         "henkin_nyushamae": 351,
         "henkin_nyushamae_cnt": 2,
-        "henkin_hayaki": 0
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 34,
         "uriage": 8415,
         "uriage_after": 7452,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 6,
         "uriage": 963,
         "uriage_after": 761,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 29,
         "uriage": 6208,
         "uriage_after": 5473,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 11,
         "uriage": 1722,
         "uriage_after": 1722,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
+      },
+      "その他": {
+        "count": 2,
+        "uriage": 366,
+        "uriage_after": 366,
+        "henkin_nyushamae": 0,
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 1,
         "uriage": 77,
         "uriage_after": 77,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-03": {
       "全体": {
-        "count": 87,
-        "uriage": 18132,
-        "uriage_after": 13331,
+        "count": 88,
+        "uriage": 18300,
+        "uriage_after": 13499,
         "henkin_nyushamae": 818,
         "henkin_nyushamae_cnt": 3,
-        "henkin_hayaki": 0
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
         "count": 27,
         "uriage": 6403,
         "uriage_after": 4247,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 39,
         "uriage": 9185,
         "uriage_after": 7462,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 11,
         "uriage": 1423,
         "uriage_after": 770,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 9,
         "uriage": 971,
         "uriage_after": 700,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
+      },
+      "その他": {
+        "count": 1,
+        "uriage": 168,
+        "uriage_after": 168,
+        "henkin_nyushamae": 0,
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "士業部": {
         "count": 1,
         "uriage": 151,
         "uriage_after": 151,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-02": {
       "全体": {
-        "count": 58,
-        "uriage": 12156,
-        "uriage_after": 9410,
+        "count": 59,
+        "uriage": 12282,
+        "uriage_after": 9536,
         "henkin_nyushamae": 140,
         "henkin_nyushamae_cnt": 1,
-        "henkin_hayaki": 0
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
-        "count": 27,
-        "uriage": 5810,
-        "uriage_after": 4990,
+        "count": 28,
+        "uriage": 5936,
+        "uriage_after": 5116,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 4,
         "uriage": 529,
         "uriage_after": 529,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 26,
         "uriage": 5679,
         "uriage_after": 3753,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 1,
         "uriage": 138,
         "uriage_after": 138,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2025-01": {
       "全体": {
-        "count": 58,
-        "uriage": 13387,
-        "uriage_after": 10227,
+        "count": 62,
+        "uriage": 14133,
+        "uriage_after": 10812,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 20,
         "uriage": 5428,
         "uriage_after": 3903,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅰ部": {
-        "count": 31,
-        "uriage": 6832,
-        "uriage_after": 5505,
+        "count": 33,
+        "uriage": 7114,
+        "uriage_after": 5625,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "電気主任・製造部": {
         "count": 4,
         "uriage": 771,
         "uriage_after": 631,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "不動産部": {
         "count": 3,
         "uriage": 356,
         "uriage_after": 188,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
+      },
+      "その他": {
+        "count": 2,
+        "uriage": 464,
+        "uriage_after": 464,
+        "henkin_nyushamae": 0,
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     },
     "2024-12": {
@@ -866,14 +1105,18 @@
         "uriage": 250,
         "uriage_after": 0,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 1,
         "uriage": 250,
         "uriage_after": 0,
         "henkin_nyushamae": 0,
-        "henkin_hayaki": 0
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       }
     }
   },
@@ -1021,6 +1264,13 @@
       }
     },
     {
+      "name": "金子 幹生",
+      "division": "スタンダード＋",
+      "summary": {
+        "projects_created": 4
+      }
+    },
+    {
       "name": "矢川 翔太",
       "division": "矢川チーム",
       "summary": {
@@ -1100,13 +1350,6 @@
     {
       "name": "齋藤 智苗",
       "division": "下園チーム",
-      "summary": {
-        "projects_created": 3
-      }
-    },
-    {
-      "name": "金子 幹生",
-      "division": "スタンダード＋",
       "summary": {
         "projects_created": 3
       }
@@ -1380,6 +1623,20 @@
       "points": 15060
     },
     {
+      "name": "桶谷 祐太",
+      "team": "採用コンサルティング",
+      "grades": {
+        "D": 13,
+        "D+": 0,
+        "C": 1,
+        "B": 0,
+        "A": 0
+      },
+      "total_deals": 14,
+      "grade_score": "0.13",
+      "points": 140
+    },
+    {
       "name": "成田 梨沙",
       "team": "野村チーム",
       "grades": {
@@ -1406,20 +1663,6 @@
       "total_deals": 116,
       "grade_score": "0.13",
       "points": 1160
-    },
-    {
-      "name": "桶谷 祐太",
-      "team": "採用コンサルティング",
-      "grades": {
-        "D": 12,
-        "D+": 0,
-        "C": 1,
-        "B": 0,
-        "A": 0
-      },
-      "total_deals": 13,
-      "grade_score": "0.13",
-      "points": 130
     },
     {
       "name": "池谷 梨帆",
@@ -1453,9 +1696,9 @@
       "name": "菊池 宏輝",
       "team": "ビギナー+",
       "grades": {
-        "D": 848,
+        "D": 847,
         "D+": 21,
-        "C": 14,
+        "C": 15,
         "B": 4,
         "A": 4
       },
@@ -1467,57 +1710,57 @@
       "name": "杉本 一沙",
       "team": "ミドル＋",
       "grades": {
-        "D": 645,
+        "D": 644,
         "D+": 12,
         "C": 5,
         "B": 2,
         "A": 6
       },
-      "total_deals": 670,
+      "total_deals": 669,
       "grade_score": "0.12",
-      "points": 6700
+      "points": 6690
     },
     {
       "name": "天貝 雄太",
       "team": "野村チーム",
       "grades": {
-        "D": 1198,
+        "D": 1218,
         "D+": 16,
         "C": 3,
         "B": 17,
         "A": 7
       },
-      "total_deals": 1241,
+      "total_deals": 1261,
       "grade_score": "0.12",
-      "points": 12410
+      "points": 12610
     },
     {
       "name": "矢川 翔太",
       "team": "HH(ALL)",
       "grades": {
-        "D": 1409,
+        "D": 1408,
         "D+": 30,
         "C": 9,
         "B": 16,
         "A": 6
       },
-      "total_deals": 1470,
+      "total_deals": 1469,
       "grade_score": "0.12",
-      "points": 14700
+      "points": 14690
     },
     {
       "name": "藤田 海衣",
       "team": "チーム不明",
       "grades": {
-        "D": 969,
+        "D": 966,
         "D+": 14,
         "C": 17,
         "B": 8,
         "A": 3
       },
-      "total_deals": 1011,
+      "total_deals": 1008,
       "grade_score": "0.12",
-      "points": 10110
+      "points": 10080
     },
     {
       "name": "鹿又 直輝",
@@ -1551,99 +1794,85 @@
       "name": "北澤 龍弥",
       "team": "ビギナー",
       "grades": {
-        "D": 641,
+        "D": 642,
         "D+": 5,
         "C": 5,
         "B": 4,
         "A": 8
       },
-      "total_deals": 663,
+      "total_deals": 664,
       "grade_score": "0.12",
-      "points": 6630
+      "points": 6640
     },
     {
       "name": "久保 希",
       "team": "HHエージェント",
       "grades": {
-        "D": 28,
+        "D": 29,
         "D+": 1,
         "C": 1,
         "B": 0,
         "A": 0
       },
-      "total_deals": 30,
+      "total_deals": 31,
       "grade_score": "0.12",
-      "points": 300
+      "points": 310
     },
     {
-      "name": "山本 優和",
-      "team": "ビギナー",
+      "name": "大松 琴音",
+      "team": "櫻井チーム",
       "grades": {
-        "D": 1130,
-        "D+": 11,
-        "C": 9,
-        "B": 2,
-        "A": 4
-      },
-      "total_deals": 1156,
-      "grade_score": "0.11",
-      "points": 11560
-    },
-    {
-      "name": "深井 康貴",
-      "team": "小森チーム",
-      "grades": {
-        "D": 350,
-        "D+": 4,
-        "C": 3,
+        "D": 243,
+        "D+": 6,
+        "C": 1,
         "B": 0,
-        "A": 0
+        "A": 1
       },
-      "total_deals": 357,
+      "total_deals": 251,
       "grade_score": "0.11",
-      "points": 3570
-    },
-    {
-      "name": "安藤 波音",
-      "team": "スタンダード",
-      "grades": {
-        "D": 1034,
-        "D+": 8,
-        "C": 7,
-        "B": 4,
-        "A": 0
-      },
-      "total_deals": 1053,
-      "grade_score": "0.11",
-      "points": 10530
+      "points": 2510
     },
     {
       "name": "浅子 征也",
       "team": "矢川チーム",
       "grades": {
-        "D": 1526,
-        "D+": 4,
+        "D": 1530,
+        "D+": 5,
         "C": 3,
         "B": 0,
         "A": 19
       },
-      "total_deals": 1552,
+      "total_deals": 1557,
       "grade_score": "0.11",
-      "points": 15520
+      "points": 15570
     },
     {
-      "name": "吉田 龍之助",
-      "team": "スタンダード",
+      "name": "佐々木 航平",
+      "team": "鈴木チーム",
       "grades": {
-        "D": 679,
+        "D": 596,
         "D+": 8,
-        "C": 2,
+        "C": 11,
         "B": 2,
-        "A": 2
+        "A": 1
       },
-      "total_deals": 693,
+      "total_deals": 618,
       "grade_score": "0.11",
-      "points": 6930
+      "points": 6180
+    },
+    {
+      "name": "山本 優和",
+      "team": "ビギナー",
+      "grades": {
+        "D": 1131,
+        "D+": 11,
+        "C": 9,
+        "B": 2,
+        "A": 4
+      },
+      "total_deals": 1157,
+      "grade_score": "0.11",
+      "points": 11570
     },
     {
       "name": "本田 栞",
@@ -1663,15 +1892,141 @@
       "name": "眞野 純平",
       "team": "矢川チーム",
       "grades": {
-        "D": 1507,
-        "D+": 18,
+        "D": 1508,
+        "D+": 19,
         "C": 5,
         "B": 4,
         "A": 2
       },
-      "total_deals": 1536,
+      "total_deals": 1538,
       "grade_score": "0.11",
-      "points": 15360
+      "points": 15380
+    },
+    {
+      "name": "深井 康貴",
+      "team": "小森チーム",
+      "grades": {
+        "D": 353,
+        "D+": 4,
+        "C": 3,
+        "B": 0,
+        "A": 0
+      },
+      "total_deals": 360,
+      "grade_score": "0.11",
+      "points": 3600
+    },
+    {
+      "name": "安藤 波音",
+      "team": "スタンダード",
+      "grades": {
+        "D": 1034,
+        "D+": 8,
+        "C": 7,
+        "B": 4,
+        "A": 0
+      },
+      "total_deals": 1053,
+      "grade_score": "0.11",
+      "points": 10530
+    },
+    {
+      "name": "吉田 龍之助",
+      "team": "スタンダード",
+      "grades": {
+        "D": 680,
+        "D+": 8,
+        "C": 2,
+        "B": 2,
+        "A": 2
+      },
+      "total_deals": 694,
+      "grade_score": "0.11",
+      "points": 6940
+    },
+    {
+      "name": "大熊 綺斗",
+      "team": "下園チーム",
+      "grades": {
+        "D": 212,
+        "D+": 8,
+        "C": 1,
+        "B": 0,
+        "A": 0
+      },
+      "total_deals": 221,
+      "grade_score": "0.11",
+      "points": 2210
+    },
+    {
+      "name": "大谷朋輝",
+      "team": "櫻井チーム",
+      "grades": {
+        "D": 1757,
+        "D+": 10,
+        "C": 9,
+        "B": 7,
+        "A": 0
+      },
+      "total_deals": 1783,
+      "grade_score": "0.11",
+      "points": 17830
+    },
+    {
+      "name": "白井 裕大",
+      "team": "ビギナー",
+      "grades": {
+        "D": 48,
+        "D+": 3,
+        "C": 0,
+        "B": 0,
+        "A": 0
+      },
+      "total_deals": 51,
+      "grade_score": "0.11",
+      "points": 510
+    },
+    {
+      "name": "藤原 彩香",
+      "team": "下園チーム",
+      "grades": {
+        "D": 1363,
+        "D+": 10,
+        "C": 3,
+        "B": 5,
+        "A": 2
+      },
+      "total_deals": 1383,
+      "grade_score": "0.11",
+      "points": 13830
+    },
+    {
+      "name": "東 聖",
+      "team": "矢川チーム",
+      "grades": {
+        "D": 1063,
+        "D+": 11,
+        "C": 3,
+        "B": 2,
+        "A": 2
+      },
+      "total_deals": 1081,
+      "grade_score": "0.11",
+      "points": 10810
+    },
+    {
+      "name": "篠崎 裕二",
+      "team": "エリートⅠⅡ",
+      "grades": {
+        "D": 1354,
+        "D+": 17,
+        "C": 9,
+        "B": 16,
+        "A": 3
+      },
+      "total_deals": 1399,
+      "grade_score": "0.11",
+      "points": 13990
     },
     {
       "name": "栢野 智由",
@@ -1691,15 +2046,29 @@
       "name": "小島 侑大",
       "team": "櫻井チーム",
       "grades": {
-        "D": 921,
+        "D": 922,
         "D+": 11,
-        "C": 3,
+        "C": 5,
         "B": 2,
         "A": 2
       },
-      "total_deals": 939,
+      "total_deals": 942,
       "grade_score": "0.11",
-      "points": 9390
+      "points": 9420
+    },
+    {
+      "name": "佐野まりん",
+      "team": "鈴木チーム",
+      "grades": {
+        "D": 1432,
+        "D+": 14,
+        "C": 12,
+        "B": 6,
+        "A": 9
+      },
+      "total_deals": 1473,
+      "grade_score": "0.11",
+      "points": 14730
     },
     {
       "name": "関 遥香",
@@ -1744,74 +2113,32 @@
       "points": 18060
     },
     {
-      "name": "篠崎 裕二",
-      "team": "野村チーム",
-      "grades": {
-        "D": 1353,
-        "D+": 17,
-        "C": 9,
-        "B": 16,
-        "A": 3
-      },
-      "total_deals": 1398,
-      "grade_score": "0.11",
-      "points": 13980
-    },
-    {
-      "name": "東 聖",
-      "team": "北島チーム",
-      "grades": {
-        "D": 1060,
-        "D+": 11,
-        "C": 2,
-        "B": 2,
-        "A": 2
-      },
-      "total_deals": 1077,
-      "grade_score": "0.11",
-      "points": 10770
-    },
-    {
       "name": "齋藤 智苗",
       "team": "下園チーム",
       "grades": {
-        "D": 1481,
+        "D": 1482,
         "D+": 4,
         "C": 6,
         "B": 3,
         "A": 6
       },
-      "total_deals": 1500,
+      "total_deals": 1501,
       "grade_score": "0.11",
-      "points": 15000
+      "points": 15010
     },
     {
       "name": "南谷 翔汰",
       "team": "ビギナー",
       "grades": {
-        "D": 1373,
+        "D": 1372,
         "D+": 16,
         "C": 8,
         "B": 1,
         "A": 3
       },
-      "total_deals": 1401,
+      "total_deals": 1400,
       "grade_score": "0.11",
-      "points": 14010
-    },
-    {
-      "name": "大谷朋輝",
-      "team": "ビギナー",
-      "grades": {
-        "D": 1756,
-        "D+": 10,
-        "C": 8,
-        "B": 7,
-        "A": 0
-      },
-      "total_deals": 1781,
-      "grade_score": "0.11",
-      "points": 17810
+      "points": 14000
     },
     {
       "name": "北島拓",
@@ -1826,20 +2153,6 @@
       "total_deals": 1313,
       "grade_score": "0.11",
       "points": 13130
-    },
-    {
-      "name": "佐々木 航平",
-      "team": "鈴木チーム",
-      "grades": {
-        "D": 589,
-        "D+": 8,
-        "C": 9,
-        "B": 2,
-        "A": 1
-      },
-      "total_deals": 609,
-      "grade_score": "0.11",
-      "points": 6090
     },
     {
       "name": "林 駿佑",
@@ -1887,57 +2200,15 @@
       "name": "橋本 千佳",
       "team": "チーム不明",
       "grades": {
-        "D": 569,
+        "D": 566,
         "D+": 8,
         "C": 8,
         "B": 3,
         "A": 1
       },
-      "total_deals": 589,
+      "total_deals": 586,
       "grade_score": "0.11",
-      "points": 5890
-    },
-    {
-      "name": "佐野まりん",
-      "team": "櫻井チーム",
-      "grades": {
-        "D": 1431,
-        "D+": 14,
-        "C": 12,
-        "B": 6,
-        "A": 9
-      },
-      "total_deals": 1472,
-      "grade_score": "0.11",
-      "points": 14720
-    },
-    {
-      "name": "藤原 彩香",
-      "team": "下園チーム",
-      "grades": {
-        "D": 1357,
-        "D+": 10,
-        "C": 3,
-        "B": 5,
-        "A": 2
-      },
-      "total_deals": 1377,
-      "grade_score": "0.11",
-      "points": 13770
-    },
-    {
-      "name": "大熊 綺斗",
-      "team": "下園チーム",
-      "grades": {
-        "D": 206,
-        "D+": 8,
-        "C": 1,
-        "B": 0,
-        "A": 0
-      },
-      "total_deals": 215,
-      "grade_score": "0.11",
-      "points": 2150
+      "points": 5860
     },
     {
       "name": "橋本 裕一郎",
@@ -1971,15 +2242,15 @@
       "name": "梶原 明璃",
       "team": "ビギナー",
       "grades": {
-        "D": 279,
+        "D": 277,
         "D+": 4,
         "C": 2,
         "B": 1,
         "A": 0
       },
-      "total_deals": 286,
+      "total_deals": 284,
       "grade_score": "0.11",
-      "points": 2860
+      "points": 2840
     },
     {
       "name": "三木 秀斗",
@@ -1996,46 +2267,32 @@
       "points": 9510
     },
     {
-      "name": "白井 裕大",
-      "team": "ビギナー",
-      "grades": {
-        "D": 47,
-        "D+": 2,
-        "C": 0,
-        "B": 0,
-        "A": 0
-      },
-      "total_deals": 49,
-      "grade_score": "0.11",
-      "points": 490
-    },
-    {
       "name": "小向 理子",
       "team": "チーム不明",
       "grades": {
-        "D": 906,
+        "D": 913,
         "D+": 0,
         "C": 6,
         "B": 4,
         "A": 5
       },
-      "total_deals": 921,
+      "total_deals": 928,
       "grade_score": "0.11",
-      "points": 9210
+      "points": 9280
     },
     {
       "name": "田尻 海幸",
       "team": "ビギナー+",
       "grades": {
-        "D": 1103,
+        "D": 1101,
         "D+": 12,
         "C": 7,
         "B": 5,
         "A": 2
       },
-      "total_deals": 1129,
+      "total_deals": 1127,
       "grade_score": "0.11",
-      "points": 11290
+      "points": 11270
     },
     {
       "name": "朝日 陸斗",
@@ -2125,29 +2382,29 @@
       "name": "中西 瑛斗",
       "team": "小笠原チーム",
       "grades": {
-        "D": 393,
+        "D": 395,
         "D+": 12,
         "C": 3,
         "B": 0,
         "A": 2
       },
-      "total_deals": 410,
+      "total_deals": 412,
       "grade_score": "0.11",
-      "points": 4100
+      "points": 4120
     },
     {
       "name": "高橋 翔龍",
       "team": "鈴木チーム",
       "grades": {
-        "D": 1460,
-        "D+": 23,
+        "D": 1456,
+        "D+": 24,
         "C": 5,
         "B": 14,
         "A": 2
       },
-      "total_deals": 1504,
+      "total_deals": 1501,
       "grade_score": "0.11",
-      "points": 15040
+      "points": 15010
     },
     {
       "name": "清田 大智",
@@ -2167,29 +2424,29 @@
       "name": "俵頭 清",
       "team": "チーム不明",
       "grades": {
-        "D": 492,
+        "D": 491,
         "D+": 2,
         "C": 6,
         "B": 0,
         "A": 4
       },
-      "total_deals": 504,
+      "total_deals": 503,
       "grade_score": "0.11",
-      "points": 5040
+      "points": 5030
     },
     {
       "name": "深山 怜音",
       "team": "チーム不明",
       "grades": {
-        "D": 538,
+        "D": 540,
         "D+": 3,
         "C": 9,
         "B": 4,
         "A": 0
       },
-      "total_deals": 554,
+      "total_deals": 556,
       "grade_score": "0.11",
-      "points": 5540
+      "points": 5560
     },
     {
       "name": "鈴木 光波",
@@ -2209,29 +2466,29 @@
       "name": "森 花柊",
       "team": "ビギナー",
       "grades": {
-        "D": 315,
+        "D": 316,
         "D+": 1,
         "C": 2,
         "B": 0,
         "A": 2
       },
-      "total_deals": 320,
+      "total_deals": 321,
       "grade_score": "0.11",
-      "points": 3200
+      "points": 3210
     },
     {
       "name": "林 虎之介",
       "team": "櫻井チーム",
       "grades": {
-        "D": 853,
-        "D+": 6,
+        "D": 867,
+        "D+": 9,
         "C": 1,
         "B": 0,
         "A": 0
       },
-      "total_deals": 860,
+      "total_deals": 877,
       "grade_score": "0.10",
-      "points": 8600
+      "points": 8770
     },
     {
       "name": "本堂 夏姫",
@@ -2279,15 +2536,15 @@
       "name": "小森 庸平",
       "team": "下園チーム",
       "grades": {
-        "D": 1239,
-        "D+": 5,
-        "C": 2,
+        "D": 1237,
+        "D+": 4,
+        "C": 3,
         "B": 0,
         "A": 0
       },
-      "total_deals": 1246,
+      "total_deals": 1244,
       "grade_score": "0.10",
-      "points": 12460
+      "points": 12440
     },
     {
       "name": "山田 風音",
@@ -2304,6 +2561,20 @@
       "points": 10
     },
     {
+      "name": "舘野 真輝",
+      "team": "ビギナー",
+      "grades": {
+        "D": 801,
+        "D+": 4,
+        "C": 2,
+        "B": 0,
+        "A": 1
+      },
+      "total_deals": 808,
+      "grade_score": "0.10",
+      "points": 8080
+    },
+    {
       "name": "鈴木 沙生",
       "team": "鈴木チーム",
       "grades": {
@@ -2316,6 +2587,20 @@
       "total_deals": 1148,
       "grade_score": "0.10",
       "points": 11480
+    },
+    {
+      "name": "金子 幹生",
+      "team": "スタンダード＋",
+      "grades": {
+        "D": 861,
+        "D+": 9,
+        "C": 2,
+        "B": 2,
+        "A": 1
+      },
+      "total_deals": 875,
+      "grade_score": "0.10",
+      "points": 8750
     },
     {
       "name": "大村 亜優",
@@ -2346,18 +2631,32 @@
       "points": 21820
     },
     {
+      "name": "竹澤 拓真",
+      "team": "ビギナー",
+      "grades": {
+        "D": 318,
+        "D+": 1,
+        "C": 0,
+        "B": 0,
+        "A": 0
+      },
+      "total_deals": 319,
+      "grade_score": "0.10",
+      "points": 3190
+    },
+    {
       "name": "渡邊 滉佑",
       "team": "矢川チーム",
       "grades": {
-        "D": 455,
+        "D": 456,
         "D+": 2,
         "C": 2,
         "B": 1,
         "A": 0
       },
-      "total_deals": 460,
+      "total_deals": 461,
       "grade_score": "0.10",
-      "points": 4600
+      "points": 4610
     },
     {
       "name": "下島 大我",
@@ -2374,20 +2673,6 @@
       "points": 19790
     },
     {
-      "name": "金子 幹生",
-      "team": "スタンダード＋",
-      "grades": {
-        "D": 860,
-        "D+": 9,
-        "C": 2,
-        "B": 2,
-        "A": 1
-      },
-      "total_deals": 874,
-      "grade_score": "0.10",
-      "points": 8740
-    },
-    {
       "name": "市村 隼也",
       "team": "エキスパートⅠⅡ",
       "grades": {
@@ -2402,32 +2687,32 @@
       "points": 720
     },
     {
+      "name": "瓶子 未羽",
+      "team": "スタンダード",
+      "grades": {
+        "D": 1136,
+        "D+": 2,
+        "C": 10,
+        "B": 2,
+        "A": 0
+      },
+      "total_deals": 1150,
+      "grade_score": "0.10",
+      "points": 11500
+    },
+    {
       "name": "崎原 レンソ",
       "team": "ビギナー",
       "grades": {
-        "D": 1590,
+        "D": 1588,
         "D+": 1,
         "C": 2,
         "B": 3,
         "A": 0
       },
-      "total_deals": 1596,
+      "total_deals": 1594,
       "grade_score": "0.10",
-      "points": 15960
-    },
-    {
-      "name": "舘野 真輝",
-      "team": "ビギナー",
-      "grades": {
-        "D": 795,
-        "D+": 3,
-        "C": 2,
-        "B": 0,
-        "A": 1
-      },
-      "total_deals": 801,
-      "grade_score": "0.10",
-      "points": 8010
+      "points": 15940
     },
     {
       "name": "岸本 基弥",
@@ -2447,29 +2732,29 @@
       "name": "茅野 司",
       "team": "チーム不明",
       "grades": {
-        "D": 2310,
+        "D": 2292,
         "D+": 4,
         "C": 5,
         "B": 0,
         "A": 0
       },
-      "total_deals": 2319,
+      "total_deals": 2301,
       "grade_score": "0.10",
-      "points": 23190
+      "points": 23010
     },
     {
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 43394,
+        "D": 43401,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 43394,
+      "total_deals": 43401,
       "grade_score": "0.10",
-      "points": 433940
+      "points": 434010
     },
     {
       "name": "吉田 考",
@@ -2486,32 +2771,18 @@
       "points": 18310
     },
     {
-      "name": "竹澤 拓真",
-      "team": "ビギナー",
-      "grades": {
-        "D": 317,
-        "D+": 1,
-        "C": 0,
-        "B": 0,
-        "A": 0
-      },
-      "total_deals": 318,
-      "grade_score": "0.10",
-      "points": 3180
-    },
-    {
       "name": "篠原 快陸",
       "team": "ミドル＋",
       "grades": {
-        "D": 1411,
+        "D": 1409,
         "D+": 6,
         "C": 0,
         "B": 1,
         "A": 0
       },
-      "total_deals": 1418,
+      "total_deals": 1416,
       "grade_score": "0.10",
-      "points": 14180
+      "points": 14160
     },
     {
       "name": "山本 佑利",
@@ -2629,15 +2900,15 @@
       "name": "猪股 ブライト",
       "team": "平塚チーム",
       "grades": {
-        "D": 594,
+        "D": 593,
         "D+": 13,
         "C": 2,
         "B": 0,
         "A": 0
       },
-      "total_deals": 609,
+      "total_deals": 608,
       "grade_score": "0.10",
-      "points": 6090
+      "points": 6080
     },
     {
       "name": "松本 怜華",
@@ -2671,29 +2942,29 @@
       "name": "布川 睦深",
       "team": "スタンダード＋",
       "grades": {
-        "D": 1100,
+        "D": 1097,
         "D+": 1,
         "C": 2,
         "B": 1,
         "A": 1
       },
-      "total_deals": 1105,
+      "total_deals": 1102,
       "grade_score": "0.10",
-      "points": 11050
+      "points": 11020
     },
     {
       "name": "長木 さくら",
       "team": "ビギナー",
       "grades": {
-        "D": 1350,
+        "D": 1349,
         "D+": 19,
-        "C": 6,
+        "C": 5,
         "B": 1,
         "A": 0
       },
-      "total_deals": 1376,
+      "total_deals": 1374,
       "grade_score": "0.10",
-      "points": 13760
+      "points": 13740
     },
     {
       "name": "田口 千裕",
@@ -2850,20 +3121,6 @@
       "points": 60
     },
     {
-      "name": "大松 琴音",
-      "team": "櫻井チーム",
-      "grades": {
-        "D": 241,
-        "D+": 4,
-        "C": 1,
-        "B": 0,
-        "A": 0
-      },
-      "total_deals": 246,
-      "grade_score": "0.10",
-      "points": 2460
-    },
-    {
       "name": "須藤輝",
       "team": "H1_team",
       "grades": {
@@ -2895,29 +3152,29 @@
       "name": "神田 雅臣",
       "team": "ビギナー",
       "grades": {
-        "D": 359,
+        "D": 360,
         "D+": 7,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 366,
+      "total_deals": 367,
       "grade_score": "0.10",
-      "points": 3660
+      "points": 3670
     },
     {
       "name": "野村 涼",
       "team": "野村チーム",
       "grades": {
-        "D": 499,
+        "D": 501,
         "D+": 1,
         "C": 2,
         "B": 0,
         "A": 1
       },
-      "total_deals": 503,
+      "total_deals": 505,
       "grade_score": "0.10",
-      "points": 5030
+      "points": 5050
     },
     {
       "name": "藤田 仙丈",
@@ -2988,20 +3245,6 @@
       "total_deals": 1,
       "grade_score": "0.10",
       "points": 10
-    },
-    {
-      "name": "瓶子 未羽",
-      "team": "大村チーム",
-      "grades": {
-        "D": 1134,
-        "D+": 2,
-        "C": 10,
-        "B": 2,
-        "A": 0
-      },
-      "total_deals": 1148,
-      "grade_score": "0.10",
-      "points": 11480
     },
     {
       "name": "梁瀬 汐里",
@@ -3119,29 +3362,29 @@
       "name": "大石 丈",
       "team": "ビギナー",
       "grades": {
-        "D": 366,
+        "D": 367,
         "D+": 3,
         "C": 1,
         "B": 0,
         "A": 0
       },
-      "total_deals": 370,
+      "total_deals": 371,
       "grade_score": "0.10",
-      "points": 3700
+      "points": 3710
     },
     {
       "name": "戸井 優来",
       "team": "チーム不明",
       "grades": {
-        "D": 75,
+        "D": 77,
         "D+": 2,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 77,
+      "total_deals": 79,
       "grade_score": "0.10",
-      "points": 770
+      "points": 790
     },
     {
       "name": "船越 麻友",
@@ -3385,15 +3628,15 @@
       "name": "木下 菜津実",
       "team": "チーム不明",
       "grades": {
-        "D": 634,
+        "D": 635,
         "D+": 1,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 635,
+      "total_deals": 636,
       "grade_score": "0.10",
-      "points": 6350
+      "points": 6360
     },
     {
       "name": "塚田 有基",
@@ -3469,15 +3712,15 @@
       "name": "内藤 理子",
       "team": "チーム不明",
       "grades": {
-        "D": 479,
+        "D": 481,
         "D+": 0,
         "C": 1,
         "B": 0,
         "A": 0
       },
-      "total_deals": 480,
+      "total_deals": 482,
       "grade_score": "0.10",
-      "points": 4800
+      "points": 4820
     },
     {
       "name": "土屋 蓮人",
@@ -3539,15 +3782,15 @@
       "name": "山本 梨央",
       "team": "ビギナー",
       "grades": {
-        "D": 446,
+        "D": 445,
         "D+": 2,
         "C": 1,
         "B": 0,
         "A": 0
       },
-      "total_deals": 449,
+      "total_deals": 448,
       "grade_score": "0.10",
-      "points": 4490
+      "points": 4480
     },
     {
       "name": "佐藤 誠英",
@@ -3677,8 +3920,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 141989,
-    "total_projects": 392,
-    "total_points": 1419890
+    "total_interviews": 142073,
+    "total_projects": 394,
+    "total_points": 1420730
   }
 }
