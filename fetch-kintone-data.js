@@ -23,11 +23,6 @@ function getFieldValue(record, fieldName) {
   return null;
 }
 
-function isAgentMember(record) {
-  const orgs = (record['tanto_organization'] && record['tanto_organization'].value) || [];
-  return orgs.some(org => org.name === 'エージェント');
-}
-
 function getTeamName(record) {
   const orgs = (record['tanto_organization'] && record['tanto_organization'].value) || [];
   const skip = ['エージェント', '建設Ⅰ部', '建設Ⅱ部', '不動産部', '電気主任・製造部',
@@ -132,10 +127,6 @@ async function main() {
       (record) => {
         const id = record['$id'] && record['$id'].value;
         if (!id) return;
-        if (!isAgentMember(record)) {
-          delete raCache.records[id]; // エージェント以外は削除
-          return;
-        }
         const raName = getSelectName(record, 'tanto');
         if (!raName) return;
         const team = getTeamName(record);
@@ -208,3 +199,4 @@ async function main() {
 }
 
 main();
+
