@@ -3,89 +3,333 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>エージェント事業部 KPI ダッシュボード</title>
+<title>エージェント事業部 KPI ダッシュボード 2026</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Hiragino Sans', sans-serif; background: #f0f2f5; color: #333; }
-  .header { background: #1a3a5c; color: white; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-  .header h1 { font-size: 18px; }
-  .last-update { font-size: 12px; opacity: 0.7; }
-  .tabs { display: flex; background: white; border-bottom: 2px solid #e0e0e0; padding: 0 24px; }
-  .tab { padding: 14px 24px; cursor: pointer; font-weight: bold; color: #999; border-bottom: 3px solid transparent; margin-bottom: -2px; }
-  .tab.active { color: #1a3a5c; border-bottom-color: #1a3a5c; }
-  .container { padding: 24px; max-width: 1200px; margin: 0 auto; }
-  .summary-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
-  .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-  .card .label { font-size: 13px; color: #888; margin-bottom: 8px; }
-  .card .value { font-size: 28px; font-weight: bold; color: #1a3a5c; }
-  table { width: 100%; background: white; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); border-collapse: collapse; overflow: hidden; }
-  th { background: #1a3a5c; color: white; padding: 12px 16px; text-align: left; font-size: 13px; }
-  td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: #f8f9fa; }
-  .grade-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin: 0 2px; }
-  .grade-A { background: #e8f5e9; color: #2e7d32; }
-  .grade-B { background: #e3f2fd; color: #1565c0; }
-  .grade-C { background: #fff9c4; color: #f57f17; }
-  .grade-Dp { background: #fce4ec; color: #c62828; }
-  .grade-D { background: #eeeeee; color: #616161; }
-  .hidden { display: none; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: #f5f6fa; color: #2d3436; font-size: 13px; }
+
+/* ヘッダー */
+.header { background: white; border-bottom: 1px solid #e0e0e0; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 48px; }
+.header-left { display: flex; align-items: center; gap: 12px; }
+.header-title { font-size: 16px; font-weight: bold; color: #1a3a5c; }
+.header-title span { color: #0984e3; }
+.header-subtitle { font-size: 11px; color: #888; border-left: 1px solid #ddd; padding-left: 12px; }
+.header-right { display: flex; align-items: center; gap: 16px; font-size: 11px; color: #666; }
+.update-btn { background: #0984e3; color: white; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+.update-btn:hover { background: #0770c4; }
+
+/* タブ */
+.tabs { background: white; border-bottom: 2px solid #e0e0e0; padding: 0 20px; display: flex; overflow-x: auto; }
+.tab { padding: 12px 16px; cursor: pointer; font-size: 12px; color: #888; border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; display: flex; align-items: center; gap: 4px; }
+.tab.active { color: #0984e3; border-bottom-color: #0984e3; font-weight: bold; }
+.tab:hover { color: #0984e3; }
+
+/* コンテンツ */
+.content { padding: 20px; max-width: 1400px; margin: 0 auto; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* フィルターバー */
+.filter-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.filter-label { font-size: 11px; color: #888; }
+.filter-select { border: 1px solid #ddd; border-radius: 4px; padding: 4px 8px; font-size: 12px; color: #333; background: white; cursor: pointer; }
+
+/* KPIカード */
+.kpi-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px; }
+.kpi-card { background: white; border-radius: 6px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.kpi-card .label { font-size: 11px; color: #888; margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
+.kpi-card .value { font-size: 22px; font-weight: bold; color: #2d3436; }
+.kpi-card .value.gold { color: #f39c12; }
+.kpi-card .value.blue { color: #0984e3; }
+.kpi-card .sub { font-size: 11px; color: #aaa; margin-top: 2px; }
+
+/* ポディウム */
+.podium { display: flex; align-items: flex-end; justify-content: center; gap: 12px; margin-bottom: 24px; }
+.podium-item { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; position: relative; }
+.podium-item.rank1 { width: 280px; border: 2px solid #f39c12; order: 2; }
+.podium-item.rank2 { width: 220px; order: 1; }
+.podium-item.rank3 { width: 220px; order: 3; }
+.podium-rank { font-size: 11px; font-weight: bold; color: #888; margin-bottom: 4px; }
+.podium-rank.gold { color: #f39c12; font-size: 13px; }
+.podium-name { font-size: 16px; font-weight: bold; color: #2d3436; margin: 4px 0; }
+.podium-item.rank1 .podium-name { font-size: 20px; }
+.podium-sub { font-size: 11px; color: #888; margin-bottom: 8px; }
+.podium-value { font-size: 24px; font-weight: bold; color: #0984e3; }
+.podium-item.rank1 .podium-value { font-size: 32px; color: #f39c12; }
+.podium-unit { font-size: 12px; color: #888; }
+.rank-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #f39c12; color: white; border-radius: 12px; padding: 2px 10px; font-size: 11px; font-weight: bold; }
+.rank-badge.silver { background: #b2bec3; }
+.rank-badge.bronze { background: #e17055; }
+.t10-badge { display: inline-block; background: #fdcb6e; color: #6d3b00; border-radius: 3px; padding: 1px 5px; font-size: 10px; font-weight: bold; margin-left: 4px; }
+
+/* ランキングリスト */
+.ranking-table { background: white; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; }
+.ranking-table table { width: 100%; border-collapse: collapse; }
+.ranking-table th { background: #f8f9fa; padding: 10px 16px; text-align: left; font-size: 11px; color: #888; font-weight: normal; border-bottom: 1px solid #e9ecef; }
+.ranking-table td { padding: 10px 16px; border-bottom: 1px solid #f1f3f5; font-size: 13px; }
+.ranking-table tr:last-child td { border-bottom: none; }
+.ranking-table tr:hover td { background: #f8f9fa; }
+.rank-num { font-weight: bold; color: #aaa; font-size: 12px; width: 40px; }
+.rank-num.top { color: #f39c12; }
+.member-name { font-weight: bold; color: #2d3436; }
+.member-div { font-size: 11px; color: #888; }
+.role-badge { display: inline-block; border-radius: 12px; padding: 2px 10px; font-size: 11px; font-weight: bold; }
+.role-badge.principal { background: #dfe6e9; color: #2d3436; }
+.role-badge.consultant { background: #d4efff; color: #0770c4; }
+.role-badge.associate { background: #ffeaa7; color: #856404; }
+.top10-divider { background: #1a3a5c; color: white; text-align: center; font-size: 11px; font-weight: bold; padding: 6px; letter-spacing: 2px; }
+
+/* グレードバッジ */
+.grade-A { background: #e8f5e9; color: #2e7d32; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
+.grade-B { background: #e3f2fd; color: #1565c0; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
+.grade-C { background: #fff9c4; color: #f57f17; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
+.grade-Dp { background: #fce4ec; color: #c62828; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
+.grade-D { background: #eeeeee; color: #616161; border-radius: 4px; padding: 2px 6px; font-weight: bold; }
+
+/* サマリーセクション */
+.section-title { font-size: 13px; font-weight: bold; color: #2d3436; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.section-title::before { content: ''; display: inline-block; width: 4px; height: 16px; background: #0984e3; border-radius: 2px; }
+
+/* ローディング */
+#loading { text-align: center; padding: 60px; color: #888; font-size: 14px; }
 </style>
 </head>
 <body>
+
 <div class="header">
-  <h1>エージェント事業部 KPI ダッシュボード</h1>
-  <span class="last-update" id="lastUpdate">読み込み中...</span>
+  <div class="header-left">
+    <div class="header-title">エージェント事業部 KPI ダッシュボード <span>2026</span></div>
+    <div class="header-subtitle">CA個人 / RAグレード / チーム別</div>
+  </div>
+  <div class="header-right">
+    <span id="headerInfo">読み込み中...</span>
+    <button class="update-btn" onclick="loadData()">⟳ 更新</button>
+  </div>
 </div>
+
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('ca')">CA（営業）</div>
-  <div class="tab" onclick="switchTab('ra')">RA（推薦者）</div>
+  <div class="tab active" onclick="switchTab('ca-ranking')">🏆 CA個人ランキング</div>
+  <div class="tab" onclick="switchTab('ra-ranking')">📊 RAグレードランキング</div>
+  <div class="tab" onclick="switchTab('summary')">📋 全体サマリー</div>
 </div>
-<div class="container">
-  <div id="caView">
-    <div class="summary-cards">
-      <div class="card"><div class="label">総成約数</div><div class="value" id="totalProjects">-</div></div>
-      <div class="card"><div class="label">総面接数</div><div class="value" id="totalInterviews">-</div></div>
-      <div class="card"><div class="label">総ポイント</div><div class="value" id="totalPoints">-</div></div>
+
+<div class="content">
+  <div id="loading">データ読み込み中...</div>
+
+  <!-- CA個人ランキング -->
+  <div id="ca-ranking" class="tab-content">
+    <div class="filter-bar">
+      <span class="filter-label">部門:</span>
+      <select class="filter-select" id="ca-filter" onchange="renderCA()">
+        <option value="all">全部門</option>
+      </select>
     </div>
-    <table>
-      <thead><tr><th>CA名</th><th>部門</th><th>成約数</th></tr></thead>
-      <tbody id="caTable"></tbody>
-    </table>
+    <div class="kpi-cards" id="ca-kpi-cards"></div>
+    <div class="podium" id="ca-podium"></div>
+    <div class="section-title">個人ランキング（全員）</div>
+    <div class="ranking-table">
+      <table>
+        <thead><tr><th>#</th><th>名前</th><th>部門</th><th>成約数</th></tr></thead>
+        <tbody id="ca-table"></tbody>
+      </table>
+    </div>
   </div>
-  <div id="raView" class="hidden">
-    <table>
-      <thead><tr><th>推薦者名</th><th>チーム</th><th>A</th><th>B</th><th>C</th><th>D+</th><th>D</th><th>スコア</th><th>ポイント</th></tr></thead>
-      <tbody id="raTable"></tbody>
-    </table>
+
+  <!-- RAグレードランキング -->
+  <div id="ra-ranking" class="tab-content">
+    <div class="filter-bar">
+      <span class="filter-label">チーム:</span>
+      <select class="filter-select" id="ra-filter" onchange="renderRA()">
+        <option value="all">全チーム</option>
+      </select>
+    </div>
+    <div class="kpi-cards" id="ra-kpi-cards"></div>
+    <div class="podium" id="ra-podium"></div>
+    <div class="section-title">グレードスコアランキング（全員）</div>
+    <div class="ranking-table">
+      <table>
+        <thead><tr><th>#</th><th>名前</th><th>チーム</th><th>A</th><th>B</th><th>C</th><th>D+</th><th>D</th><th>スコア</th><th>ポイント</th></tr></thead>
+        <tbody id="ra-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 全体サマリー -->
+  <div id="summary" class="tab-content">
+    <div class="kpi-cards" id="summary-kpi-cards"></div>
   </div>
 </div>
+
 <script>
-function switchTab(tab) {
-  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', (tab==='ca'&&i===0)||(tab==='ra'&&i===1)));
-  document.getElementById('caView').classList.toggle('hidden', tab !== 'ca');
-  document.getElementById('raView').classList.toggle('hidden', tab !== 'ra');
+let data = null;
+
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    const ids = ['ca-ranking', 'ra-ranking', 'summary'];
+    t.classList.toggle('active', ids[i] === id);
+  });
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
 }
-fetch('output/data.json').then(r => r.json()).then(data => {
-  document.getElementById('lastUpdate').textContent = '最終更新: ' + new Date(data.lastUpdate).toLocaleString('ja-JP');
-  document.getElementById('totalProjects').textContent = data.summary.total_projects;
-  document.getElementById('totalInterviews').textContent = data.summary.total_interviews;
-  document.getElementById('totalPoints').textContent = data.summary.total_points;
-  const caTable = document.getElementById('caTable');
-  data.ca_list.forEach(ca => {
-    caTable.innerHTML += `<tr><td>${ca.name}</td><td>${ca.division}</td><td>${ca.summary.projects_created}</td></tr>`;
-  });
-  const raTable = document.getElementById('raTable');
-  data.ra_list.forEach(ra => {
-    raTable.innerHTML += `<tr><td>${ra.name}</td><td>${ra.team}</td>
-      <td><span class="grade-badge grade-A">${ra.grades.A}</span></td>
-      <td><span class="grade-badge grade-B">${ra.grades.B}</span></td>
-      <td><span class="grade-badge grade-C">${ra.grades.C}</span></td>
-      <td><span class="grade-badge grade-Dp">${ra.grades['D+']}</span></td>
-      <td><span class="grade-badge grade-D">${ra.grades.D}</span></td>
-      <td>${ra.grade_score}</td><td>${ra.points}</td></tr>`;
-  });
-}).catch(e => { document.getElementById('lastUpdate').textContent = 'データ読み込みエラー'; });
+
+function getRoleBadge(division) {
+  if (!division) return '';
+  if (division.includes('部長') || division.includes('マネ')) return '<span class="role-badge principal">マネージャー</span>';
+  return `<span class="role-badge consultant">${division}</span>`;
+}
+
+function renderPodium(container, items, valueKey, unitLabel) {
+  if (!items || items.length === 0) { container.innerHTML = ''; return; }
+  const top3 = items.slice(0, 3);
+  const rankClasses = ['rank2', 'rank1', 'rank3'];
+  const rankLabels = ['🥈 2nd PLACE', '🥇 1st PLACE', '🥉 3rd PLACE'];
+  const badgeClasses = ['silver', '', 'bronze'];
+  const order = top3.length >= 3 ? [top3[1], top3[0], top3[2]] : top3;
+  const orderRanks = top3.length >= 3 ? [1, 0, 2] : [0];
+
+  container.innerHTML = order.map((item, i) => {
+    const origIdx = orderRanks[i];
+    const cls = rankClasses[origIdx] || 'rank3';
+    const label = rankLabels[origIdx] || `#${origIdx+1}`;
+    const badgeCls = badgeClasses[origIdx] || 'bronze';
+    const val = typeof item[valueKey] === 'number' ? item[valueKey] : parseFloat(item[valueKey]) || 0;
+    return `
+      <div class="podium-item ${cls}">
+        <span class="rank-badge ${badgeCls}">${label}</span>
+        <div class="podium-rank">&nbsp;</div>
+        <div class="podium-name">${item.name}</div>
+        <div class="podium-sub">${item.division || item.team || ''}</div>
+        <div class="podium-value">${val}<span class="podium-unit">${unitLabel}</span></div>
+      </div>`;
+  }).join('');
+}
+
+function renderCA() {
+  if (!data) return;
+  const filter = document.getElementById('ca-filter').value;
+  let list = [...data.ca_list];
+  if (filter !== 'all') list = list.filter(c => c.division === filter);
+
+  const total = list.reduce((s, c) => s + c.summary.projects_created, 0);
+  const avg = list.length > 0 ? (total / list.length).toFixed(1) : 0;
+  const top1 = list[0] ? list[0].summary.projects_created : 0;
+
+  document.getElementById('ca-kpi-cards').innerHTML = `
+    <div class="kpi-card"><div class="label">👥 対象人数</div><div class="value blue">${list.length} 名</div></div>
+    <div class="kpi-card"><div class="label">🏆 合計成約数</div><div class="value">${total} 件</div></div>
+    <div class="kpi-card"><div class="label">📊 平均成約数</div><div class="value">${avg} 件</div></div>
+    <div class="kpi-card"><div class="label">🥇 TOP1</div><div class="value gold">${top1} 件</div><div class="sub">${list[0] ? list[0].name : '-'}</div></div>
+    <div class="kpi-card"><div class="label">📅 取得期間</div><div class="value" style="font-size:14px">${data.dataFrom || '-'} 〜</div></div>
+  `;
+
+  renderPodium(document.getElementById('ca-podium'),
+    list.map(c => ({...c, _val: c.summary.projects_created})),
+    '_val', '件');
+
+  document.getElementById('ca-table').innerHTML = list.map((c, i) => {
+    const isTop10 = i === 9 && list.length > 10 ?
+      '<tr class="top10-divider"><td colspan="4">★ ここまで TOP 10 ★</td></tr>' : '';
+    return `${i === 10 ? '<tr class="top10-divider"><td colspan="4">★ ここまで TOP 10 ★</td></tr>' : ''}
+      <tr>
+        <td><span class="rank-num ${i < 3 ? 'top' : ''}">#${i+1}</span></td>
+        <td><div class="member-name">${c.name}</div></td>
+        <td><div class="member-div">${c.division || '-'}</div></td>
+        <td><strong>${c.summary.projects_created}</strong> 件</td>
+      </tr>`;
+  }).join('');
+}
+
+function renderRA() {
+  if (!data) return;
+  const filter = document.getElementById('ra-filter').value;
+  let list = [...data.ra_list];
+  if (filter !== 'all') list = list.filter(r => r.team === filter);
+
+  const totalPoints = list.reduce((s, r) => s + r.points, 0);
+  const totalDeals = list.reduce((s, r) => s + r.total_deals, 0);
+  const top1 = list[0];
+
+  document.getElementById('ra-kpi-cards').innerHTML = `
+    <div class="kpi-card"><div class="label">👥 対象人数</div><div class="value blue">${list.length} 名</div></div>
+    <div class="kpi-card"><div class="label">📋 総案件数</div><div class="value">${totalDeals} 件</div></div>
+    <div class="kpi-card"><div class="label">⭐ 総ポイント</div><div class="value">${totalPoints}</div></div>
+    <div class="kpi-card"><div class="label">🥇 TOP1スコア</div><div class="value gold">${top1 ? top1.grade_score : '-'}</div><div class="sub">${top1 ? top1.name : '-'}</div></div>
+    <div class="kpi-card"><div class="label">📅 取得期間</div><div class="value" style="font-size:14px">${data.dataFrom || '-'} 〜</div></div>
+  `;
+
+  renderPodium(document.getElementById('ra-podium'),
+    list.map(r => ({...r, _val: parseFloat(r.grade_score)})),
+    '_val', 'pt');
+
+  document.getElementById('ra-table').innerHTML = list.map((r, i) => `
+    ${i === 10 ? '<tr class="top10-divider"><td colspan="10">★ ここまで TOP 10 ★</td></tr>' : ''}
+    <tr>
+      <td><span class="rank-num ${i < 3 ? 'top' : ''}">#${i+1}</span></td>
+      <td><div class="member-name">${r.name}</div></td>
+      <td><div class="member-div">${r.team || '-'}</div></td>
+      <td><span class="grade-A">${r.grades.A}</span></td>
+      <td><span class="grade-B">${r.grades.B}</span></td>
+      <td><span class="grade-C">${r.grades.C}</span></td>
+      <td><span class="grade-Dp">${r.grades['D+']}</span></td>
+      <td><span class="grade-D">${r.grades.D}</span></td>
+      <td><strong>${r.grade_score}</strong></td>
+      <td>${r.points}</td>
+    </tr>`).join('');
+}
+
+function renderSummary() {
+  if (!data) return;
+  document.getElementById('summary-kpi-cards').innerHTML = `
+    <div class="kpi-card"><div class="label">📊 総案件数（RA）</div><div class="value blue">${data.summary.total_interviews}</div></div>
+    <div class="kpi-card"><div class="label">🏆 総成約数（CA）</div><div class="value">${data.summary.total_projects}</div></div>
+    <div class="kpi-card"><div class="label">⭐ 総ポイント</div><div class="value gold">${data.summary.total_points}</div></div>
+    <div class="kpi-card"><div class="label">👤 CAメンバー数</div><div class="value">${data.ca_list.length}</div></div>
+    <div class="kpi-card"><div class="label">👤 RAメンバー数</div><div class="value">${data.ra_list.length}</div></div>
+  `;
+}
+
+function loadData() {
+  document.getElementById('loading').style.display = 'block';
+  fetch('output/data.json?t=' + Date.now())
+    .then(r => r.json())
+    .then(d => {
+      data = d;
+      document.getElementById('loading').style.display = 'none';
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.getElementById('ca-ranking').classList.add('active');
+
+      const updated = new Date(d.lastUpdate).toLocaleString('ja-JP');
+      document.getElementById('headerInfo').textContent =
+        `最終更新: ${updated} ／ CA: ${d.ca_list.length}名 ／ RA: ${d.ra_list.length}名`;
+
+      // フィルターを動的に生成
+      const divisions = [...new Set(d.ca_list.map(c => c.division).filter(Boolean))];
+      const caFilter = document.getElementById('ca-filter');
+      divisions.forEach(div => {
+        const opt = document.createElement('option');
+        opt.value = div; opt.textContent = div;
+        caFilter.appendChild(opt);
+      });
+
+      const teams = [...new Set(d.ra_list.map(r => r.team).filter(Boolean))];
+      const raFilter = document.getElementById('ra-filter');
+      teams.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t; opt.textContent = t;
+        raFilter.appendChild(opt);
+      });
+
+      renderCA();
+      renderRA();
+      renderSummary();
+    })
+    .catch(e => {
+      document.getElementById('loading').textContent = 'データ読み込みエラー: ' + e.message;
+    });
+}
+
+loadData();
 </script>
 </body>
 </html>
