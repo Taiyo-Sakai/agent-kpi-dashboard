@@ -87,8 +87,10 @@ async function main() {
       ['Tanto', 'tantou_soshiki'],
       (record) => {
         const caName = getSelectName(record, 'Tanto');
-        const divCheck = getSelectName(record, 'tantou_soshiki');
-        if (divCheck && divCheck.includes('営業開発')) return;
+        // エージェント事業部のみ（組織リストに「エージェント」が含まれるか確認）
+        const caOrgs = (record['tantou_soshiki'] && record['tantou_soshiki'].value) || [];
+        const isAgentCA = caOrgs.some(org => org.name === 'エージェント');
+        if (!isAgentCA) return;
         const division = getSelectName(record, 'tantou_soshiki');
         if (!caName) return;
         if (!caMap[caName]) caMap[caName] = { name: caName, division: division || '部門不明', summary: { projects_created: 0 } };
@@ -103,8 +105,10 @@ async function main() {
       ['tanto', 'tanto_organization', 'deal_status_1'],
       (record) => {
         const raName = getSelectName(record, 'tanto');
-        const teamCheck = getSelectName(record, 'tanto_organization');
-        if (teamCheck && teamCheck.includes('営業開発')) return;
+        // エージェント事業部のみ（組織リストに「エージェント」が含まれるか確認）
+        const raOrgs = (record['tanto_organization'] && record['tanto_organization'].value) || [];
+        const isAgentRA = raOrgs.some(org => org.name === 'エージェント');
+        if (!isAgentRA) return;
         const team = getSelectName(record, 'tanto_organization');
         const subtable = getFieldValue(record, 'deal_status_1');
         if (!raName) return;
@@ -148,4 +152,5 @@ async function main() {
 }
 
 main();
+
 
