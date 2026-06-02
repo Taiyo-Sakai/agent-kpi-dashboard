@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-06-02T11:53:55.376Z",
+  "lastUpdate": "2026-06-02T22:06:34.356Z",
   "monthly": {
     "2026-06": {
       "全体": {
@@ -192,8 +192,8 @@
         "count": 129,
         "uriage": 31399,
         "uriage_after": 29119,
-        "henkin_nyushamae": 7846,
-        "henkin_nyushamae_cnt": 34,
+        "henkin_nyushamae": 8146,
+        "henkin_nyushamae_cnt": 35,
         "henkin_hayaki": 1143,
         "henkin_hayaki_cnt": 11
       },
@@ -776,7 +776,7 @@
       "全体": {
         "count": 112,
         "uriage": 24483,
-        "uriage_after": 17224,
+        "uriage_after": 16924,
         "henkin_nyushamae": 0,
         "henkin_nyushamae_cnt": 0,
         "henkin_hayaki": 0,
@@ -785,7 +785,7 @@
       "建設Ⅰ部": {
         "count": 39,
         "uriage": 9068,
-        "uriage_after": 7738,
+        "uriage_after": 7438,
         "henkin_nyushamae": 0,
         "henkin_nyushamae_cnt": 0,
         "henkin_hayaki": 0,
@@ -1891,15 +1891,15 @@
       "name": "佐々木 航平",
       "team": "鈴木チーム",
       "grades": {
-        "D": 593,
+        "D": 592,
         "D+": 10,
         "C": 10,
         "B": 3,
         "A": 1
       },
-      "total_deals": 617,
+      "total_deals": 616,
       "grade_score": "0.11",
-      "points": 6170
+      "points": 6160
     },
     {
       "name": "橋本 千佳",
@@ -2028,20 +2028,6 @@
       "points": 4400
     },
     {
-      "name": "深井 康貴",
-      "team": "小森チーム",
-      "grades": {
-        "D": 353,
-        "D+": 4,
-        "C": 3,
-        "B": 0,
-        "A": 0
-      },
-      "total_deals": 360,
-      "grade_score": "0.11",
-      "points": 3600
-    },
-    {
       "name": "安藤 波音",
       "team": "スタンダード",
       "grades": {
@@ -2115,15 +2101,15 @@
       "name": "北島拓",
       "team": "チーム不明",
       "grades": {
-        "D": 1270,
+        "D": 1269,
         "D+": 20,
         "C": 7,
         "B": 15,
         "A": 3
       },
-      "total_deals": 1315,
+      "total_deals": 1314,
       "grade_score": "0.11",
-      "points": 13150
+      "points": 13140
     },
     {
       "name": "三浦 昂",
@@ -2171,15 +2157,15 @@
       "name": "田尻 海幸",
       "team": "ミドル＋",
       "grades": {
-        "D": 1106,
+        "D": 1107,
         "D+": 12,
         "C": 7,
         "B": 5,
         "A": 2
       },
-      "total_deals": 1132,
+      "total_deals": 1133,
       "grade_score": "0.11",
-      "points": 11320
+      "points": 11330
     },
     {
       "name": "東 聖",
@@ -2605,15 +2591,15 @@
       "name": "神田 雅臣",
       "team": "ビギナー",
       "grades": {
-        "D": 373,
+        "D": 374,
         "D+": 7,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 380,
+      "total_deals": 381,
       "grade_score": "0.10",
-      "points": 3800
+      "points": 3810
     },
     {
       "name": "小笠原 大翔",
@@ -2670,6 +2656,20 @@
       "total_deals": 1245,
       "grade_score": "0.10",
       "points": 12450
+    },
+    {
+      "name": "深井 康貴",
+      "team": "小森チーム",
+      "grades": {
+        "D": 354,
+        "D+": 4,
+        "C": 3,
+        "B": 0,
+        "A": 0
+      },
+      "total_deals": 361,
+      "grade_score": "0.10",
+      "points": 3610
     },
     {
       "name": "山田 風音",
@@ -2913,29 +2913,29 @@
       "name": "戸井 優来",
       "team": "チーム不明",
       "grades": {
-        "D": 78,
+        "D": 79,
         "D+": 2,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 80,
+      "total_deals": 81,
       "grade_score": "0.10",
-      "points": 800
+      "points": 810
     },
     {
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 43451,
+        "D": 43546,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 43451,
+      "total_deals": 43546,
       "grade_score": "0.10",
-      "points": 434510
+      "points": 435460
     },
     {
       "name": "吉田 考",
@@ -2983,15 +2983,15 @@
       "name": "平塚 金洋",
       "team": "HHエージェント",
       "grades": {
-        "D": 1625,
+        "D": 1624,
         "D+": 1,
         "C": 4,
         "B": 0,
         "A": 0
       },
-      "total_deals": 1630,
+      "total_deals": 1629,
       "grade_score": "0.10",
-      "points": 16300
+      "points": 16290
     },
     {
       "name": "平山 蓮",
@@ -4003,8 +4003,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 142601,
-    "total_projects": 404,
-    "total_points": 1426010
+    "total_interviews": 142697,
+    "total_projects": 405,
+    "total_points": 1426970
   }
 }
