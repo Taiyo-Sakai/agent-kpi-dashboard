@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-06-03T16:05:27.088Z",
+  "lastUpdate": "2026-06-03T23:22:04.321Z",
   "monthly": {
     "2026-06": {
       "全体": {
@@ -3179,15 +3179,15 @@
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 43526,
+        "D": 43572,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 43526,
+      "total_deals": 43572,
       "grade_score": "0.10",
-      "points": 435260
+      "points": 435720
     },
     {
       "name": "山本 佑利",
@@ -3655,15 +3655,15 @@
       "name": "橋本 祐輝",
       "team": "ビギナー",
       "grades": {
-        "D": 398,
+        "D": 399,
         "D+": 1,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 399,
+      "total_deals": 400,
       "grade_score": "0.10",
-      "points": 3990
+      "points": 4000
     },
     {
       "name": "浅野 大次",
@@ -4045,8 +4045,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 143162,
+    "total_interviews": 143209,
     "total_projects": 407,
-    "total_points": 1431620
+    "total_points": 1432090
   }
 }
