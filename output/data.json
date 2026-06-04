@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-06-04T19:48:21.345Z",
+  "lastUpdate": "2026-06-04T23:56:28.204Z",
   "monthly": {
     "2026-06": {
       "全体": {
@@ -1933,29 +1933,29 @@
       "name": "田尻 海幸",
       "team": "スタンダード",
       "grades": {
-        "D": 1103,
+        "D": 1104,
         "D+": 12,
         "C": 7,
         "B": 5,
         "A": 2
       },
-      "total_deals": 1129,
+      "total_deals": 1130,
       "grade_score": "0.11",
-      "points": 11290
+      "points": 11300
     },
     {
       "name": "浅子 征也",
       "team": "矢川チーム",
       "grades": {
-        "D": 1543,
+        "D": 1544,
         "D+": 5,
         "C": 3,
         "B": 0,
         "A": 19
       },
-      "total_deals": 1570,
+      "total_deals": 1571,
       "grade_score": "0.11",
-      "points": 15700
+      "points": 15710
     },
     {
       "name": "白井 裕大",
@@ -2031,15 +2031,15 @@
       "name": "杉本 一沙",
       "team": "ビギナー",
       "grades": {
-        "D": 650,
+        "D": 652,
         "D+": 12,
         "C": 4,
         "B": 2,
         "A": 6
       },
-      "total_deals": 674,
+      "total_deals": 676,
       "grade_score": "0.11",
-      "points": 6740
+      "points": 6760
     },
     {
       "name": "吉田 龍之助",
@@ -2227,29 +2227,29 @@
       "name": "南谷 翔汰",
       "team": "ビギナー",
       "grades": {
-        "D": 1353,
+        "D": 1354,
         "D+": 17,
         "C": 7,
         "B": 2,
         "A": 3
       },
-      "total_deals": 1382,
+      "total_deals": 1383,
       "grade_score": "0.11",
-      "points": 13820
+      "points": 13830
     },
     {
       "name": "齋藤 智苗",
       "team": "下園チーム",
       "grades": {
-        "D": 1478,
+        "D": 1479,
         "D+": 4,
         "C": 6,
         "B": 3,
         "A": 6
       },
-      "total_deals": 1497,
+      "total_deals": 1498,
       "grade_score": "0.11",
-      "points": 14970
+      "points": 14980
     },
     {
       "name": "上村 黎",
@@ -2367,15 +2367,15 @@
       "name": "三木 秀斗",
       "team": "ビギナー",
       "grades": {
-        "D": 949,
+        "D": 950,
         "D+": 4,
         "C": 7,
         "B": 4,
         "A": 2
       },
-      "total_deals": 966,
+      "total_deals": 967,
       "grade_score": "0.11",
-      "points": 9660
+      "points": 9670
     },
     {
       "name": "東 聖",
@@ -2465,15 +2465,15 @@
       "name": "脇屋 香音",
       "team": "ビギナー",
       "grades": {
-        "D": 1060,
+        "D": 1061,
         "D+": 2,
         "C": 13,
         "B": 0,
         "A": 1
       },
-      "total_deals": 1076,
+      "total_deals": 1077,
       "grade_score": "0.11",
-      "points": 10760
+      "points": 10770
     },
     {
       "name": "橋本 裕一郎",
@@ -2521,15 +2521,15 @@
       "name": "谷田 芳樹",
       "team": "ビギナー",
       "grades": {
-        "D": 1208,
+        "D": 1209,
         "D+": 19,
         "C": 6,
         "B": 2,
         "A": 7
       },
-      "total_deals": 1242,
+      "total_deals": 1243,
       "grade_score": "0.11",
-      "points": 12420
+      "points": 12430
     },
     {
       "name": "山本 健登",
@@ -2605,15 +2605,15 @@
       "name": "林 虎之介",
       "team": "櫻井チーム",
       "grades": {
-        "D": 823,
+        "D": 824,
         "D+": 7,
         "C": 1,
         "B": 0,
         "A": 0
       },
-      "total_deals": 831,
+      "total_deals": 832,
       "grade_score": "0.10",
-      "points": 8310
+      "points": 8320
     },
     {
       "name": "下園 佳愛",
@@ -3151,15 +3151,15 @@
       "name": "岩井 桜",
       "team": "チーム不明",
       "grades": {
-        "D": 1418,
+        "D": 1419,
         "D+": 6,
         "C": 9,
         "B": 2,
         "A": 1
       },
-      "total_deals": 1436,
+      "total_deals": 1437,
       "grade_score": "0.10",
-      "points": 14360
+      "points": 14370
     },
     {
       "name": "室伏若菜",
@@ -3277,15 +3277,15 @@
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 43614,
+        "D": 43632,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 43614,
+      "total_deals": 43632,
       "grade_score": "0.10",
-      "points": 436140
+      "points": 436320
     },
     {
       "name": "平塚 金洋",
@@ -4045,8 +4045,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 143762,
-    "total_projects": 413,
-    "total_points": 1437620
+    "total_interviews": 143791,
+    "total_projects": 414,
+    "total_points": 1437910
   }
 }
