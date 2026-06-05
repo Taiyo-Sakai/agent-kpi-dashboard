@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-06-05T11:50:48.100Z",
+  "lastUpdate": "2026-06-05T18:29:38.136Z",
   "monthly": {
     "2026-06": {
       "全体": {
@@ -1734,6 +1734,20 @@
       "points": 8960
     },
     {
+      "name": "矢川 翔太",
+      "team": "矢川チーム",
+      "grades": {
+        "D": 1394,
+        "D+": 30,
+        "C": 9,
+        "B": 16,
+        "A": 6
+      },
+      "total_deals": 1455,
+      "grade_score": "0.12",
+      "points": 14550
+    },
+    {
       "name": "杉本 一沙",
       "team": "ビギナー",
       "grades": {
@@ -1830,20 +1844,6 @@
       "total_deals": 1346,
       "grade_score": "0.12",
       "points": 13460
-    },
-    {
-      "name": "矢川 翔太",
-      "team": "HH(ALL)",
-      "grades": {
-        "D": 1391,
-        "D+": 30,
-        "C": 9,
-        "B": 16,
-        "A": 6
-      },
-      "total_deals": 1452,
-      "grade_score": "0.12",
-      "points": 14520
     },
     {
       "name": "多田 健太郎",
@@ -2227,15 +2227,15 @@
       "name": "北島拓",
       "team": "北島チーム",
       "grades": {
-        "D": 1256,
+        "D": 1255,
         "D+": 20,
         "C": 7,
         "B": 15,
         "A": 3
       },
-      "total_deals": 1301,
+      "total_deals": 1300,
       "grade_score": "0.11",
-      "points": 13010
+      "points": 13000
     },
     {
       "name": "南谷 翔汰",
@@ -2255,15 +2255,15 @@
       "name": "齋藤 智苗",
       "team": "下園チーム",
       "grades": {
-        "D": 1478,
+        "D": 1479,
         "D+": 4,
         "C": 6,
         "B": 3,
         "A": 6
       },
-      "total_deals": 1497,
+      "total_deals": 1498,
       "grade_score": "0.11",
-      "points": 14970
+      "points": 14980
     },
     {
       "name": "上村 黎",
@@ -3277,15 +3277,15 @@
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 43642,
+        "D": 43682,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 43642,
+      "total_deals": 43682,
       "grade_score": "0.10",
-      "points": 436420
+      "points": 436820
     },
     {
       "name": "平塚 金洋",
@@ -4045,8 +4045,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 144111,
+    "total_interviews": 144154,
     "total_projects": 419,
-    "total_points": 1441110
+    "total_points": 1441540
   }
 }
