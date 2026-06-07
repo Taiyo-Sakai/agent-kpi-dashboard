@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-06-07T08:38:23.298Z",
+  "lastUpdate": "2026-06-07T15:12:23.521Z",
   "monthly": {
     "2026-06": {
       "全体": {
@@ -3277,15 +3277,15 @@
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 43997,
+        "D": 44088,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 43997,
+      "total_deals": 44088,
       "grade_score": "0.10",
-      "points": 439970
+      "points": 440880
     },
     {
       "name": "平塚 金洋",
@@ -4045,8 +4045,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 144527,
+    "total_interviews": 144618,
     "total_projects": 421,
-    "total_points": 1445270
+    "total_points": 1446180
   }
 }
