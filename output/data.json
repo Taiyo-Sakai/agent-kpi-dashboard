@@ -1,13 +1,22 @@
 {
-  "lastUpdate": "2026-06-08T12:49:53.920Z",
+  "lastUpdate": "2026-06-08T21:13:52.163Z",
   "monthly": {
     "2026-06": {
       "全体": {
-        "count": 26,
-        "uriage": 6678,
-        "uriage_after": 6678,
+        "count": 27,
+        "uriage": 7008,
+        "uriage_after": 7008,
         "henkin_nyushamae": 1927,
         "henkin_nyushamae_cnt": 6,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
+      },
+      "建設Ⅰ部": {
+        "count": 7,
+        "uriage": 1861,
+        "uriage_after": 1861,
+        "henkin_nyushamae": 0,
+        "henkin_nyushamae_cnt": 0,
         "henkin_hayaki": 0,
         "henkin_hayaki_cnt": 0
       },
@@ -42,15 +51,6 @@
         "count": 2,
         "uriage": 607,
         "uriage_after": 607,
-        "henkin_nyushamae": 0,
-        "henkin_nyushamae_cnt": 0,
-        "henkin_hayaki": 0,
-        "henkin_hayaki_cnt": 0
-      },
-      "建設Ⅰ部": {
-        "count": 6,
-        "uriage": 1531,
-        "uriage_after": 1531,
         "henkin_nyushamae": 0,
         "henkin_nyushamae_cnt": 0,
         "henkin_hayaki": 0,
@@ -1272,6 +1272,13 @@
       }
     },
     {
+      "name": "山本 優和",
+      "division": "ビギナー",
+      "summary": {
+        "projects_created": 5
+      }
+    },
+    {
       "name": "矢川 翔太",
       "division": "矢川チーム",
       "summary": {
@@ -1309,13 +1316,6 @@
     {
       "name": "久保 希",
       "division": "HHエージェント",
-      "summary": {
-        "projects_created": 4
-      }
-    },
-    {
-      "name": "山本 優和",
-      "division": "ビギナー",
       "summary": {
         "projects_created": 4
       }
@@ -1662,15 +1662,15 @@
       "name": "櫻井 和音",
       "team": "櫻井チーム",
       "grades": {
-        "D": 1016,
+        "D": 1010,
         "D+": 17,
         "C": 12,
         "B": 7,
         "A": 48
       },
-      "total_deals": 1100,
+      "total_deals": 1094,
       "grade_score": "0.15",
-      "points": 11000
+      "points": 10940
     },
     {
       "name": "仲井 陽英",
@@ -1858,15 +1858,15 @@
       "name": "猪股 ブライト",
       "team": "平塚チーム",
       "grades": {
-        "D": 610,
+        "D": 611,
         "D+": 14,
         "C": 1,
         "B": 1,
         "A": 0
       },
-      "total_deals": 626,
+      "total_deals": 627,
       "grade_score": "0.11",
-      "points": 6260
+      "points": 6270
     },
     {
       "name": "松田 紫音",
@@ -2026,15 +2026,15 @@
       "name": "本田 栞",
       "team": "北島チーム",
       "grades": {
-        "D": 473,
+        "D": 476,
         "D+": 9,
         "C": 3,
         "B": 1,
         "A": 0
       },
-      "total_deals": 486,
+      "total_deals": 489,
       "grade_score": "0.11",
-      "points": 4860
+      "points": 4890
     },
     {
       "name": "三浦 昂",
@@ -2250,15 +2250,15 @@
       "name": "安藤 波音",
       "team": "スタンダード",
       "grades": {
-        "D": 1040,
+        "D": 1041,
         "D+": 8,
         "C": 9,
         "B": 5,
         "A": 0
       },
-      "total_deals": 1062,
+      "total_deals": 1063,
       "grade_score": "0.11",
-      "points": 10620
+      "points": 10630
     },
     {
       "name": "高橋 翔龍",
@@ -2348,15 +2348,15 @@
       "name": "大谷朋輝",
       "team": "櫻井チーム",
       "grades": {
-        "D": 1767,
+        "D": 1768,
         "D+": 12,
         "C": 9,
         "B": 7,
         "A": 0
       },
-      "total_deals": 1795,
+      "total_deals": 1796,
       "grade_score": "0.11",
-      "points": 17950
+      "points": 17960
     },
     {
       "name": "遠藤 直人",
@@ -3370,15 +3370,15 @@
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 43916,
+        "D": 43999,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 43916,
+      "total_deals": 43999,
       "grade_score": "0.10",
-      "points": 439160
+      "points": 439990
     },
     {
       "name": "ダニエラ ロフィコ",
@@ -4110,8 +4110,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 145183,
-    "total_projects": 430,
-    "total_points": 1451830
+    "total_interviews": 145266,
+    "total_projects": 431,
+    "total_points": 1452660
   }
 }
