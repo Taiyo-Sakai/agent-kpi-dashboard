@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-06-09T18:32:55.690Z",
+  "lastUpdate": "2026-06-09T23:53:51.280Z",
   "monthly": {
     "2026-06": {
       "全体": {
@@ -2712,15 +2712,15 @@
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 44038,
+        "D": 44077,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 44038,
+      "total_deals": 44077,
       "grade_score": "0.10",
-      "points": 440380
+      "points": 440770
     },
     {
       "name": "舘野 真輝",
@@ -4110,8 +4110,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 145679,
+    "total_interviews": 145718,
     "total_projects": 435,
-    "total_points": 1456790
+    "total_points": 1457180
   }
 }
