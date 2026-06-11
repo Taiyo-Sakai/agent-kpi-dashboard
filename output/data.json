@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-06-11T12:32:38.451Z",
+  "lastUpdate": "2026-06-11T21:31:09.378Z",
   "monthly": {
     "2026-06": {
       "全体": {
@@ -1970,15 +1970,15 @@
       "name": "大久保 至恩",
       "team": "矢川チーム",
       "grades": {
-        "D": 1763,
+        "D": 1764,
         "D+": 30,
         "C": 12,
         "B": 4,
         "A": 6
       },
-      "total_deals": 1815,
+      "total_deals": 1816,
       "grade_score": "0.11",
-      "points": 18150
+      "points": 18160
     },
     {
       "name": "田尻 海幸",
@@ -2068,15 +2068,15 @@
       "name": "本田 栞",
       "team": "北島チーム",
       "grades": {
-        "D": 476,
+        "D": 477,
         "D+": 9,
         "C": 3,
         "B": 1,
         "A": 0
       },
-      "total_deals": 489,
+      "total_deals": 490,
       "grade_score": "0.11",
-      "points": 4890
+      "points": 4900
     },
     {
       "name": "三浦 昂",
@@ -2278,15 +2278,15 @@
       "name": "山本 優和",
       "team": "ビギナー",
       "grades": {
-        "D": 1136,
+        "D": 1137,
         "D+": 11,
         "C": 9,
         "B": 3,
         "A": 4
       },
-      "total_deals": 1163,
+      "total_deals": 1164,
       "grade_score": "0.11",
-      "points": 11630
+      "points": 11640
     },
     {
       "name": "眞野 純平",
@@ -2348,15 +2348,15 @@
       "name": "大村 亜優",
       "team": "鈴木チーム",
       "grades": {
-        "D": 1489,
+        "D": 1487,
         "D+": 1,
         "C": 20,
         "B": 0,
         "A": 0
       },
-      "total_deals": 1510,
+      "total_deals": 1508,
       "grade_score": "0.11",
-      "points": 15100
+      "points": 15080
     },
     {
       "name": "南谷 翔汰",
@@ -2558,15 +2558,15 @@
       "name": "脇屋 香音",
       "team": "ビギナー",
       "grades": {
-        "D": 1079,
+        "D": 1080,
         "D+": 4,
         "C": 13,
         "B": 0,
         "A": 1
       },
-      "total_deals": 1097,
+      "total_deals": 1098,
       "grade_score": "0.11",
-      "points": 10970
+      "points": 10980
     },
     {
       "name": "橋本 裕一郎",
@@ -2754,29 +2754,29 @@
       "name": "藤原 彩香",
       "team": "下園チーム",
       "grades": {
-        "D": 1396,
+        "D": 1395,
         "D+": 12,
         "C": 5,
         "B": 2,
         "A": 2
       },
-      "total_deals": 1417,
+      "total_deals": 1416,
       "grade_score": "0.10",
-      "points": 14170
+      "points": 14160
     },
     {
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 44120,
+        "D": 44195,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 44120,
+      "total_deals": 44195,
       "grade_score": "0.10",
-      "points": 441200
+      "points": 441950
     },
     {
       "name": "舘野 真輝",
@@ -2866,15 +2866,15 @@
       "name": "佐藤 純巨",
       "team": "HH(ALL)",
       "grades": {
-        "D": 357,
+        "D": 356,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 357,
+      "total_deals": 356,
       "grade_score": "0.10",
-      "points": 3570
+      "points": 3560
     },
     {
       "name": "藤田 仙丈",
@@ -3048,8 +3048,8 @@
       "name": "小笠原 大翔",
       "team": "エリートⅠⅡ",
       "grades": {
-        "D": 599,
-        "D+": 3,
+        "D": 598,
+        "D+": 4,
         "C": 0,
         "B": 0,
         "A": 2
@@ -3342,15 +3342,15 @@
       "name": "篠原 快陸",
       "team": "ミドル＋",
       "grades": {
-        "D": 1354,
+        "D": 1353,
         "D+": 6,
         "C": 1,
         "B": 1,
         "A": 0
       },
-      "total_deals": 1362,
+      "total_deals": 1361,
       "grade_score": "0.10",
-      "points": 13620
+      "points": 13610
     },
     {
       "name": "藤波 祐佳",
@@ -3608,15 +3608,15 @@
       "name": "宮井 遼人",
       "team": "H1_team",
       "grades": {
-        "D": 1268,
+        "D": 1269,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 1268,
+      "total_deals": 1269,
       "grade_score": "0.10",
-      "points": 12680
+      "points": 12690
     },
     {
       "name": "菅原 裕一朗",
@@ -4124,8 +4124,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 146631,
+    "total_interviews": 146706,
     "total_projects": 446,
-    "total_points": 1466310
+    "total_points": 1467060
   }
 }
