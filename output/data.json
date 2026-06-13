@@ -1,15 +1,24 @@
 {
-  "lastUpdate": "2026-06-13T00:04:36.607Z",
+  "lastUpdate": "2026-06-13T10:17:03.176Z",
   "monthly": {
     "2026-06": {
       "全体": {
-        "count": 45,
-        "uriage": 11532,
-        "uriage_after": 11532,
+        "count": 46,
+        "uriage": 11810,
+        "uriage_after": 11810,
         "henkin_nyushamae": 2456,
         "henkin_nyushamae_cnt": 8,
         "henkin_hayaki": 194,
         "henkin_hayaki_cnt": 2
+      },
+      "士業部": {
+        "count": 4,
+        "uriage": 896,
+        "uriage_after": 896,
+        "henkin_nyushamae": 0,
+        "henkin_nyushamae_cnt": 0,
+        "henkin_hayaki": 0,
+        "henkin_hayaki_cnt": 0
       },
       "建設Ⅱ部": {
         "count": 12,
@@ -33,15 +42,6 @@
         "count": 15,
         "uriage": 4356,
         "uriage_after": 4356,
-        "henkin_nyushamae": 0,
-        "henkin_nyushamae_cnt": 0,
-        "henkin_hayaki": 0,
-        "henkin_hayaki_cnt": 0
-      },
-      "士業部": {
-        "count": 3,
-        "uriage": 618,
-        "uriage_after": 618,
         "henkin_nyushamae": 0,
         "henkin_nyushamae_cnt": 0,
         "henkin_hayaki": 0,
@@ -1163,7 +1163,7 @@
       "name": "渡辺 史門",
       "division": "ビギナー",
       "summary": {
-        "projects_created": 14
+        "projects_created": 15
       }
     },
     {
@@ -1746,29 +1746,29 @@
       "name": "菊池 宏輝",
       "team": "ビギナー+",
       "grades": {
-        "D": 956,
+        "D": 958,
         "D+": 24,
         "C": 15,
         "B": 5,
         "A": 5
       },
-      "total_deals": 1005,
+      "total_deals": 1007,
       "grade_score": "0.12",
-      "points": 10050
+      "points": 10070
     },
     {
       "name": "矢川 翔太",
       "team": "矢川チーム",
       "grades": {
-        "D": 1373,
+        "D": 1372,
         "D+": 29,
         "C": 10,
         "B": 16,
         "A": 6
       },
-      "total_deals": 1434,
+      "total_deals": 1433,
       "grade_score": "0.12",
-      "points": 14340
+      "points": 14330
     },
     {
       "name": "藤田 海衣",
@@ -1816,15 +1816,15 @@
       "name": "鹿又 直輝",
       "team": "エリートⅠⅡ",
       "grades": {
-        "D": 1242,
+        "D": 1246,
         "D+": 27,
         "C": 9,
         "B": 13,
         "A": 8
       },
-      "total_deals": 1299,
+      "total_deals": 1303,
       "grade_score": "0.12",
-      "points": 12990
+      "points": 13030
     },
     {
       "name": "北澤 龍弥",
@@ -1886,15 +1886,15 @@
       "name": "松田 紫音",
       "team": "ビギナー",
       "grades": {
-        "D": 919,
+        "D": 921,
         "D+": 9,
         "C": 4,
         "B": 3,
         "A": 0
       },
-      "total_deals": 935,
+      "total_deals": 937,
       "grade_score": "0.11",
-      "points": 9350
+      "points": 9370
     },
     {
       "name": "下園 佳愛",
@@ -1914,15 +1914,15 @@
       "name": "中西 瑛斗",
       "team": "小笠原チーム",
       "grades": {
-        "D": 425,
+        "D": 424,
         "D+": 14,
         "C": 3,
         "B": 0,
         "A": 3
       },
-      "total_deals": 445,
+      "total_deals": 444,
       "grade_score": "0.11",
-      "points": 4450
+      "points": 4440
     },
     {
       "name": "浅子 征也",
@@ -1956,15 +1956,15 @@
       "name": "北島拓",
       "team": "北島チーム",
       "grades": {
-        "D": 1265,
+        "D": 1268,
         "D+": 20,
         "C": 7,
         "B": 15,
         "A": 3
       },
-      "total_deals": 1310,
+      "total_deals": 1313,
       "grade_score": "0.11",
-      "points": 13100
+      "points": 13130
     },
     {
       "name": "大久保 至恩",
@@ -2222,15 +2222,15 @@
       "name": "吉田 龍之助",
       "team": "スタンダード",
       "grades": {
-        "D": 707,
+        "D": 709,
         "D+": 11,
         "C": 4,
         "B": 2,
         "A": 2
       },
-      "total_deals": 726,
+      "total_deals": 728,
       "grade_score": "0.11",
-      "points": 7260
+      "points": 7280
     },
     {
       "name": "大熊 綺斗",
@@ -2250,15 +2250,15 @@
       "name": "箱田 瑞希",
       "team": "チーム不明",
       "grades": {
-        "D": 442,
+        "D": 439,
         "D+": 10,
         "C": 1,
         "B": 0,
         "A": 2
       },
-      "total_deals": 455,
+      "total_deals": 452,
       "grade_score": "0.11",
-      "points": 4550
+      "points": 4520
     },
     {
       "name": "金子 幹生",
@@ -2376,29 +2376,29 @@
       "name": "大村 亜優",
       "team": "鈴木チーム",
       "grades": {
-        "D": 1484,
+        "D": 1483,
         "D+": 1,
         "C": 19,
         "B": 0,
         "A": 0
       },
-      "total_deals": 1504,
+      "total_deals": 1503,
       "grade_score": "0.11",
-      "points": 15040
+      "points": 15030
     },
     {
       "name": "南谷 翔汰",
       "team": "ビギナー",
       "grades": {
-        "D": 1428,
+        "D": 1426,
         "D+": 18,
         "C": 7,
         "B": 2,
         "A": 3
       },
-      "total_deals": 1458,
+      "total_deals": 1456,
       "grade_score": "0.11",
-      "points": 14580
+      "points": 14560
     },
     {
       "name": "齋藤 智苗",
@@ -2530,15 +2530,15 @@
       "name": "栢野 智由",
       "team": "下園チーム",
       "grades": {
-        "D": 299,
+        "D": 298,
         "D+": 2,
         "C": 2,
         "B": 2,
         "A": 1
       },
-      "total_deals": 306,
+      "total_deals": 305,
       "grade_score": "0.11",
-      "points": 3060
+      "points": 3050
     },
     {
       "name": "大浦 慶大",
@@ -2572,15 +2572,15 @@
       "name": "脇屋 香音",
       "team": "ビギナー",
       "grades": {
-        "D": 1081,
+        "D": 1093,
         "D+": 3,
         "C": 14,
         "B": 0,
         "A": 1
       },
-      "total_deals": 1099,
+      "total_deals": 1111,
       "grade_score": "0.11",
-      "points": 10990
+      "points": 11110
     },
     {
       "name": "橋本 裕一郎",
@@ -2642,15 +2642,15 @@
       "name": "谷田 芳樹",
       "team": "ビギナー",
       "grades": {
-        "D": 1212,
+        "D": 1217,
         "D+": 21,
         "C": 6,
         "B": 2,
         "A": 8
       },
-      "total_deals": 1249,
+      "total_deals": 1254,
       "grade_score": "0.11",
-      "points": 12490
+      "points": 12540
     },
     {
       "name": "清田 大智",
@@ -2670,15 +2670,15 @@
       "name": "俵頭 清",
       "team": "チーム不明",
       "grades": {
-        "D": 544,
+        "D": 545,
         "D+": 5,
         "C": 6,
         "B": 0,
         "A": 4
       },
-      "total_deals": 559,
+      "total_deals": 560,
       "grade_score": "0.11",
-      "points": 5590
+      "points": 5600
     },
     {
       "name": "深山 怜音",
@@ -2698,9 +2698,9 @@
       "name": "森 花柊",
       "team": "ビギナー",
       "grades": {
-        "D": 332,
+        "D": 331,
         "D+": 3,
-        "C": 2,
+        "C": 3,
         "B": 0,
         "A": 2
       },
@@ -2726,29 +2726,29 @@
       "name": "野村 涼",
       "team": "チーム不明",
       "grades": {
-        "D": 501,
+        "D": 510,
         "D+": 1,
         "C": 2,
         "B": 0,
         "A": 1
       },
-      "total_deals": 505,
+      "total_deals": 514,
       "grade_score": "0.10",
-      "points": 5050
+      "points": 5140
     },
     {
       "name": "猪股 ブライト",
       "team": "平塚チーム",
       "grades": {
-        "D": 625,
+        "D": 628,
         "D+": 14,
         "C": 1,
         "B": 1,
         "A": 0
       },
-      "total_deals": 641,
+      "total_deals": 644,
       "grade_score": "0.10",
-      "points": 6410
+      "points": 6440
     },
     {
       "name": "林 虎之介",
@@ -2796,29 +2796,29 @@
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 44217,
+        "D": 44261,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 44217,
+      "total_deals": 44261,
       "grade_score": "0.10",
-      "points": 442170
+      "points": 442610
     },
     {
       "name": "舘野 真輝",
       "team": "ビギナー",
       "grades": {
-        "D": 818,
+        "D": 819,
         "D+": 5,
         "C": 2,
         "B": 0,
         "A": 2
       },
-      "total_deals": 827,
+      "total_deals": 828,
       "grade_score": "0.10",
-      "points": 8270
+      "points": 8280
     },
     {
       "name": "竹澤 拓真",
@@ -3090,15 +3090,15 @@
       "name": "小笠原 大翔",
       "team": "エリートⅠⅡ",
       "grades": {
-        "D": 593,
+        "D": 592,
         "D+": 4,
         "C": 0,
         "B": 0,
         "A": 2
       },
-      "total_deals": 599,
+      "total_deals": 598,
       "grade_score": "0.10",
-      "points": 5990
+      "points": 5980
     },
     {
       "name": "布川 睦深",
@@ -3132,15 +3132,15 @@
       "name": "岸本 基弥",
       "team": "エリートⅠⅡ",
       "grades": {
-        "D": 1549,
+        "D": 1554,
         "D+": 4,
         "C": 1,
         "B": 1,
         "A": 0
       },
-      "total_deals": 1555,
+      "total_deals": 1560,
       "grade_score": "0.10",
-      "points": 15550
+      "points": 15600
     },
     {
       "name": "鈴木 沙生",
@@ -3174,15 +3174,15 @@
       "name": "小森 庸平",
       "team": "下園チーム",
       "grades": {
-        "D": 1226,
+        "D": 1231,
         "D+": 2,
         "C": 3,
         "B": 0,
         "A": 0
       },
-      "total_deals": 1231,
+      "total_deals": 1236,
       "grade_score": "0.10",
-      "points": 12310
+      "points": 12360
     },
     {
       "name": "下島 大我",
@@ -3790,15 +3790,15 @@
       "name": "橋本 祐輝",
       "team": "ビギナー",
       "grades": {
-        "D": 452,
+        "D": 456,
         "D+": 5,
         "C": 1,
         "B": 0,
         "A": 0
       },
-      "total_deals": 458,
+      "total_deals": 462,
       "grade_score": "0.10",
-      "points": 4580
+      "points": 4620
     },
     {
       "name": "豊泉 亮平",
@@ -4138,8 +4138,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 147117,
-    "total_projects": 459,
-    "total_points": 1471170
+    "total_interviews": 147209,
+    "total_projects": 460,
+    "total_points": 1472090
   }
 }
