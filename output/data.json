@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "2026-06-13T10:17:03.176Z",
+  "lastUpdate": "2026-06-13T16:03:10.466Z",
   "monthly": {
     "2026-06": {
       "全体": {
@@ -1956,15 +1956,15 @@
       "name": "北島拓",
       "team": "北島チーム",
       "grades": {
-        "D": 1268,
+        "D": 1267,
         "D+": 20,
         "C": 7,
         "B": 15,
         "A": 3
       },
-      "total_deals": 1313,
+      "total_deals": 1312,
       "grade_score": "0.11",
-      "points": 13130
+      "points": 13120
     },
     {
       "name": "大久保 至恩",
@@ -2768,15 +2768,15 @@
       "name": "深井 康貴",
       "team": "小森チーム",
       "grades": {
-        "D": 388,
+        "D": 391,
         "D+": 5,
         "C": 3,
         "B": 0,
         "A": 0
       },
-      "total_deals": 396,
+      "total_deals": 399,
       "grade_score": "0.10",
-      "points": 3960
+      "points": 3990
     },
     {
       "name": "藤原 彩香",
@@ -2796,15 +2796,15 @@
       "name": "萩祐太",
       "team": "チーム不明",
       "grades": {
-        "D": 44261,
+        "D": 44326,
         "D+": 0,
         "C": 0,
         "B": 0,
         "A": 0
       },
-      "total_deals": 44261,
+      "total_deals": 44326,
       "grade_score": "0.10",
-      "points": 442610
+      "points": 443260
     },
     {
       "name": "舘野 真輝",
@@ -3356,15 +3356,15 @@
       "name": "篠原 快陸",
       "team": "ミドル＋",
       "grades": {
-        "D": 1346,
+        "D": 1344,
         "D+": 6,
         "C": 1,
         "B": 1,
         "A": 0
       },
-      "total_deals": 1354,
+      "total_deals": 1352,
       "grade_score": "0.10",
-      "points": 13540
+      "points": 13520
     },
     {
       "name": "藤波 祐佳",
@@ -4138,8 +4138,8 @@
     }
   ],
   "summary": {
-    "total_interviews": 147209,
+    "total_interviews": 147274,
     "total_projects": 460,
-    "total_points": 1472090
+    "total_points": 1472740
   }
 }
